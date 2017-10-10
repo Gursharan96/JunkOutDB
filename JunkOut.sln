@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01JunkOutDB", "JunkOutDB\01JunkOutDB.csproj", "{A9ADF867-091E-4019-A11B-1378FF81373F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02JunkOut", "JunkOut\02JunkOut.csproj", "{51A88E8C-0C2A-482E-A4E5-A8AE9EA3000E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9ADF867-091E-4019-A11B-1378FF81373F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9ADF867-091E-4019-A11B-1378FF81373F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9ADF867-091E-4019-A11B-1378FF81373F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9ADF867-091E-4019-A11B-1378FF81373F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51A88E8C-0C2A-482E-A4E5-A8AE9EA3000E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51A88E8C-0C2A-482E-A4E5-A8AE9EA3000E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51A88E8C-0C2A-482E-A4E5-A8AE9EA3000E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51A88E8C-0C2A-482E-A4E5-A8AE9EA3000E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B0E6045-2B97-45C7-AB9B-B4FA57F56E41}
+	EndGlobalSection
+EndGlobal
