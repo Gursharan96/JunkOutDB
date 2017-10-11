@@ -1,0 +1,92 @@
+﻿.wrapper {
+    /*  border: 1px solid black;*/
+    position: absolute;
+    top: 45%;
+    left: 15%;
+    width: 70%;
+    transform: translate(0%, -35%);
+}
+
+.heading {
+    font-family: Roboto,Helvetica,Arial,sans-serif;
+    padding: 20px 10px;
+    font-size: 35px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 6px;
+    color: #468847;
+    background-color: white;
+    border: 2px solid #468847;
+}
+
+.divbg {
+    background-color: #F9F9F9;
+    border: 2px solid #468847;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+#mappoint {
+    width: 50%;
+    position: relative;
+    left: 25%;
+    padding-top: 6%;
+    padding-bottom: 5%;
+}
+
+.space {
+    padding: 4%;
+    text-align: center;
+}
+
+.nextbtn {
+    position: relative;
+    left: 90%;
+    border: 1px solid black;
+}
+
+.previousbtn {
+    width: 500px;
+}
+
+#slide-2, #slide-3, #slide-4, #slide-5 {
+    display: none;
+}
+
+#pcode {
+    width: 40%;
+    margin: auto;
+}
+
+#go {
+    width: 44%;
+    text-align: center;
+}
+
+#binsdiv {
+    display: none;
+}
+
+#appointment {
+    text-align: left;
+    vertical-align: top;
+    padding: 5px;
+}
+
+.dimensions {
+    border: 1px groove #ffffff !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow: 0px 0px 0px 0px #000;
+    box-shadow: 0px 0px 0px 0px #000;
+}
+
+.f-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width: auto;
+    padding: 0 10px;
+    border-bottom: none;
+    color: #468847;
+}

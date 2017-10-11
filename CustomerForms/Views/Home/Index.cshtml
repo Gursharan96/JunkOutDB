@@ -1,24 +1,365 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-LOL WHAT THE HECK IS HAPPENING!
+<head>
+    <title></title>
+    <!-- Include meta tag to ensure proper rendering and touch zooming -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="jquery.js"></script>
+    <!-- Include the jQuery library -->
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    <link rel="stylesheet" type="text/css" href="~/Content/customerForm.css">
 
-<div class="row">
+    <script>
+        $(document).ready(function () {
+            $("#go").click(function () {
+                $("#slide-1").hide();
+                $("#slide-2").show('slow');
+            });
+            $('#pcode').keypress(function (e) {
+                if (e.which == 13) {
+                    $("#slide-1").hide();
+                    $("#slide-2").show('slow');
+                }
+            });
+            $("#next_1").click(function () {
+                if (!$("input[name='jobtype']:checked").val()) {
+                    alert('Please select a job type');
+                }
+                else {
+                    $("#slide-2").hide();
+                    $("#slide-3").show('slow');
+                    if ($("input[name='jobtype']:checked").val() == "binRental") {
+                        $("#binsdiv").show();
+                    }
+                    else {
+                        $("#binsdiv").hide();
+                    }
+                }
+            });
+            $("#prev_1").click(function () {
+                $("#slide-2").hide();
+                $("#slide-1").show('slow');
+            });
+            $("#next_2").click(function () {
+                $("#slide-3").hide();
+                $("#slide-4").show('slow');
+                $('#poscode').val($('#pcode').val());
+            });
+            $("#prev_2").click(function () {
+                $("#slide-3").hide();
+                $("#slide-2").show('slow');
+            });
+            $("#next_3").click(function () {
+                $("#slide-4").hide();
+                $("#slide-5").show('slow');
+                $("#fnametxt").html($("#fname").val());
+            });
+            $("#prev_3").click(function () {
+                $("#slide-4").hide();
+                $("#slide-3").show('slow');
+            });
+            $("#submit").click(function () {
+                $("#slide-5").hide();
+            });
+            $("#prev_4").click(function () {
+                $("#slide-5").hide();
+                $("#slide-4").show('slow');
+            });
 
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+            var date = new Date();
+            date.setDate(date.getDate() - 1);
+
+            $('#date').datepicker({
+                startDate: date
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server" method="post">
+        <div class="container">
+            <div class="col-xs-12" style="margin: auto">
+                <div style="padding: 25px;" id="slide-1">
+                    <h1 class="heading">Please enter your postal code:</h1>
+                    <div class="divbg">
+                        <img src="~/images/7.png" id="mappoint" />
+                        <br />
+                        <h3 style="text-align: center;">Postal Code:</h3>
+                        <input id="pcode" type="text" class="form-control" />
+                        <div class="space">
+                            <button type="button" class="btn btn-success" id="go">Go!</button>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 25px;" id="slide-2">
+                    <h1 class="heading">Choose one Job Service!</h1>
+                    <div class="divbg">
+                        <div class="space">
+                            <div class="row">
+                                <div class="col-md-4" style="text-align: center">
+                                    <label>
+                                        <input type="radio" name="jobtype" value="binRental" required />Bin Rental
+                                    </label>
+                                </div>
+                                <div class="col-md-4" style="text-align: center">
+                                    <label>
+                                        <input type="radio" name="jobtype" value="demolish" required />Demolish
+                                    </label>
+                                </div>
+                                <div class="col-md-4" style="text-align: center">
+                                    <label>
+                                        <input type="radio" name="jobtype" value="junkRemoval" required />Junk Removal
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space">
+                            <span class="col-md-6" style="text-align: center;"><button type="button" class="btn btn-danger" id="prev_1" style="width:50%">Previous</button></span>
+                            <span class="col-md-6" style="text-align: center;"><button type="button" class="btn btn-success" id="next_1" style="width:50%">Next</button></span>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 25px;" id="slide-3">
+                    <h1 class="heading">Schedule Appointment</h1>
+                    <div class="divbg">
+                        <fieldset class="dimensions" id="binsdiv">
+                            <legend class="f-border">Bin Size</legend>
+                            <div class="space">
+                                <div class="row">
+                                    <div class="col-md-4" style="text-align: center">
+                                        <img src="~/images/5y3.JPG" style="width: 100%" />
+                                        <br />
+                                        <span><b>5 cubic yard </b></span>
+                                        <br />
+                                        Length: 12'
+                                        <br />
+                                        Width: 5'
+                                        <br />
+                                        Height: 2'
+                                        <br />
+                                    </div>
+                                    <div class="col-md-4" style="text-align: center">
+                                        <img src="~/images/5y3.JPG" style="width: 100%" />
+                                        <br />
+                                        <span><b>10 cubic yard </b></span>
+                                        <br />
+                                        Length: 12'
+                                        <br />
+                                        Width: 6'
+                                        <br />
+                                        Height: 4'
+                                        <br />
+                                    </div>
+                                    <div class="col-md-4" style="text-align: center">
+                                        <img src="~/images/5y3.JPG" style="width: 100%" />
+                                        <br />
+                                        <span><b>14 cubic yard </b></span>
+                                        <br />
+                                        Length: 12'
+                                        <br />
+                                        Width: 6'
+                                        <br />
+                                        Height: 5.5'
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="space">
+                            <label for="comment" style="color: #468847;">
+                                Please describe a little about the job (if you need extra bin, mention here):
+                            </label>
+                            <textarea class="form-control" rows="3" id="comment"></textarea>
+                        </div>
+                        <fieldset class="dimensions">
+                            <legend class="f-border">Schedule Appointment</legend>
+                            <div id="appointment">
+                                <p class="col-md-6">Delievery Date and Time: <input type="datetime-local" name="date" style="color: black"></p>
+                                <p class="col-md-6">Pick-Up Date and Time:<input type="datetime-local" name="date" style="color: black"></p>
+                            </div>
+                        </fieldset>
+                        <div class="space">
+                            <span class="col-md-6" style="text-align: center;"><button type="button" class="btn btn-danger" id="prev_2" style="width:50%">Previous</button></span>
+                            <span class="col-md-6" style="text-align: center;"><button type="button" class="btn btn-success" id="next_2" style="width:50%">Next</button></span>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 25px;" id="slide-4">
+                    <h1 class="heading">Contact Information</h1>
+                    <div class="divbg">
+                        <div class="space">
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="fname">First Name:</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="fname" placeholder="First Name" name="fname">
+                                </div>
+                                <label class="control-label col-md-2" for="fname">Last Name:</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="lname" placeholder="Last Name" name="lname">
+                                </div>
+                            </div>
+                            <p style="padding: 10px"></p>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="email">Email:</label>
+                                <div class="col-md-4">
+                                    <input type="email" class="form-control" id="email" placeholder="some@example.com" name="email">
+                                </div>
+                                <label class="control-label col-md-2" for="phone">Phone number:</label>
+                                <div class="col-md-4">
+                                    <input type="tel" class="form-control" id="phone" placeholder="" name="phone">
+                                </div>
+                            </div>
+                            <p style="padding: 15px"></p>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="compname">Company Name:</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="compname" name="compname">
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="dimensions">
+                            <legend class="f-border">Site Address</legend>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label for="sitetype">Select list (select one):</label>
+                                    <select class="form-control" id="sitetype">
+                                        <option>Residence</option>
+                                        <option>Household</option>
+                                        <option>Office Building</option>
+                                        <option>Apartment</option>
+                                        <option>Other:</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="control-label" for="streetaddress">Street Address:</label>
+                                    <input type="text" class="form-control" id="streetaddress" name="streetaddress">
+                                </div>
+                            </div>
+                            <p style="padding: 10px"></p>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <label class="control-label" for="unit">Apt/Unit#:</label>
+                                    <input type="text" class="form-control" id="unit" name="unit">
+                                </div>
+                                <div class="col-md-5">
+                                    <label class="control-label" for="city">City:</label>
+                                    <input type="text" class="form-control" id="city" name="city">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="sitetype">Province:</label>
+                                    <select class="form-control" id="sitetype">
+                                        <option>ON</option>
+                                        <option>QC</option>
+                                        <option>NB</option>
+                                        <option>NS</option>
+                                        <option>MB</option>
+                                        <option>BC</option>
+                                        <option>PE</option>
+                                        <option>SK</option>
+                                        <option>AB</option>
+                                        <option>NL</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="control-label" for="poscode">Postal Code:</label>
+                                    <input type="text" class="form-control" id="poscode" name="poscode" disabled>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row">
+                            <span class="col-md-6" style="text-align: center;"><button type="button" class="btn btn-danger" id="prev_3" style="width:50%">Previous</button></span>
+                            <span class="col-md-6" style="text-align: center;"><button type="button" class="btn btn-success" id="next_3" style="width:50%">Next</button></span>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 25px;" id="slide-5">
+                    <h1 class="heading">Confirmation</h1>
+                    <div class="divbg">
+                        <div class="space">
+                            <div class="form-group">
+                                <label class="control-label col-md-2">First Name:</label>
+                                <label class="control-label col-md-4" id="fnametxt"></label>
+                                <label class="control-label col-md-2">Last Name:</label>
+                                <label class="control-label col-md-4" id="lnametxt"></label>
+                            </div>
+                            <p style="padding: 10px"></p>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="email">Email:</label>
+                                <div class="col-md-4">
+                                    <input type="email" class="form-control" id="email" placeholder="some@example.com" name="email">
+                                </div>
+                                <label class="control-label col-md-2" for="phone">Phone number:</label>
+                                <div class="col-md-4">
+                                    <input type="tel" class="form-control" id="phone" placeholder="" name="phone">
+                                </div>
+                            </div>
+                            <p style="padding: 15px"></p>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="compname">Company Name:</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="compname" name="compname">
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="dimensions">
+                            <legend class="f-border">Site Address</legend>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label for="sitetype">Select list (select one):</label>
+                                    <select class="form-control" id="sitetype">
+                                        <option>Residence</option>
+                                        <option>Household</option>
+                                        <option>Office Building</option>
+                                        <option>Apartment</option>
+                                        <option>Other:</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="control-label" for="streetaddress">Street Address:</label>
+                                    <input type="text" class="form-control" id="streetaddress" name="streetaddress">
+                                </div>
+                            </div>
+                            <p style="padding: 10px"></p>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <label class="control-label" for="unit">Apt/Unit#:</label>
+                                    <input type="text" class="form-control" id="unit" name="unit">
+                                </div>
+                                <div class="col-md-5">
+                                    <label class="control-label" for="city">City:</label>
+                                    <input type="text" class="form-control" id="city" name="city">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="sitetype">Province:</label>
+                                    <select class="form-control" id="sitetype">
+                                        <option>ON</option>
+                                        <option>QC</option>
+                                        <option>NB</option>
+                                        <option>NS</option>
+                                        <option>MB</option>
+                                        <option>BC</option>
+                                        <option>PE</option>
+                                        <option>SK</option>
+                                        <option>AB</option>
+                                        <option>NL</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="control-label" for="poscode">Postal Code:</label>
+                                    <input type="text" class="form-control" id="poscode" name="poscode" disabled>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row">
+                            <span class="col-md-6" style="text-align: center;"><button type="button" class="btn btn-danger" id="prev_4" style="width:50%">Previous</button></span>
+                            <span class="col-md-6" style="text-align: center;"><button type="submit" class="btn btn-success" id="submit" style="width:50%">Place an order!</button></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>

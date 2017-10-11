@@ -8,11 +8,16 @@ namespace CustomerForms.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
-
+        [HttpPost]
+        public ActionResult Index(string fname)
+        {
+            return Content($"Hello {fname}");
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
