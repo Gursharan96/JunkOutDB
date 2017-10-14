@@ -54,7 +54,20 @@
             $("#next_3").click(function () {
                 $("#slide-4").hide();
                 $("#slide-5").show('slow');
+
                 $("#fnametxt").html($("#fname").val());
+                $("#lnametxt").html($("#lname").val());
+                $("#emailtxt").html($("#email").val());
+                $("#phonetxt").html($("#phone").val());
+                $("#compnametxt").html($("#compname").val());
+                
+                $("#sitetypetxt").html($("#sitetype").val());
+                $("#streetaddresstxt").html($("#streetaddress").val());
+                $("#provincetxt").html($("#province").val());
+                $("#unittxt").html($("#unit").val());
+                $("#citytxt").html($("#city").val());
+                $("#pcodetxt").html($("#pcode").val());
+
             });
             $("#prev_3").click(function () {
                 $("#slide-4").hide();
@@ -80,7 +93,7 @@
 </head>
 <body>
     <form id="form1" runat="server" method="post">
-        <div class="container">
+        <div class="container" style="font-size: 16px">
             <div class="col-xs-12" style="margin: auto">
                 <div style="padding: 25px;" id="slide-1">
                     <h1 class="heading">Please enter your postal code:</h1>
@@ -189,8 +202,8 @@
                 </div>
                 <div style="padding: 25px;" id="slide-4">
                     <h1 class="heading">Contact Information</h1>
-                    <div class="divbg">
-                        <div class="space">
+                    <div class="divbg" style="font-size: 15px">
+                        <div class="space" style="text-align:left">
                             <div class="form-group">
                                 <label class="control-label col-md-2" for="fname">First Name:</label>
                                 <div class="col-md-4">
@@ -214,7 +227,9 @@
                             </div>
                             <p style="padding: 15px"></p>
                             <div class="form-group">
-                                <label class="control-label col-md-2" for="compname">Company Name:</label>
+                                <div class="col-md-2">
+                                    <label class="control-label" for="compname">Company Name:</label>
+                                </div>
                                 <div class="col-md-10">
                                     <input type="text" class="form-control" id="compname" name="compname">
                                 </div>
@@ -230,7 +245,6 @@
                                         <option>Household</option>
                                         <option>Office Building</option>
                                         <option>Apartment</option>
-                                        <option>Other:</option>
                                     </select>
                                 </div>
                                 <div class="col-md-8">
@@ -249,8 +263,8 @@
                                     <input type="text" class="form-control" id="city" name="city">
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="sitetype">Province:</label>
-                                    <select class="form-control" id="sitetype">
+                                    <label for="province">Province:</label>
+                                    <select class="form-control" id="province">
                                         <option>ON</option>
                                         <option>QC</option>
                                         <option>NB</option>
@@ -277,80 +291,47 @@
                 </div>
                 <div style="padding: 25px;" id="slide-5">
                     <h1 class="heading">Confirmation</h1>
-                    <div class="divbg">
-                        <div class="space">
+                    <div class="divbg" style="font-size: 15px">
+                        <div class="space" style="text-align:left">
                             <div class="form-group">
                                 <label class="control-label col-md-2">First Name:</label>
-                                <label class="control-label col-md-4" id="fnametxt"></label>
+                                <span class="col-md-4" id="fnametxt"></span>
                                 <label class="control-label col-md-2">Last Name:</label>
-                                <label class="control-label col-md-4" id="lnametxt"></label>
+                                <span class="col-md-4" id="lnametxt"></span>
                             </div>
                             <p style="padding: 10px"></p>
                             <div class="form-group">
-                                <label class="control-label col-md-2" for="email">Email:</label>
-                                <div class="col-md-4">
-                                    <input type="email" class="form-control" id="email" placeholder="some@example.com" name="email">
-                                </div>
-                                <label class="control-label col-md-2" for="phone">Phone number:</label>
-                                <div class="col-md-4">
-                                    <input type="tel" class="form-control" id="phone" placeholder="" name="phone">
-                                </div>
+                                <label class="control-label col-md-2">Email:</label>
+                                <label class="control-label col-md-4" id="emailtxt"></label>
+                                <label class="control-label col-md-2">Phone number:</label>
+                                <label class="control-label col-md-4" id="phonetxt"></label>
                             </div>
                             <p style="padding: 15px"></p>
                             <div class="form-group">
-                                <label class="control-label col-md-2" for="compname">Company Name:</label>
-                                <div class="col-md-10">
-                                    <input type="text" class="form-control" id="compname" name="compname">
-                                </div>
+                                <label class="control-label col-md-2">Company Name:</label>
+                                <label class="control-label col-md-10" id="compnametxt"></label>
                             </div>
                         </div>
                         <fieldset class="dimensions">
                             <legend class="f-border">Site Address</legend>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <label for="sitetype">Select list (select one):</label>
-                                    <select class="form-control" id="sitetype">
-                                        <option>Residence</option>
-                                        <option>Household</option>
-                                        <option>Office Building</option>
-                                        <option>Apartment</option>
-                                        <option>Other:</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-8">
-                                    <label class="control-label" for="streetaddress">Street Address:</label>
-                                    <input type="text" class="form-control" id="streetaddress" name="streetaddress">
-                                </div>
-                            </div>
-                            <p style="padding: 10px"></p>
-                            <div class="form-group">
-                                <div class="col-md-2">
-                                    <label class="control-label" for="unit">Apt/Unit#:</label>
-                                    <input type="text" class="form-control" id="unit" name="unit">
-                                </div>
-                                <div class="col-md-5">
-                                    <label class="control-label" for="city">City:</label>
-                                    <input type="text" class="form-control" id="city" name="city">
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="sitetype">Province:</label>
-                                    <select class="form-control" id="sitetype">
-                                        <option>ON</option>
-                                        <option>QC</option>
-                                        <option>NB</option>
-                                        <option>NS</option>
-                                        <option>MB</option>
-                                        <option>BC</option>
-                                        <option>PE</option>
-                                        <option>SK</option>
-                                        <option>AB</option>
-                                        <option>NL</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="control-label" for="poscode">Postal Code:</label>
-                                    <input type="text" class="form-control" id="poscode" name="poscode" disabled>
-                                </div>
+                            <div class="form-group" style="text-align:center">
+                                    <label class="control-label">Site Type</label>
+                                    <span class="control-label" id="sitetypetxt"></span>
+                                <br />
+                                    <label class="control-label">Street Address:</label>
+                                    <span class="control-label" id="streetaddresstxt"></span>
+                                <br />
+                                    <label class="control-label">Apt/Unit#:</label>
+                                    <span class="control-label" id="unittxt"></span>
+                                <br />
+                                    <label class="control-label">City:</label>
+                                    <span class="control-label" id="citytxt"></span>
+                                <br />
+                                    <label class="control-label">Province:</label>
+                                    <span id="provincetxt"></span>
+                                <br />
+                                    <label class="control-label">Postal Code:</label>
+                                    <span class="control-label" id="pcodetxt"></span>
                             </div>
                         </fieldset>
                         <div class="row">
