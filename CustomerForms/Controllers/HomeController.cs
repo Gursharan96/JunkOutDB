@@ -14,9 +14,9 @@ namespace CustomerForms.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(string fname)
+        public ActionResult Index(string fname, string bintwo, string binone, string jobtype)
         {
-            return Content($"Hello {fname}");
+            return Content($"Hello {fname} {jobtype} {bintwo} {binone}");
         }
         public ActionResult About()
         {
