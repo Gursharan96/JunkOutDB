@@ -1,5 +1,4 @@
 ﻿.wrapper {
-    /*  border: 1px solid black;*/
     position: absolute;
     top: 45%;
     left: 15%;
@@ -90,3 +89,78 @@
     border-bottom: none;
     color: #468847;
 }
+
+.selectjobtype input {
+    display:none;
+}
+.selectjobtype label {
+    width: 50%;
+    height: 45px;
+    background-color: buttonface;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    padding: 12px 14px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 1px 1px black inset;
+}
+.selectjobtype input:checked ~ label {
+    font-weight: bold;
+    color: white;
+    background-color: green;
+}
+
+#binone {
+    display: none;
+}
+
+#binone + label {
+    background: url(../images/5y3.JPG) no-repeat 0 0;
+    height: 159px;
+    width: 268px;
+    background-size: 100%;
+    box-shadow: 0px 0px 1px 1px black inset;
+}
+
+#binone:checked + label {
+    border: 5px solid green;
+    background: url(../images/checkbin.JPG) no-repeat 0 0;
+    background-size: 100%;
+}
+
+#bintwo {
+display: none;
+}
+
+#bintwo + label {
+    background: url(../images/5y3.JPG) no-repeat 0 0;
+    height: 159px;
+    width: 268px;
+    background-size: 100%;
+    box-shadow: 0px 0px 1px 1px black inset;
+}
+
+#bintwo:checked + label {
+    border: 5px solid green;
+    background: url(../images/checkbin.JPG) no-repeat 0 0;
+    background-size: 100%;
+}
+
+#binthree {
+    display: none;
+}
+
+#binthree + label {
+    background: url(../images/5y3.JPG) no-repeat 0 0;
+    height: 159px;
+    width: 268px;
+    background-size: 100%;
+    box-shadow: 0px 0px 1px 1px black inset;
+}
+
+#binthree:checked + label {
+    border: 5px solid green;
+    background: url(../images/checkbin.JPG) no-repeat 0 0;
+    background-size: 100%;
+}
+

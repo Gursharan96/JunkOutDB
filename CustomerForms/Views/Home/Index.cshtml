@@ -14,15 +14,21 @@
     <script>
         $(document).ready(function () {
             $("#go").click(function () {
-                $("#slide-1").hide();
-                $("#slide-2").show('slow');
+                var rege = /^([A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9])$/;
+                if (rege.test($('#pcode').val())) {
+                    $("#slide-1").hide();
+                    $("#slide-2").show('slow');
+                }
+                else{
+                    alert("Please enter into the formal of A9A 9A9");
+                }
             });
-            $('#pcode').keypress(function (e) {
+          /*  $('#pcode').keypress(function (e) {
                 if (e.which == 13) {
                     $("#slide-1").hide();
                     $("#slide-2").show('slow');
                 }
-            });
+            });*/
             $("#next_1").click(function () {
                 if (!$("input[name='jobtype']:checked").val()) {
                     alert('Please select a job type');
@@ -60,7 +66,7 @@
                 $("#emailtxt").html($("#email").val());
                 $("#phonetxt").html($("#phone").val());
                 $("#compnametxt").html($("#compname").val());
-                
+
                 $("#sitetypetxt").html($("#sitetype").val());
                 $("#streetaddresstxt").html($("#streetaddress").val());
                 $("#provincetxt").html($("#province").val());
@@ -81,13 +87,6 @@
                 $("#slide-4").show('slow');
             });
 
-            var date = new Date();
-            date.setDate(date.getDate() - 1);
-
-            $('#date').datepicker({
-                startDate: date
-            });
-
         });
     </script>
 </head>
@@ -101,7 +100,7 @@
                         <img src="~/images/7.png" id="mappoint" />
                         <br />
                         <h3 style="text-align: center;">Postal Code:</h3>
-                        <input id="pcode" type="text" class="form-control" />
+                        <input id="pcode" type="text" class="form-control" maxlength="7" placeholder="A9A 9A9"/>
                         <div class="space">
                             <button type="button" class="btn btn-success" id="go">Go!</button>
                         </div>
@@ -110,22 +109,20 @@
                 <div style="padding: 25px;" id="slide-2">
                     <h1 class="heading">Choose one Job Service!</h1>
                     <div class="divbg">
-                        <div class="space">
-                            <div class="row">
+                        Click on the button to select one:
+                        <div class="space">                            
+                            <div class="row selectjobtype">
                                 <div class="col-md-4" style="text-align: center">
-                                    <label>
-                                        <input type="radio" name="jobtype" value="binRental" required />Bin Rental
-                                    </label>
+                                    <input type="radio" name="jobtype" id="binRental" value="binRental" required />
+                                    <label for="binRental">Bin Rental</label>
                                 </div>
                                 <div class="col-md-4" style="text-align: center">
-                                    <label>
-                                        <input type="radio" name="jobtype" value="demolish" required />Demolish
-                                    </label>
+                                    <input type="radio" name="jobtype" id="demolish" value="demolish" required />
+                                    <label for="demolish">Demolish</label>
                                 </div>
                                 <div class="col-md-4" style="text-align: center">
-                                    <label>
-                                        <input type="radio" name="jobtype" value="junkRemoval" required />Junk Removal
-                                    </label>
+                                    <input type="radio" name="jobtype" id="junkRemoval" value="junkRemoval" required />
+                                    <label for="junkRemoval">Junk Removal</label>
                                 </div>
                             </div>
                         </div>
@@ -140,10 +137,11 @@
                     <div class="divbg">
                         <fieldset class="dimensions" id="binsdiv">
                             <legend class="f-border">Bin Size</legend>
+                            Click on the image to select bin size:
                             <div class="space">
                                 <div class="row">
                                     <div class="col-md-4" style="text-align: center">
-                                        <img src="~/images/5y3.JPG" style="width: 100%" />
+                                        <input type="checkbox" id="binone" name="binone" /><label for="binone"></label>
                                         <br />
                                         <span><b>5 cubic yard </b></span>
                                         <br />
@@ -155,7 +153,7 @@
                                         <br />
                                     </div>
                                     <div class="col-md-4" style="text-align: center">
-                                        <img src="~/images/5y3.JPG" style="width: 100%" />
+                                        <input type="checkbox" id="bintwo" name="bintwo" /><label for="bintwo"></label>
                                         <br />
                                         <span><b>10 cubic yard </b></span>
                                         <br />
@@ -167,7 +165,7 @@
                                         <br />
                                     </div>
                                     <div class="col-md-4" style="text-align: center">
-                                        <img src="~/images/5y3.JPG" style="width: 100%" />
+                                        <input type="checkbox" id="binthree" name="binthree" /><label for="binthree"></label>
                                         <br />
                                         <span><b>14 cubic yard </b></span>
                                         <br />
