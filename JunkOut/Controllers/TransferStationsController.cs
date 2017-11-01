@@ -6,13 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using JunkOutDB;
+using JunkOutDBModel;
 
 namespace JunkOut.Controllers
 {
     public class TransferStationsController : Controller
     {
-        private JunkOutDBContainer db = new JunkOutDBContainer();
+        private JunkoutDBModelContainer db = new JunkoutDBModelContainer();
 
         // GET: TransferStations
         public ActionResult Index()
@@ -46,7 +46,7 @@ namespace JunkOut.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,StreetAddress,City,Company,Phone,HoursOfOperations,Notes,Rate,Terms")] TransferStation transferStation)
+        public ActionResult Create([Bind(Include = "ID,StreetAddress,City,PostalCode,Country,Company,Phone,HoursOfOperation,Notes,Rate,Term")] TransferStation transferStation)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace JunkOut.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,StreetAddress,City,Company,Phone,HoursOfOperations,Notes,Rate,Terms")] TransferStation transferStation)
+        public ActionResult Edit([Bind(Include = "ID,StreetAddress,City,PostalCode,Country,Company,Phone,HoursOfOperation,Notes,Rate,Term")] TransferStation transferStation)
         {
             if (ModelState.IsValid)
             {

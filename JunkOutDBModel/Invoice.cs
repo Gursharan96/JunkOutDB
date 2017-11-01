@@ -7,19 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace JunkOutDB
+namespace JunkOutDBModel
 {
     using System;
     using System.Collections.Generic;
     
     public partial class Invoice
     {
-        public int Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Invoice()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
+        public int ID { get; set; }
         public double HST { get; set; }
         public Nullable<double> FuelSurcharge { get; set; }
         public double SubTotal { get; set; }
         public Nullable<double> OverWeight { get; set; }
     
-        public virtual Order Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

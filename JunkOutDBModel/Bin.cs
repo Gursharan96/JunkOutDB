@@ -7,20 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace JunkOutDB
+namespace JunkOutDBModel
 {
     using System;
     using System.Collections.Generic;
     
     public partial class Bin
     {
-        public int Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Bin()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
+        public int ID { get; set; }
         public string BinSize { get; set; }
         public double FlatRate { get; set; }
         public double MinTonnageAwarded { get; set; }
         public double MaxRentalDuration { get; set; }
         public string Status { get; set; }
     
-        public virtual Order Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
