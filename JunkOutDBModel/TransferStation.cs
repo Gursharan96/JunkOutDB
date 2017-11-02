@@ -7,32 +7,33 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace JunkOutDB
+namespace JunkOutDBModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class TransferStation
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
+        public TransferStation()
         {
-            this.Customers = new HashSet<Customer>();
+            this.Orders = new HashSet<Order>();
         }
     
-        public int Id { get; set; }
-        public string JobType { get; set; }
-        public System.DateTime Date { get; set; }
-        public System.TimeSpan Time { get; set; }
-        public string SourceOfOrdering { get; set; }
-        public string HearingSource { get; set; }
-        public string OrderNotes { get; set; }
-        public string Status { get; set; }
+        public int ID { get; set; }
+        public string StreetAddress { get; set; }
+        public string City { get; set; }
+        public string PostalCode { get; set; }
+        public string Country { get; set; }
+        public string Company { get; set; }
+        public string Phone { get; set; }
+        public string HoursOfOperation { get; set; }
+        public string Notes { get; set; }
+        public string Rate { get; set; }
+        public string Term { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customers { get; set; }
-        public virtual Invoice Invoice { get; set; }
-        public virtual Bin Bin { get; set; }
-        public virtual TransferStation TransferStation { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual Expens Expen { get; set; }
     }
 }

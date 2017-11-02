@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JunkOutDB
+namespace JunkOutDBModel
 {
     public class Class1
     {

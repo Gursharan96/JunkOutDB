@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="72f39d5c55654f2c853210a64344cfec" Name="Diagram1" ZoomLevel="64" >
+        <EntityTypeShape EntityType="JunkoutDBModel.Address" Width="1.5" PointX="0.5" PointY="4.75" />
+        <EntityTypeShape EntityType="JunkoutDBModel.Bin" Width="1.5" PointX="3.375" PointY="7.125" />
+        <EntityTypeShape EntityType="JunkoutDBModel.Customer" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="JunkoutDBModel.Expens" Width="1.5" PointX="8.875" PointY="7.875" />
+        <EntityTypeShape EntityType="JunkoutDBModel.Invoice" Width="1.5" PointX="7.25" PointY="1.125" />
+        <EntityTypeShape EntityType="JunkoutDBModel.Order" Width="1.5" PointX="3.75" PointY="1.5" />
+        <EntityTypeShape EntityType="JunkoutDBModel.TransferStation" Width="1.5" PointX="6.625" PointY="6" />
+        <AssociationConnector Association="JunkoutDBModel.CustomerAddress" />
+        <AssociationConnector Association="JunkoutDBModel.CustomerOrder" />
+        <AssociationConnector Association="JunkoutDBModel.OrderBin" />
+        <AssociationConnector Association="JunkoutDBModel.InvoiceOrder" />
+        <AssociationConnector Association="JunkoutDBModel.OrderTransferStation" />
+        <AssociationConnector Association="JunkoutDBModel.TransferStationExpens" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

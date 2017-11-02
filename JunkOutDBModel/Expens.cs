@@ -7,29 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace JunkOutDB
+namespace JunkOutDBModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Address
+    public partial class Expens
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Address()
+        public Expens()
         {
-            this.Customers = new HashSet<Customer>();
+            this.TransferStations = new HashSet<TransferStation>();
         }
     
-        public int Id { get; set; }
-        public string StreetAddress { get; set; }
-        public string AptNum { get; set; }
-        public string City { get; set; }
-        public string Province { get; set; }
-        public string Country { get; set; }
-        public string PostalCode { get; set; }
-        public string AddressType { get; set; }
+        public int ID { get; set; }
+        public string DisposalCost { get; set; }
+        public string Distance { get; set; }
+        public string Time { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual ICollection<TransferStation> TransferStations { get; set; }
     }
 }

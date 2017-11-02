@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace JunkOutDB
+namespace JunkOutDBModel
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class JunkOutDBContainer : DbContext
+    public partial class JunkoutDBModelContainer : DbContext
     {
-        public JunkOutDBContainer()
-            : base("name=JunkOutDBContainer")
+        public JunkoutDBModelContainer()
+            : base("name=JunkoutDBModelContainer")
         {
         }
     
@@ -25,12 +25,12 @@ namespace JunkOutDB
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Bin> Bins { get; set; }
-        public virtual DbSet<Invoice> Invoices { get; set; }
-        public virtual DbSet<Expense> Expenses { get; set; }
-        public virtual DbSet<TransferStation> TransferStations { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<Bin> Bins { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Expens> Expenses { get; set; }
+        public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<TransferStation> TransferStations { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model JunkOutDB.TransferStation
+﻿@model JunkOutDBModel.TransferStation
 
 @{
     ViewBag.Title = "Details";
@@ -27,6 +27,22 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Company)
         </dt>
 
@@ -43,11 +59,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HoursOfOperations)
+            @Html.DisplayNameFor(model => model.HoursOfOperation)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HoursOfOperations)
+            @Html.DisplayFor(model => model.HoursOfOperation)
         </dd>
 
         <dt>
@@ -67,16 +83,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Terms)
+            @Html.DisplayNameFor(model => model.Term)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Terms)
+            @Html.DisplayFor(model => model.Term)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
