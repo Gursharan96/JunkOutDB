@@ -1,0 +1,99 @@
+﻿@model IEnumerable<JunkOutDBModel.Address>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Google Maps JavaScript API v3 Example: Geocoding Simple</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeVLMqIbVxzRyPnv4szmwLjzFsJ4G8xQ4"></script>
+    <script type="text/javascript">
+
+
+
+        function initialize() {
+            var geocoder;
+            var map;
+            var addresses = @Html.Raw(Json.Encode(Model));
+
+            var icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+            
+
+            geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(43.6532, -79.3832);
+            var myOptions = {
+                zoom: 11,
+                center: latlng,
+                mapTypeControl: true,
+                mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.DROPDOWN_MENU },
+                navigationControl: true,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+            var infoWindow = new google.maps.InfoWindow();
+
+            for (i = 0; i < addresses.length; i++) {
+
+                var myLoc = addresses[i];
+
+                var geoOptions = {
+                    address: myLoc.StreetAddress + "," + myLoc.City + "," + myLoc.Province + "," + myLoc.PostalCode
+                }
+                
+
+                console.log(myLoc['StreetAddress']);
+
+                if (myLoc.AddressType == "Transfer Station") {
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                } else if (myLoc.AddressType == "Lot") {
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+                }else{
+                    icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                }
+
+                var markerContentString = myLoc.AddressType + ", \n" + myLoc.StreetAddress + "\n" +
+                    myLoc.City + ", " + myLoc.Province + "\n" + myLoc.PostalCode;
+
+                geocoder.geocode(geoOptions, addMarkers(markerContentString, icon));
+            }
+
+            function addMarkers(markerContentString, icon) {
+                return function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location,
+                            title: markerContentString,
+                            icon: icon,
+                            zIndex: i
+                        });
+                        (function (marker, markerContentString) {
+
+                            // Attaching a click event to the current marker
+                            google.maps.event.addListener(marker, "click", function (e) {
+                                infoWindow.setContent(markerContentString);
+                                infoWindow.open(map, marker);
+                            });
+                        })(marker, markerContentString);
+                    }
+                };
+            }
+
+                    }
+
+    </script>
+    
+
+</head>
+<body onload="initialize()">
+    <h2>Track Bins</h2>
+    <div id="map_canvas" style="width:75%; float:left; height:500px"></div>
+    <div id="legend" style="width:10%; float:right" >
+        <img style="width:100%; height:auto;" src="~/Content/Images/Map Legend 2.png" />
+    </div>
+
+</body>
