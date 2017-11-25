@@ -11,6 +11,7 @@ namespace JunkOutDBModel
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Order
     {
@@ -22,6 +23,8 @@ namespace JunkOutDBModel
     
         public int ID { get; set; }
         public string JobType { get; set; }
+
+        [DataType(DataType.DateTime)]
         public System.DateTime Date { get; set; }
         public System.TimeSpan Time { get; set; }
         public string SourceOfOrdering { get; set; }

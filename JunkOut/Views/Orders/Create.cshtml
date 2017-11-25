@@ -11,7 +11,7 @@
 
 @using (Html.BeginForm())
 {
-@Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
     <h4>Orders</h4>
@@ -99,7 +99,41 @@
     <div class="form-group">
         @Html.LabelFor(model => model.address.AddressType, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.address.AddressType, new { htmlAttributes = new { @class = "form-control" } })
+            @{
+                List<SelectListItem> listAddressType = new List<SelectListItem>();
+                listAddressType.Add(new SelectListItem
+                {
+                    Text = "Residential",
+                    Value = "Residential"
+                });
+                listAddressType.Add(new SelectListItem
+                {
+                    Text = "Construction Site",
+                    Value = "Construction Site",
+                    Selected = true
+                });
+                listAddressType.Add(new SelectListItem
+                {
+                    Text = "Commercial",
+                    Value = "Commercial"
+                });
+                listAddressType.Add(new SelectListItem
+                {
+                    Text = "Retail",
+                    Value = "Retail"
+                });
+                listAddressType.Add(new SelectListItem
+                {
+                    Text = "Others",
+                    Value = "Others"
+                });
+
+            }
+
+            @Html.DropDownListFor(model => model.address.AddressType, listAddressType, "-- Address Type --")
+
+
+
         </div>
     </div>
 
@@ -110,14 +144,44 @@
     <div class="form-group">
         @Html.LabelFor(model => model.order.JobType, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.order.JobType, new { htmlAttributes = new { @class = "form-control" } })
+            @{
+                List<SelectListItem> listJobType = new List<SelectListItem>();
+                listJobType.Add(new SelectListItem
+                {
+                    Text = "Junk Removal",
+                    Value = "Junk Removal"
+                });
+                listJobType.Add(new SelectListItem
+                {
+                    Text = "Bin Rental",
+                    Value = "Bin Rental",
+                    Selected = true
+                });
+                listJobType.Add(new SelectListItem
+                {
+                    Text = "Demolition",
+                    Value = "Demolition"
+                });
+              
+            }
+
+            @Html.DropDownListFor(model => model.order.JobType, listJobType, "-- Job Type --")
+
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.order.Date, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.order.Date, new { htmlAttributes = new { @class = "form-control" } })
+
+            <div class="input-group" id="datetimepicker">
+                @Html.EditorFor(model => model.order.Date, new { htmlAttributes = new { @class = "form-control" } })
+               
+            </div>
+
+
+
+
         </div>
     </div>
 
@@ -133,9 +197,57 @@
     <div class="form-group">
         @Html.LabelFor(model => model.order.HearingSource, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.order.HearingSource, new { htmlAttributes = new { @class = "form-control" } })
+      
+  
+
+    @{
+        List<SelectListItem> listItems = new List<SelectListItem>();
+        listItems.Add(new SelectListItem
+        {
+            Text = "Referral",
+            Value = "Referral"
+        });
+        listItems.Add(new SelectListItem
+        {
+            Text = "Website",
+            Value = "Website",
+            Selected = true
+        });
+        listItems.Add(new SelectListItem
+        {
+            Text = "Bins",
+            Value = "Bins"
+        });
+        listItems.Add(new SelectListItem
+        {
+            Text = "Saw truck",
+            Value = "Saw truck"
+        });
+        listItems.Add(new SelectListItem
+        {
+            Text = "Lawn Sign",
+            Value = "Lawn Sign",
+        });
+        listItems.Add(new SelectListItem
+        {
+            Text = "Referral / Friend",
+            Value = "Referral / Friend"
+        });
+        listItems.Add(new SelectListItem
+        {
+            Text = "Others",
+            Value = "Others"
+        });
+    }
+
+    @Html.DropDownListFor(model => model.order.HearingSource, listItems, "-- Select Source --")
+
+</div>
         </div>
-    </div>
+
+
+
+   
 
 
 
@@ -166,7 +278,23 @@
         </div>
     </div>
 </div>
-}
+
+
+@*<script>
+    $(document).ready(function () {
+        $("#datetimepicker").datetimepicker(
+
+        {
+                    showTodayButton: true,
+                    format: 'YYYY-MM-DD HH:mm',
+                    showClose: true,
+                    showClear: true,
+                    toolbarPlacement: 'top',
+                    stepping: 15
+                });
+    });
+</script>*@
+        }
 
 <div>
     @Html.ActionLink("Back to List", "Index")

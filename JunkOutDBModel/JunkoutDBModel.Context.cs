@@ -32,5 +32,7 @@ namespace JunkOutDBModel
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<TransferStation> TransferStations { get; set; }
+
+      
     }
 }
