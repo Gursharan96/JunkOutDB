@@ -48,27 +48,69 @@ namespace JunkOut.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(OrdersViewModel model)
         {
+            /*
             var order = model.order;
 
-            var customer = new Customer();
-
-            var address = new Address();
 
             db.Orders.Add(order);
-            customer.ID = order.ID;
+
+            /*
+            var customer = new Customer() {
+
+                FirstName = model.customer.FirstName,
+                LastName = model.customer.LastName,
+                CompanyName = model.customer.CompanyName,
+                Email = model.customer.Email,
+                PhoneNumber = model.customer.PhoneNumber
+
+                };
+
+             */
+
+            Customer customer = model.customer;
+
+
+            Address address = model.address;
+            Order order = model.order;
+
+
+
             db.Customers.Add(customer);
-
-            address.ID = customer.ID;
-
-
             db.Addresses.Add(address);
 
+            customer.Addresses.Add(address);
 
-            return View(model);
+            var queryBin= from b in db.Bins
+                          where b.Status == "Available"
+                          select b;
+
+            Bin bin = queryBin.First();
+
+
+          //  Bin bin = db.Bins.First();
+            order.Bin = bin;
+            order.Status = "New";
+            order.SourceOfOrdering = "Call In";
+
+            db.Orders.Add(order);
+
+            order.Customers.Add(customer);
+
+          
+
+           
+
+
+
+
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index");
         }
 
 
-      
+
 
 
 
@@ -95,7 +137,14 @@ namespace JunkOut.Controllers
         {
             Order order = db.Orders.Find(id);
 
+
+            Customer customer = order.Customers.FirstOrDefault<Customer>();
+
+
+
+            order.Customers.Remove(customer);
             db.Orders.Remove(order);
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
