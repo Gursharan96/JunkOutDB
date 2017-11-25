@@ -176,11 +176,11 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.order.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.order.DeliveryDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 
                 <div class="input-group" id="datetimepicker">
-                    @Html.EditorFor(model => model.order.Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.order.DeliveryDateTime, new { htmlAttributes = new { @class = "form-control" } })
 
                 </div>
 
@@ -191,9 +191,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.order.Time, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.order.PickupDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.order.Time, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.order.PickupDateTime, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 

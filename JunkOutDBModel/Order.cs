@@ -11,7 +11,6 @@ namespace JunkOutDBModel
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Order
     {
@@ -23,14 +22,12 @@ namespace JunkOutDBModel
     
         public int ID { get; set; }
         public string JobType { get; set; }
-
-        [DataType(DataType.DateTime)]
-        public System.DateTime Date { get; set; }
-        public System.TimeSpan Time { get; set; }
         public string SourceOfOrdering { get; set; }
         public string HearingSource { get; set; }
         public string OrderNotes { get; set; }
         public string Status { get; set; }
+        public System.DateTime DeliveryDateTime { get; set; }
+        public Nullable<System.DateTime> PickupDateTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
