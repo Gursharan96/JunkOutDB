@@ -20,24 +20,29 @@ namespace CustomerForms.Controllers
         public ActionResult Index(CustomerFormModel cfm, FormCollection frm)
         // public ActionResult Index(string fname, string bintwo, string binone, string jobtype)
         {
-            //String jt = frm["jobtype"].ToString();
+            String jt = frm["jobtype"].ToString();
 
 
-             if (ModelState.IsValid)
-              {
+            if (ModelState.IsValid)
+            {
 
-                  db.Customers.Add(cfm.customer);   
-                  db.Addresses.Add(cfm.address);
+
+                cfm.address.Country = "Canada";
+                db.Customers.Add(cfm.customer);
+                db.Addresses.Add(cfm.address);
 
                 Customer c = db.Customers.Find(cfm.customer.ID);
                 Address a = db.Addresses.Find(cfm.address.ID);
                 c.Addresses.Add(a);
 
-                // db.Orders.Add(cfm.order);
+                cfm.order.SourceOfOrdering = "Online";
+                cfm.order.JobType = "LOL";
+                
+                db.Orders.Add(cfm.order);
 
                 db.SaveChanges();
-                  return RedirectToAction("About");
-              } 
+                return RedirectToAction("About");
+            }
 
             // return Content($"Hello {fname} {jobtype} {bintwo} {binone}");
             return View();

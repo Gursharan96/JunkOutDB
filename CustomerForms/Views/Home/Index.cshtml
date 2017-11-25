@@ -53,7 +53,8 @@
                 }
             });*/
             $("#next_1").click(function () {
-                if (!$("input[name='order.JobType']:checked").val()) {
+                // if (!$("input[name='order.JobType']:checked").val()) {
+                if (!$("input[name='jobtype']:checked").val()){
                     alert('Please select a job type');
                 }
                 else {
@@ -105,7 +106,8 @@
                 $("#citytxt").html($("#city").val());
                 $("#pcodetxt").html($("#pcode").val().toUpperCase());
 
-                $("#jobtypetxt").html($("input[name='order.JobType']:checked").val());
+               // $("#jobtypetxt").html($("input[name='order.JobType']:checked").val());
+                $("#jobtypetxt").html($("input[name='jobtype']:checked").val());
 
                 $("#deldateandtimetxt").html($("#del").val());
                 $("#pickupdateandtimetxt").html($("#pickup").val());
@@ -153,18 +155,18 @@
                         <div class="space">                            
                             <div class="row selectjobtype">
                                 <div class="col-md-4" style="text-align: center">
-                                    @Html.RadioButtonFor(model => model.order.JobType, "Bin Rental", new { @id = "binRental", @name="jobtype", @required = true})
-                                  <!--  <input type="radio" name="jobtype" id="binRental" value="Bin Rental" required /> -->
+                                    @*@Html.RadioButtonFor(model => model.order.JobType, "Bin Rental", new { @id = "binRental", @name="jobtype", @required = true})*@
+                                    <input type="radio" name="jobtype" id="binRental" value="Bin Rental" required /> 
                                     <label for="binRental">Bin Rental</label>
                                 </div>
                                 <div class="col-md-4" style="text-align: center">
-                                    @Html.RadioButtonFor(model => model.order.JobType, "Demolish", new { @id = "demolish", @name = "jobtype", @required = true })
-                                    <!--<input type="radio" name="jobtype" id="demolish" value="Demolish" required />-->
+                                    @*@Html.RadioButtonFor(model => model.order.JobType, "Demolish", new { @id = "demolish", @name = "jobtype", @required = true })*@
+                                    <input type="radio" name="jobtype" id="demolish" value="Demolish" required />
                                     <label for="demolish">Demolish</label>
                                 </div>
                                 <div class="col-md-4" style="text-align: center">
-                                    @Html.RadioButtonFor(model => model.order.JobType, "Junk Removal", new { @id = "junkRemoval", @name = "jobtype", @required = true })
-                                    <!--input type="radio" name="jobtype" id="junkRemoval" value="Junk Removal" required />-->
+                                    @*@Html.RadioButtonFor(model => model.order.JobType, "Junk Removal", new { @id = "junkRemoval", @name = "jobtype", @required = true })*@
+                                    <input type="radio" name="jobtype" id="junkRemoval" value="Junk Removal" required />
                                     <label for="junkRemoval">Junk Removal</label>
                                 </div>
                             </div>
@@ -372,10 +374,10 @@
                                 </div>
                             </div>
                             <p style="padding: 10px"></p>
-                            <div class="form-group">
+                         <!--   <div class="form-group">
                                 @Html.LabelFor(model => model.address.Country, htmlAttributes: new { @class = "control-label" })
                                 @Html.EditorFor(model => model.address.Country, new { htmlAttributes = new { @class = "form-control", @id = "country" } })
-                            </div>
+                            </div> -->
                         </fieldset>
                         <div class="row">
                             <span class="col-md-6" style="text-align: center;"><button type="button" class="btn btn-danger" id="prev_3" style="width:50%">Previous</button></span>
