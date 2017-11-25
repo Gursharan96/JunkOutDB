@@ -299,7 +299,7 @@
                         Text = "Completed",
                         Value = "Completed",
                     });
-                  
+
                 }
 
                 @Html.DropDownListFor(model => model.order.Status, listStatus, "-- Select Status --")
@@ -308,16 +308,7 @@
         </div>
 
 
-
-
-
-
-
-
-
-
-
-
+        @Html.HiddenFor(model => model.order.SourceOfOrdering)
 
 
 
@@ -328,7 +319,7 @@
             </div>
         </div>
     </div>
-}
+                    }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
