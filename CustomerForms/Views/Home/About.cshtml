@@ -1,7 +1,32 @@
-﻿@{
+﻿@using JunkOutDBModel
+@model IEnumerable<Address>
+
+@{
     ViewBag.Title = "About";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.StreetAddress)</th>
+        <th>@Html.DisplayNameFor(model => model.Province) </th>
+        <th>@Html.DisplayNameFor(model => model.City) </th>
+        <th>---</th>
+    </tr>
+    @foreach (Address g in Model)
+    {
+        <tr>
+            <td>@g.StreetAddress</td>
+            <td>@g.Province</td>
+            <td>@g.City</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = g.ID }) |
+                @Html.ActionLink("Detail", "Detail", new { id = g.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = g.ID })
+            </td>
+        </tr>
+    }
+</table>
