@@ -17,14 +17,25 @@ namespace CustomerForms.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(CustomerFormModel cfm)
+        public ActionResult Index(CustomerFormModel cfm, FormCollection frm)
         // public ActionResult Index(string fname, string bintwo, string binone, string jobtype)
         {
+            //String jt = frm["jobtype"].ToString();
+
 
              if (ModelState.IsValid)
               {
-                  db.Customers.Add(cfm.customer);
-                  db.SaveChanges();
+
+                  db.Customers.Add(cfm.customer);   
+                  db.Addresses.Add(cfm.address);
+
+                Customer c = db.Customers.Find(cfm.customer.ID);
+                Address a = db.Addresses.Find(cfm.address.ID);
+                c.Addresses.Add(a);
+
+                // db.Orders.Add(cfm.order);
+
+                db.SaveChanges();
                   return RedirectToAction("About");
               } 
 
