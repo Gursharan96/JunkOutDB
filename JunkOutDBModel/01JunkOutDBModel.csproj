@@ -83,6 +83,7 @@
     <Compile Include="Order.cs">
       <DependentUpon>JunkoutDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PartialClasses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransferStation.cs">
       <DependentUpon>JunkoutDBModel.tt</DependentUpon>
