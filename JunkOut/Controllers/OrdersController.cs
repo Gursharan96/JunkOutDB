@@ -6,6 +6,10 @@ using System.Web.Mvc;
 using JunkOutDBModel;
 using JunkOut.Models;
 using System.Net;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
+using System.Text;
 
 namespace JunkOut.Controllers
 {
@@ -109,11 +113,154 @@ namespace JunkOut.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var ordervm = new OrdersViewModel();
+
+            {
+
+                Order order = db.Orders.SingleOrDefault(o => o.ID == id);
+
+                Customer customer = order.Customers.First();
+
+                Address address = customer.Addresses.First();
+
+
+                if (order == null)
+                {
+                    return HttpNotFound();
+                }
+
+
+                ordervm.order = order;
+                ordervm.customer = customer;
+                ordervm.address = address;
+
+               
+
+                // Retrieve list of States
+                
+            }
+            return View(ordervm);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit( OrdersViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Order order = model.order;
+                Customer customer = model.customer;
+                Address address = model.address;
+
+
+                db.Entry(order).State = EntityState.Modified;
+                db.Entry(customer).State = EntityState.Modified;
+                db.Entry(address).State = EntityState.Modified;
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch ( System.Data.DataException ex)
+                {
+                   
+                            System.Console.WriteLine("Property: {0} ", ex.Message);
+                        
+                    
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+
+      
 
 
 
 
 
+        /*
+                public ActionResult Edit(int? id)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    OrdersViewModel model = new OrdersViewModel();
+                    Order order = model.order;
+                    order = db.Orders.Find(id);
+                    if (order == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(model);
+                }
+
+                // POST: Bins/Edit/5
+                // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+                // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+                [HttpPost, ActionName("Edit")]
+                [ValidateAntiForgeryToken]
+                public ActionResult EditPost(int? id)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+
+
+                    var courseToUpdate = db.Orders.Find(id);
+
+                        try
+                        {
+                            db.SaveChanges();
+
+                            return RedirectToAction("Index");
+                        }
+
+                        catch (RetryLimitExceededException )
+                        {
+                            //Log the error (uncomment dex variable name and add a line here to write a log.
+                            ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                        }
+
+                    return View(courseToUpdate);
+                }
+
+
+                [HttpPost]
+                [ValidateAntiForgeryToken]
+                public ActionResult Edit(OrdersViewModel model)
+                {
+
+                    if (ModelState.IsValid)
+                    {
+                        Order order = model.order;
+                        Customer customer = model.customer;
+                        Address address = model.address;
+
+                        db.Entry(order).State = EntityState.Modified;
+                        db.Entry(customer).State = EntityState.Modified;
+                        db.Entry(address).State = EntityState.Modified;
+
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                    return View(model);
+                }
+        */
 
 
 

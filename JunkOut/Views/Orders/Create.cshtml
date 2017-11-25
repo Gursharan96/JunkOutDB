@@ -174,12 +174,14 @@
         @Html.LabelFor(model => model.order.Date, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
 
+            <div class="input-group" id="datetimepicker">
+                @Html.EditorFor(model => model.order.Date, new { htmlAttributes = new { @class = "form-control" } })
+               
+            </div>
 
 
 
 
-
-            @Html.EditorFor(model => model.order.Date, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
 
@@ -276,7 +278,23 @@
         </div>
     </div>
 </div>
-}
+
+
+@*<script>
+    $(document).ready(function () {
+        $("#datetimepicker").datetimepicker(
+
+        {
+                    showTodayButton: true,
+                    format: 'YYYY-MM-DD HH:mm',
+                    showClose: true,
+                    showClear: true,
+                    toolbarPlacement: 'top',
+                    stepping: 15
+                });
+    });
+</script>*@
+        }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
