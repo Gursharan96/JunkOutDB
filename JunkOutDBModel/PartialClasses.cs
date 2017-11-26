@@ -47,29 +47,32 @@ namespace JunkOutDBModel
 
     public class TransferStationMeta
     {
-
-
         [Display(Name = "Street Address")]
         [Required(ErrorMessage = " {0} required")]
         public string StreetAddress { get; set; }
 
-
-
         [Required(ErrorMessage = " {0} required")]
         public string City { get; set; }
 
+        [Display(Name = "Postal Code")]
         [Required(ErrorMessage = " {0} required")]
+        [RegularExpression("(^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$)", ErrorMessage = "Please Insert Valid Postal Code")]
+        public string PostalCode { get; set; }
 
+        [Required(ErrorMessage = " {0} required")]
+        public string Country { get; set; }
+
+        [Required(ErrorMessage = " {0} required")]
         public string Company { get; set; }
 
+        [Display(Name = "Phone Number")]
         [Required(ErrorMessage = " {0} required")]
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Can contain Numbers Only")]
         public string Phone { get; set; }
 
         [Display(Name = "Hours Of Operations")]
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Can contain Numbers Only")]
-        public string HoursOfOperations { get; set; }
+        public string HoursOfOperation { get; set; }
 
 
         public string Notes { get; set; }
@@ -78,8 +81,9 @@ namespace JunkOutDBModel
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Can contain Numbers Only")]
         public string Rate { get; set; }
 
+
         [Required(ErrorMessage = " {0} required")]
-        public string Terms { get; set; }
+        public string Term { get; set; }
 
 
 
