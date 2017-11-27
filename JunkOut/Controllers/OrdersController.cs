@@ -170,98 +170,26 @@ namespace JunkOut.Controllers
                 {
                     db.SaveChanges();
                 }
-                catch ( System.Data.DataException ex)
+                catch (DbEntityValidationException e)
                 {
-                   
-                            System.Console.WriteLine("Property: {0} ", ex.Message);
-                        
-                    
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    throw;
                 }
-                return RedirectToAction("Index");
             }
-
-            return View(model);
+                return View(model);
         }
 
 
       
-
-
-
-
-
-        /*
-                public ActionResult Edit(int? id)
-                {
-                    if (id == null)
-                    {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    }
-                    OrdersViewModel model = new OrdersViewModel();
-                    Order order = model.order;
-                    order = db.Orders.Find(id);
-                    if (order == null)
-                    {
-                        return HttpNotFound();
-                    }
-                    return View(model);
-                }
-
-                // POST: Bins/Edit/5
-                // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-                // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-                [HttpPost, ActionName("Edit")]
-                [ValidateAntiForgeryToken]
-                public ActionResult EditPost(int? id)
-                {
-                    if (id == null)
-                    {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    }
-
-
-                    var courseToUpdate = db.Orders.Find(id);
-
-                        try
-                        {
-                            db.SaveChanges();
-
-                            return RedirectToAction("Index");
-                        }
-
-                        catch (RetryLimitExceededException )
-                        {
-                            //Log the error (uncomment dex variable name and add a line here to write a log.
-                            ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-                        }
-
-                    return View(courseToUpdate);
-                }
-
-
-                [HttpPost]
-                [ValidateAntiForgeryToken]
-                public ActionResult Edit(OrdersViewModel model)
-                {
-
-                    if (ModelState.IsValid)
-                    {
-                        Order order = model.order;
-                        Customer customer = model.customer;
-                        Address address = model.address;
-
-                        db.Entry(order).State = EntityState.Modified;
-                        db.Entry(customer).State = EntityState.Modified;
-                        db.Entry(address).State = EntityState.Modified;
-
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
-
-                    return View(model);
-                }
-        */
-
 
 
         public ActionResult Delete(int? id)
