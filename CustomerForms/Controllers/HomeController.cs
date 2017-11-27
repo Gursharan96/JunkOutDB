@@ -17,10 +17,10 @@ namespace CustomerForms.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(CustomerFormModel cfm, FormCollection frm)
+        public ActionResult Index(CustomerFormModel cfm)
         // public ActionResult Index(string fname, string bintwo, string binone, string jobtype)
         {
-            String jt = frm["jobtype"].ToString();
+            // String jt = frm["jobtype"].ToString();
 
 
             if (ModelState.IsValid)
@@ -35,10 +35,10 @@ namespace CustomerForms.Controllers
                 Address a = db.Addresses.Find(cfm.address.ID);
                 c.Addresses.Add(a);
 
-                cfm.order.SourceOfOrdering = "Online";
-                cfm.order.JobType = "LOL";
+                cfm.orders.SourceOfOrdering = "Online";
+                cfm.orders.JobType = "LOL";
                 
-                db.Orders.Add(cfm.order);
+              //  db.Orders.Add(cfm.orders);
 
                 db.SaveChanges();
                 return RedirectToAction("About");

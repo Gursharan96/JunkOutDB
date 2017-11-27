@@ -9,7 +9,7 @@ namespace CustomerForms.Models
     public class CustomerFormModel
     {
         public Address address { get; set; }
-        public Order order { get; set; }
+        public Order orders { get; set; }
         public Customer customer { get; set; }
 
 

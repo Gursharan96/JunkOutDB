@@ -229,7 +229,8 @@
                             <label for="comment" style="color: #468847;">
                                 Please describe a little about the job (if you need extra bin, mention here):
                             </label>
-                            <textarea class="form-control" rows="3" id="comment"></textarea>
+                            @*<textarea class="form-control" rows="3" id="comment"></textarea>*@
+                            @Html.TextAreaFor(model => model.orders.OrderNotes, new { rows = "3", @class = "form-control", @id ="comment" })
                         </div>
                         <fieldset class="dimensions">
                             <legend class="f-border">Schedule Appointment</legend>
