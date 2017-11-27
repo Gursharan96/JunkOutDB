@@ -6,6 +6,10 @@ using System.Web.Mvc;
 using JunkOutDBModel;
 using JunkOut.Models;
 using System.Net;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
+using System.Text;
 
 namespace JunkOut.Controllers
 {
@@ -48,31 +52,144 @@ namespace JunkOut.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(OrdersViewModel model)
         {
+            /*
             var order = model.order;
 
-            var customer = new Customer();
-
-            var address = new Address();
 
             db.Orders.Add(order);
-            customer.ID = order.ID;
+
+            /*
+            var customer = new Customer() {
+
+                FirstName = model.customer.FirstName,
+                LastName = model.customer.LastName,
+                CompanyName = model.customer.CompanyName,
+                Email = model.customer.Email,
+                PhoneNumber = model.customer.PhoneNumber
+
+                };
+
+             */
+
+            Customer customer = model.customer;
+
+
+            Address address = model.address;
+            Order order = model.order;
+
+
+
             db.Customers.Add(customer);
-
-            address.ID = customer.ID;
-
-
             db.Addresses.Add(address);
 
+            customer.Addresses.Add(address);
 
-            return View(model);
+            var queryBin= from b in db.Bins
+                          where b.Status == "Available"
+                          select b;
+
+            Bin bin = queryBin.First();
+
+
+          //  Bin bin = db.Bins.First();
+            order.Bin = bin;
+            order.Status = "New";
+            order.SourceOfOrdering = "Call In";
+
+            db.Orders.Add(order);
+
+            order.Customers.Add(customer);
+
+          
+
+           
+
+
+
+
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var ordervm = new OrdersViewModel();
+
+            {
+
+                Order order = db.Orders.SingleOrDefault(o => o.ID == id);
+
+                Customer customer = order.Customers.First();
+
+                Address address = customer.Addresses.First();
+
+
+                if (order == null)
+                {
+                    return HttpNotFound();
+                }
+
+
+                ordervm.order = order;
+                ordervm.customer = customer;
+                ordervm.address = address;
+
+               
+
+                // Retrieve list of States
+                
+            }
+            return View(ordervm);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit( OrdersViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Order order = model.order;
+                Customer customer = model.customer;
+                Address address = model.address;
+
+
+                db.Entry(order).State = EntityState.Modified;
+                db.Entry(customer).State = EntityState.Modified;
+                db.Entry(address).State = EntityState.Modified;
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    throw;
+                }
+            }
+                return View(model);
         }
 
 
       
-
-
-
-
 
 
         public ActionResult Delete(int? id)
@@ -95,7 +212,14 @@ namespace JunkOut.Controllers
         {
             Order order = db.Orders.Find(id);
 
+
+            Customer customer = order.Customers.FirstOrDefault<Customer>();
+
+
+
+            order.Customers.Remove(customer);
             db.Orders.Remove(order);
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }

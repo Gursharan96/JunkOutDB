@@ -16,11 +16,7 @@ namespace JunkOut.Models
         public Customer customer { get; set; }
         public Address address { get; set; }
 
-        public Bin bin { get; set; }
-
-        public TransferStation transferStation { get; set; }
-
-
+       
        
      //   public List<SelBin> SelBins { get; set; }
 
