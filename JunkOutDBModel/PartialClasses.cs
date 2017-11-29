@@ -106,11 +106,12 @@ namespace JunkOutDBModel
     {
         [Display(Name = "First Name")]
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Can contain Numbers Only")]
+        [RegularExpression("/^[a-z ,.'-]+$/i", ErrorMessage = "First Name cannot contain numbers")]
         public string FirstName { get; set; }
 
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = " {0} required")]
+        [RegularExpression("/^[a-z ,.'-]+$/i", ErrorMessage = "Last Name cannot contain numbers")]
         public string LastName { get; set; }
 
         [Display(Name = "Company Name")]
