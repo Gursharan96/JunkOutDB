@@ -56,10 +56,10 @@ namespace JunkOutDBModel
 
         [Display(Name = "Postal Code")]
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("(^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$)", ErrorMessage = "Please Insert Valid Postal Code")]
+       // [RegularExpression("(^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$)", ErrorMessage = "Please Insert Valid Postal Code")]
         public string PostalCode { get; set; }
 
-        [Required(ErrorMessage = " {0} required")]
+       [Required(ErrorMessage = " {0} required")]
         public string Country { get; set; }
 
         [Required(ErrorMessage = " {0} required")]
@@ -106,12 +106,12 @@ namespace JunkOutDBModel
     {
         [Display(Name = "First Name")]
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("/^[a-z ,.'-]+$/i", ErrorMessage = "First Name cannot contain numbers")]
+       // [RegularExpression("/^[a-z ,.'-]+$/i", ErrorMessage = "First Name cannot contain numbers")]
         public string FirstName { get; set; }
 
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("/^[a-z ,.'-]+$/i", ErrorMessage = "Last Name cannot contain numbers")]
+       // [RegularExpression("/^[a-z ,.'-]+$/i", ErrorMessage = "Last Name cannot contain numbers")]
         public string LastName { get; set; }
 
         [Display(Name = "Company Name")]
@@ -167,7 +167,7 @@ namespace JunkOutDBModel
 
         [Display(Name = "Postal Code")]
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("(^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$)", ErrorMessage = "Please Insert Valid Postal Code")]
+       // [RegularExpression("(^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$)", ErrorMessage = "Please Insert Valid Postal Code")]
         public string PostalCode { get; set; }
 
         [Display(Name = "Address Type")]
@@ -188,7 +188,7 @@ namespace JunkOutDBModel
 
     public class OrderMeta
     {
-        [Display(Name = "Address Type")]
+        [Display(Name = "Job Type")]
         [Required(ErrorMessage = " {0} required")]
         public string JobType { get; set; }
 

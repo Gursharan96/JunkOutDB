@@ -60,7 +60,7 @@
                 else {
                     $("#slide-2").hide();
                     $("#slide-3").show('slow');
-                    if ($("input[name='order.JobType']:checked").val() == "Bin Rental") {
+                    if ($("input[name='jobtype']:checked").val() == "Bin Rental") {
                         $("#binsdiv").show();
                     }
                     else {
@@ -73,17 +73,17 @@
                 $("#slide-1").show('slow');
             });
             $("#next_2").click(function () {
-             /*   if ((!$("#del").val())) {
+                if ((!$("#del").val())) {
                     alert("Please enter BOTH date and time for Delivery!");
                 }
                 else if ((!$("#pickup").val())) {
                     alert("Please enter BOTH date and time for Pick Up!");
                 }  
-                else { */
+                else { 
                     $("#slide-3").hide();
                     $("#slide-4").show('slow');
                     $('#poscode').val($('#pcode').val().toUpperCase());
-              //  } 
+                } 
             });
             $("#prev_2").click(function () {
                 $("#slide-3").hide();
