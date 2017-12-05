@@ -75,7 +75,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.address.StreetAddress, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.address.StreetAddress, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.address.StreetAddress, new { htmlAttributes = new { @class = "form-control", id ="StreetAddress" } })
             @Html.ValidationMessageFor(model => model.address.StreetAddress, "", new { @class = "text-danger" })
 
 
@@ -350,6 +350,30 @@
 </div>
 
 @section Scripts {
+
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv-x3Oo0fLyDiLzOtZ9D47_oQUq02TNrY&libraries=places"></script>
+
+<script type="text/javascript">
+
+    google.maps.event.addDomListener(window, 'load', function () {
+        var options = {
+        };
+
+        var input = document.getElementById('StreetAddress');
+        var places = new google.maps.places.Autocomplete(input, options);
+
+
+    });
+</script>
+
+
+
+
+
+
+
     @Scripts.Render("~/bundles/jqueryval")
 }
 

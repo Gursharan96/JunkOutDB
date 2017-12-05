@@ -106,7 +106,6 @@ namespace JunkOutDBModel
     {
         [Display(Name = "First Name")]
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Can contain Numbers Only")]
         public string FirstName { get; set; }
 
         [Display(Name = "Last Name")]
@@ -166,7 +165,7 @@ namespace JunkOutDBModel
 
         [Display(Name = "Postal Code")]
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("(^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$)", ErrorMessage = "Please Insert Valid Postal Code")]
+      //  [RegularExpression("(^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$)", ErrorMessage = "Please Insert Valid Postal Code")]
         public string PostalCode { get; set; }
 
         [Display(Name = "Address Type")]
@@ -187,7 +186,7 @@ namespace JunkOutDBModel
 
     public class OrderMeta
     {
-        [Display(Name = "Address Type")]
+        [Display(Name = "Job Type")]
         [Required(ErrorMessage = " {0} required")]
         public string JobType { get; set; }
 
@@ -200,7 +199,6 @@ namespace JunkOutDBModel
         public string HearingSource { get; set; }
 
         [Display(Name = "Order Notes")]
-        [Required(ErrorMessage = " {0} required")]
         public string OrderNotes { get; set; }
 
         [Display(Name = "Status")]
