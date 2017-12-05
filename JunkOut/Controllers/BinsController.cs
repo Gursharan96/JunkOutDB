@@ -13,11 +13,19 @@ namespace JunkOut.Controllers
     public class BinsController : Controller
     {
         private JunkoutDBModelContainer db = new JunkoutDBModelContainer();
+        
 
         // GET: Bins
         public ActionResult Index()
         {
-            return View(db.Bins.ToList());
+            IEnumerable<Bin> binList = (IEnumerable<Bin>) TempData["sortedList"];
+
+            if (binList == null)
+            {
+                binList = db.Bins.ToList();
+            }
+
+            return View(binList);
         }
 
         // GET: Bins/Details/5
@@ -33,6 +41,25 @@ namespace JunkOut.Controllers
                 return HttpNotFound();
             }
             return View(bin);
+        }
+        
+
+        public ActionResult SortStatus(string status, string binSize)
+        {
+            IEnumerable<Bin> binList = db.Bins.ToList();
+            if(!status.Equals("all") && !status.Equals(""))
+            {
+                binList = binList.Where(Bins => Bins.Status == status);
+            }
+
+            if(!binSize.Equals("all") && !binSize.Equals(""))
+            {
+                binList = binList.Where(Bins => Bins.BinSize == binSize);
+            }
+
+            TempData["sortedList"] = binList;
+
+            return RedirectToAction("Index");
         }
 
         // GET: Bins/Create
@@ -50,6 +77,9 @@ namespace JunkOut.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                bin.Status = "New";
+
                 db.Bins.Add(bin);
                 db.SaveChanges();
                 return RedirectToAction("Index");
