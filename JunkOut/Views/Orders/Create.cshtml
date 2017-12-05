@@ -95,7 +95,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.address.City, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.address.City, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.address.City, new { htmlAttributes = new { @class = "form-control", id="City" } })
             @Html.ValidationMessageFor(model => model.address.City, "", new { @class = "text-danger" })
 
 
@@ -105,7 +105,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.address.Province, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.address.Province, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.address.Province, new { htmlAttributes = new { @class = "form-control" , id = "Province" } })
             @Html.ValidationMessageFor(model => model.address.Province, "", new { @class = "text-danger" })
 
 
@@ -115,7 +115,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.address.Country, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.address.Country, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.address.Country, new { htmlAttributes = new { @class = "form-control", id="Country" } })
             @Html.ValidationMessageFor(model => model.address.Country, "", new { @class = "text-danger" })
 
 
@@ -126,7 +126,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.address.PostalCode, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.address.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.address.PostalCode, new { htmlAttributes = new { @class = "form-control", id="PostalCode" } })
             @Html.ValidationMessageFor(model => model.address.PostalCode, "", new { @class = "text-danger" })
 
 
@@ -357,15 +357,48 @@
 
 <script type="text/javascript">
 
+
+
     google.maps.event.addDomListener(window, 'load', function () {
-        var options = {
-        };
+
 
         var input = document.getElementById('StreetAddress');
-        var places = new google.maps.places.Autocomplete(input, options);
+        var options = {
+        componentRestrictions: { country: 'CA' }
+    };
+
+    places = new google.maps.places.Autocomplete(input, options);
 
 
+      //  var places = new google.maps.places.Autocomplete(document.getElementById('StreetAddress'));
+
+
+
+
+        google.maps.event.addListener(places, 'place_changed', function () {
+            var place = places.getPlace();
+            var address = place.formatted_address;
+            var value = address.split(",");
+            count = value.length;
+            streetAddress = value[0]
+            country = value[count - 1];
+            state = value[count - 2];
+            city = value[count - 3];
+            var z = state.split(" ");
+            document.getElementById("Country").value = country;
+            var i = z.length;
+             document.getElementById("Province").value = z[1];
+            if (i > 2)
+                document.getElementById("PostalCode").value = z[2] + z[3];
+            document.getElementById("City").value = city;
+
+            var mesg = address;
+            document.getElementById("StreetAddress").value = streetAddress;
+
+        });
     });
+
+
 </script>
 
 
