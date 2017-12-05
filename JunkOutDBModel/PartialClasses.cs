@@ -106,7 +106,7 @@ namespace JunkOutDBModel
     {
         [Display(Name = "First Name")]
         [Required(ErrorMessage = " {0} required")]
-       // [RegularExpression("/^[a-z ,.'-]+$/i", ErrorMessage = "First Name cannot contain numbers")]
+
         public string FirstName { get; set; }
 
         [Display(Name = "Last Name")]
@@ -167,7 +167,7 @@ namespace JunkOutDBModel
 
         [Display(Name = "Postal Code")]
         [Required(ErrorMessage = " {0} required")]
-       // [RegularExpression("(^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$)", ErrorMessage = "Please Insert Valid Postal Code")]
+
         public string PostalCode { get; set; }
 
         [Display(Name = "Address Type")]
@@ -201,7 +201,6 @@ namespace JunkOutDBModel
         public string HearingSource { get; set; }
 
         [Display(Name = "Order Notes")]
-        [Required(ErrorMessage = " {0} required")]
         public string OrderNotes { get; set; }
 
         [Display(Name = "Status")]
