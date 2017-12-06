@@ -77,6 +77,9 @@ namespace JunkOut.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                bin.Status = "New";
+
                 db.Bins.Add(bin);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -93,14 +93,14 @@ namespace JunkOut.Controllers
 
           //  Bin bin = db.Bins.First();
             order.Bin = bin;
-            order.Status = "New";
+            order.Status = "Confirmed";
             order.SourceOfOrdering = "Call In";
 
             db.Orders.Add(order);
 
             order.Customers.Add(customer);
 
-          
+            bin.Status = "Booked";
 
            
 
@@ -215,10 +215,24 @@ namespace JunkOut.Controllers
 
             Customer customer = order.Customers.FirstOrDefault<Customer>();
 
+            Bin bin = order.Bin;
 
+          
 
             order.Customers.Remove(customer);
             db.Orders.Remove(order);
+
+            bin.Status = "Available";
+
+            Address address = customer.Addresses.FirstOrDefault<Address>();
+
+            customer.Addresses.Remove(address);
+
+            db.Customers.Remove(customer);
+            db.Addresses.Remove(address);
+
+
+
 
             db.SaveChanges();
             return RedirectToAction("Index");
