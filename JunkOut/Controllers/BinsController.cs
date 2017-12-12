@@ -42,23 +42,41 @@ namespace JunkOut.Controllers
             }
             return View(bin);
         }
-        
 
-        public ActionResult SortStatus(string status, string binSize)
+
+        public ActionResult SortBins(FormCollection form)
         {
             IEnumerable<Bin> binList = db.Bins.ToList();
-            if(!status.Equals("all") && !status.Equals(""))
+            string[] statuses = { "New", "Available", "pending", "Booked", "delivered"};
+            string[] sizes = { "5", "10", "14" };
+            string[] checkedStatuses = new string[5];
+            string[] checkedSizes= new string[3];
+            int countStatus = 0;
+            int countSizes = 0;
+            foreach (string item in form)
             {
-                binList = binList.Where(Bins => Bins.Status == status);
-            }
+                if (statuses.Contains(item) && form[item].Substring(0, 1).Equals("t"))
+                {
+                    checkedStatuses[countStatus++] = item;
+                }
 
-            if(!binSize.Equals("all") && !binSize.Equals(""))
-            {
-                binList = binList.Where(Bins => Bins.BinSize == binSize);
+                if (sizes.Contains(item) && form[item].Substring(0, 1).Equals("t"))
+                {
+                    checkedSizes[countSizes++] = item;
+                }
+
             }
+            binList = binList.Where(Bins => Bins.Status == checkedStatuses[0] ||
+                                                Bins.Status == checkedStatuses[1] ||
+                                                Bins.Status == checkedStatuses[2] ||
+                                                Bins.Status == checkedStatuses[3] ||
+                                                Bins.Status == checkedStatuses[4]);
+
+            binList = binList.Where(Bins => Bins.BinSize == checkedSizes[0] ||
+                                                Bins.BinSize == checkedSizes[1] ||
+                                                Bins.BinSize == checkedSizes[2]);
 
             TempData["sortedList"] = binList;
-
             return RedirectToAction("Index");
         }
 
@@ -78,7 +96,7 @@ namespace JunkOut.Controllers
             if (ModelState.IsValid)
             {
 
-                bin.Status = "New";
+                bin.Status = "Available";
 
                 db.Bins.Add(bin);
                 db.SaveChanges();

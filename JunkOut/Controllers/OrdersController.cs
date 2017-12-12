@@ -19,7 +19,13 @@ namespace JunkOut.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            return View(db.Orders.ToList());
+            IEnumerable<Order> orderList = (IEnumerable<Order>)TempData["sortedList"];
+
+            if (orderList == null)
+            {
+                orderList = db.Orders.ToList();
+            }
+            return View(orderList);
         }
 
         public ActionResult Details(int? id)
@@ -29,13 +35,65 @@ namespace JunkOut.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Order order = db.Orders.Find(id);
+            Order orderList = db.Orders.Find(id);
 
-            if (order == null)
+            if (orderList == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+            return View(orderList);
+        }
+
+        public ActionResult SortOrders(FormCollection form)
+        {
+            IEnumerable<Order> orderList = db.Orders.ToList();
+            string[] statuses = { "New", "Pending", "Confirmed", "Delivered", "Completed" };
+            string[] jobTypes = { "Bin Rental", "Junk Removal", "Demolition" };
+            string[] checkedStatuses = new string[5];
+            string[] checkedJobTypes = new string[3];
+            int countStatus = 0;
+            int countJobTypes = 0;
+
+            bool orderByDeliveryDesc = true;
+            foreach (string item in form)
+            {
+                if (statuses.Contains(item) && form[item].Substring(0, 1).Equals("t"))
+                {
+                    checkedStatuses[countStatus++] = item;
+                }
+                else if(jobTypes.Contains(item) && form[item].Substring(0, 1).Equals("t"))
+                {
+                    checkedJobTypes[countJobTypes++] = item;
+                }
+                else if(form[item] == "deliveryAsc")
+                {
+                    orderByDeliveryDesc = false;
+                }
+                        
+
+            }
+            orderList = orderList.Where(Orders => Orders.Status == checkedStatuses[0] ||
+                                                Orders.Status == checkedStatuses[1] ||
+                                                Orders.Status == checkedStatuses[2] ||
+                                                Orders.Status == checkedStatuses[3] ||
+                                                Orders.Status == checkedStatuses[4]);
+
+            orderList = orderList.Where(Orders => Orders.JobType == checkedJobTypes[0] ||
+                                                Orders.JobType == checkedJobTypes[1] ||
+                                                Orders.JobType == checkedJobTypes[2]);
+
+            if(orderByDeliveryDesc)
+            {
+                orderList = orderList.OrderByDescending(Orders => Orders.DeliveryDateTime);
+            }
+            else
+            {
+                orderList = orderList.OrderBy(Orders => Orders.DeliveryDateTime);
+            }
+            
+
+            TempData["sortedList"] = orderList;
+            return RedirectToAction("Index");
         }
 
 

@@ -12,6 +12,33 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("SortOrders", "Orders"))
+{
+    <div style="display:inline;float:left;width:200px;">
+        <p>JobType: </p>
+        @Html.CheckBox("Bin Rental", true)  <span>Bin Rental</span><br />
+        @Html.CheckBox("Junk Removal", true) <span>Junk Removal</span><br />
+        @Html.CheckBox("Demolition", true) <span>Demolition</span><br />
+    </div>
+    <div style="display:inline;float:left;width:200px;">
+        <p>Status: </p>
+        @Html.CheckBox("New", true)  <span>New</span><br />
+        @Html.CheckBox("Pending", true) <span>Pending</span><br />
+        @Html.CheckBox("Confirmed", true) <span>Confirmed</span><br />
+        @Html.CheckBox("Delivered", true) <span>Delivered</span><br />
+        @Html.CheckBox("Completed", true) <span>Completed</span><br />
+    </div>
+    <div style="display:inline;float:left;width:200px;">
+        <p>Order By Delivery Date: </p>
+        @Html.RadioButton("orderByDelivery", "deliveryAsc", true) <span>Ascending</span>
+        @Html.RadioButton("orderByDelivery", "deliveryDesc", true) <span>Descending</span>
+    </div>
+
+    <input type="submit" value="Search" />
+}
+
+
 <table class="table">
     <tr>
         <th>
