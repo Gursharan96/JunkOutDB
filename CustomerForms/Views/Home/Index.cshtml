@@ -235,8 +235,14 @@
                         <fieldset class="dimensions">
                             <legend class="f-border">Schedule Appointment</legend>
                             <div id="appointment">
-                                <p class="col-md-6">Delivery Date and Time: <input type="datetime-local" id="del" style="color: black"></p>
-                                <p class="col-md-6">Pick-Up Date and Time:<input type="datetime-local" id="pickup" name="date" style="color: black"></p>
+                                <p class="col-md-6">Delivery Date and Time: 
+                                <input type="datetime-local" id="del" name="delivery" style="color: black">
+                                @*@Html.EditorFor(model => Model.orders.DeliveryDateTime, new { htmlAttributes = new { @class = "form-control", id = "del" }})*@
+                                </p>
+                                <p class="col-md-6">Pick-Up Date and Time:
+                                <input type="datetime-local" id="pickup" name="pickup" style="color: black">
+                                    @*@Html.EditorFor(model => Model.orders.PickupDateTime, new { htmlAttributes = new { @class = "form-control", id = "pickup" } })*@
+                                </p>
                             </div>
                         </fieldset>
                         <div class="space">
@@ -495,7 +501,8 @@
                         </fieldset>
                         <label for="resource">How did you hear about us?</label>
                         <div>
-                            <input type="text" class="form-control" id="resource" name="resource">
+                            @*<input type="text" class="form-control" id="resource" name="resource">*@
+                            @Html.DropDownListFor(model => model.orders.HearingSource, new SelectList(Enum.GetValues(typeof(SourceOfHearing))), new { @class = "form-control", @id = "sitetype" })
                         </div>
                         <div class="space"></div> 
 

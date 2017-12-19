@@ -14,7 +14,6 @@ namespace CustomerForms.Models
 
 
     }
-
     public enum Prov
     {
         ON,
@@ -28,12 +27,18 @@ namespace CustomerForms.Models
         AB,
         NL
     }
-
     public enum Site
     {
         Residence,
         Household,
         Office,
         Apartment
+    }
+    public enum SourceOfHearing
+    {
+        Referral,
+        Advertisement,
+        Online_Surfing,
+        Other
     }
 }
