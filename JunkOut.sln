@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01JunkOutDBModel", "JunkOut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02JunkOut", "JunkOut\02JunkOut.csproj", "{659677C8-D9EA-44C4-B3AC-78269F74C93F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JunkOutDBModel", "JunkOutDBModel\JunkOutDBModel.csproj", "{5AA18AD4-C367-4CF2-9A50-52D23F9E6448}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{659677C8-D9EA-44C4-B3AC-78269F74C93F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{659677C8-D9EA-44C4-B3AC-78269F74C93F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{659677C8-D9EA-44C4-B3AC-78269F74C93F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AA18AD4-C367-4CF2-9A50-52D23F9E6448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AA18AD4-C367-4CF2-9A50-52D23F9E6448}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AA18AD4-C367-4CF2-9A50-52D23F9E6448}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AA18AD4-C367-4CF2-9A50-52D23F9E6448}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FEEBAD36-31CF-44D9-8CAB-9B73E46D913B}</ProjectGuid>
+    <ProjectGuid>{5AA18AD4-C367-4CF2-9A50-52D23F9E6448}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>JunkOutDBModel</RootNamespace>
@@ -55,7 +55,6 @@
     <Compile Include="Bin.cs">
       <DependentUpon>JunkoutDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>JunkoutDBModel.tt</DependentUpon>
     </Compile>
@@ -83,7 +82,6 @@
     <Compile Include="Order.cs">
       <DependentUpon>JunkoutDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PartialClasses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransferStation.cs">
       <DependentUpon>JunkoutDBModel.tt</DependentUpon>
@@ -108,11 +106,10 @@
       <LastGenOutput>JunkoutDBModel.Context.cs</LastGenOutput>
       <DependentUpon>JunkoutDBModel.edmx</DependentUpon>
     </Content>
-    <Content Include="JunkoutDBModel.edmx.sql" />
     <Content Include="JunkoutDBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>JunkoutDBModel.cs</LastGenOutput>
       <DependentUpon>JunkoutDBModel.edmx</DependentUpon>
+      <LastGenOutput>JunkoutDBModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

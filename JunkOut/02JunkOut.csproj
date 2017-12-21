@@ -177,6 +177,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\JunkOut - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -237,9 +239,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JunkOutDBModel\01JunkOutDBModel.csproj">
-      <Project>{feebad36-31cf-44d9-8cab-9b73e46d913b}</Project>
-      <Name>01JunkOutDBModel</Name>
+    <ProjectReference Include="..\JunkOutDBModel\JunkOutDBModel.csproj">
+      <Project>{5aa18ad4-c367-4cf2-9a50-52d23f9e6448}</Project>
+      <Name>JunkOutDBModel</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
