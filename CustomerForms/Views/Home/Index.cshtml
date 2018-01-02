@@ -1,4 +1,7 @@
-﻿@{
+﻿@using CustomerForms.Models
+@model CustomerFormModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 <head>
@@ -50,7 +53,8 @@
                 }
             });*/
             $("#next_1").click(function () {
-                if (!$("input[name='jobtype']:checked").val()) {
+                // if (!$("input[name='order.JobType']:checked").val()) {
+                if (!$("input[name='jobtype']:checked").val()){
                     alert('Please select a job type');
                 }
                 else {
@@ -75,7 +79,7 @@
                 else if ((!$("#pickup").val())) {
                     alert("Please enter BOTH date and time for Pick Up!");
                 }  
-                else {
+                else { 
                     $("#slide-3").hide();
                     $("#slide-4").show('slow');
                     $('#poscode').val($('#pcode').val().toUpperCase());
@@ -102,6 +106,7 @@
                 $("#citytxt").html($("#city").val());
                 $("#pcodetxt").html($("#pcode").val().toUpperCase());
 
+               // $("#jobtypetxt").html($("input[name='order.JobType']:checked").val());
                 $("#jobtypetxt").html($("input[name='jobtype']:checked").val());
 
                 $("#deldateandtimetxt").html($("#del").val());
@@ -133,7 +138,10 @@
                         <img src="~/images/7.png" id="mappoint" />
                         <br />
                         <h3 style="text-align: center;">Postal Code:</h3>
-                        <input id="pcode" type="text" class="form-control" maxlength="7" placeholder="A9A 9A9"/>
+                        <!--<input id="pcode" type="text" class="form-control" maxlength="7" placeholder="A9A 9A9"/> -->
+                                
+                        @Html.EditorFor(model => model.address.PostalCode, new { htmlAttributes = new { @class = "form-control", @id = "pcode", @maxlength = "7", @placeholder = "A9A 9A9" } })
+                        
                         <div class="space">
                             <button type="button" class="btn btn-success" id="go">Go!</button>
                         </div>
@@ -147,14 +155,17 @@
                         <div class="space">                            
                             <div class="row selectjobtype">
                                 <div class="col-md-4" style="text-align: center">
-                                    <input type="radio" name="jobtype" id="binRental" value="Bin Rental" required />
+                                    @*@Html.RadioButtonFor(model => model.order.JobType, "Bin Rental", new { @id = "binRental", @name="jobtype", @required = true})*@
+                                    <input type="radio" name="jobtype" id="binRental" value="Bin Rental" required /> 
                                     <label for="binRental">Bin Rental</label>
                                 </div>
                                 <div class="col-md-4" style="text-align: center">
+                                    @*@Html.RadioButtonFor(model => model.order.JobType, "Demolish", new { @id = "demolish", @name = "jobtype", @required = true })*@
                                     <input type="radio" name="jobtype" id="demolish" value="Demolish" required />
                                     <label for="demolish">Demolish</label>
                                 </div>
                                 <div class="col-md-4" style="text-align: center">
+                                    @*@Html.RadioButtonFor(model => model.order.JobType, "Junk Removal", new { @id = "junkRemoval", @name = "jobtype", @required = true })*@
                                     <input type="radio" name="jobtype" id="junkRemoval" value="Junk Removal" required />
                                     <label for="junkRemoval">Junk Removal</label>
                                 </div>
@@ -239,18 +250,29 @@
                     <div class="divbg" style="font-size: 15px">
                         <div class="space" style="text-align:left">
                             <div class="form-group">
-                                <label class="control-label col-md-2" for="fname">First Name:</label>
+                               <!-- <label class="control-label col-md-2" for="fname">First Name:</label>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" id="fname" placeholder="First Name" name="fname">
-                                </div>
+                                </div> 
                                 <label class="control-label col-md-2" for="fname">Last Name:</label>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" id="lname" placeholder="Last Name" name="lname">
                                 </div>
+                                  -->
+
+                                @Html.LabelFor(model => model.customer.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.customer.FirstName, new { htmlAttributes = new { @class = "form-control", id = "fname" } })
+                                </div>
+                                @Html.LabelFor(model => model.customer.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.customer.LastName, new { htmlAttributes = new { @class = "form-control", @id = "lname" } })
+                                </div>
+                                
                             </div>
                             <p style="padding: 10px"></p>
                             <div class="form-group">
-                                <label class="control-label col-md-2" for="email">Email:</label>
+                              <!--  <label class="control-label col-md-2" for="email">Email:</label>
                                 <div class="col-md-4">
                                     <input type="email" class="form-control" id="email" placeholder="some@example.com" name="email">
                                 </div>
@@ -258,47 +280,78 @@
                                 <div class="col-md-4">
                                     <input type="tel" class="form-control" id="phone" placeholder="" name="phone">
                                 </div>
+                                -->
+
+                                @Html.LabelFor(model => model.customer.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.customer.Email, new { htmlAttributes = new { @class = "form-control", @id = "email" } })
+                                </div>
+
+                                @Html.LabelFor(model => model.customer.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.customer.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @id = "phone" } })
+                                </div>
                             </div>
                             <p style="padding: 15px"></p>
                             <div class="form-group">
+                                <!--
                                 <div class="col-md-2">
                                     <label class="control-label" for="compname">Company Name:</label>
                                 </div>
                                 <div class="col-md-10">
                                     <input type="text" class="form-control" id="compname" name="compname">
                                 </div>
-                            </div>
+                                    -->
+                                @Html.LabelFor(model => model.customer.CompanyName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.customer.CompanyName, new { htmlAttributes = new { @class = "form-control", @id = "compname" } })
+                                </div>
+                            </div> 
                         </div>
+
+                        
                         <fieldset class="dimensions">
                             <legend class="f-border">Site Address</legend>
                             <div class="form-group">
                                 <div class="col-md-4">
                                     <label for="sitetype">Select list (select one):</label>
-                                    <select class="form-control" id="sitetype">
+                                    <!--<select class="form-control" id="sitetype">
                                         <option>Residence</option>
                                         <option>Household</option>
                                         <option>Office Building</option>
                                         <option>Apartment</option>
-                                    </select>
+                                    </select> -->
+                                    @Html.DropDownListFor(model => model.address.AddressType, new SelectList(Enum.GetValues(typeof(Site))), new { @class = "form-control", @id = "sitetype" })
                                 </div>
                                 <div class="col-md-8">
-                                    <label class="control-label" for="streetaddress">Street Address:</label>
-                                    <input type="text" class="form-control" id="streetaddress" name="streetaddress">
+                                   <!-- <label class="control-label" for="streetaddress">Street Address:</label>
+                                    <input type="text" class="form-control" id="streetaddress" name="streetaddress"> -->
+                                    @Html.LabelFor(model => model.address.StreetAddress, htmlAttributes: new { @class = "control-label col-md-8" })
+                                    @Html.EditorFor(model => model.address.StreetAddress, new { htmlAttributes = new { @class = "form-control", @id = "streetaddress" } })
                                 </div>
                             </div>
                             <p style="padding: 10px"></p>
                             <div class="form-group">
                                 <div class="col-md-2">
-                                    <label class="control-label" for="unit">Apt/Unit#:</label>
-                                    <input type="text" class="form-control" id="unit" name="unit">
+                                    <!--<label class="control-label" for="unit">Apt/Unit#:</label>
+                                    <input type="text" class="form-control" id="unit" name="unit">-->
+                                    @Html.LabelFor(model => model.address.AptNum, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.address.AptNum, new { htmlAttributes = new { @class = "form-control", @id = "unit" } })
+
+
                                 </div>
+
                                 <div class="col-md-5">
-                                    <label class="control-label" for="city">City:</label>
-                                    <input type="text" class="form-control" id="city" name="city">
-                                </div>
+                                   <!-- <label class="control-label" for="city">City:</label>
+                                    <input type="text" class="form-control" id="city" name="city"> -->
+                                    @Html.LabelFor(model => model.address.City, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.address.City, new { htmlAttributes = new { @class = "form-control", @id = "city" } })
+
+                                </div> 
+                               
                                 <div class="col-md-2">
-                                    <label for="province">Province:</label>
-                                    <select class="form-control" id="province">
+                                  <label for="province">Province:</label>
+                                     <!-- <select class="form-control" id="province">
                                         <option>ON</option>
                                         <option>QC</option>
                                         <option>NB</option>
@@ -309,13 +362,22 @@
                                         <option>SK</option>
                                         <option>AB</option>
                                         <option>NL</option>
-                                    </select>
+                                    </select>-->
+                                    @Html.DropDownListFor(model => model.address.Province, new SelectList(Enum.GetValues(typeof(Prov))), new { @class = "form-control", @id="province" })
                                 </div>
+                                
+
+
                                 <div class="col-md-3">
                                     <label class="control-label" for="poscode">Postal Code:</label>
                                     <input type="text" class="form-control" id="poscode" name="poscode" disabled>
                                 </div>
                             </div>
+                            <p style="padding: 10px"></p>
+                         <!--   <div class="form-group">
+                                @Html.LabelFor(model => model.address.Country, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.address.Country, new { htmlAttributes = new { @class = "form-control", @id = "country" } })
+                            </div> -->
                         </fieldset>
                         <div class="row">
                             <span class="col-md-6" style="text-align: center;"><button type="button" class="btn btn-danger" id="prev_3" style="width:50%">Previous</button></span>
