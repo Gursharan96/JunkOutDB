@@ -110,24 +110,7 @@ namespace JunkOut.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(OrdersViewModel model)
         {
-            /*
-            var order = model.order;
-
-
-            db.Orders.Add(order);
-
-            /*
-            var customer = new Customer() {
-
-                FirstName = model.customer.FirstName,
-                LastName = model.customer.LastName,
-                CompanyName = model.customer.CompanyName,
-                Email = model.customer.Email,
-                PhoneNumber = model.customer.PhoneNumber
-
-                };
-
-             */
+           
 
             Customer customer = model.customer;
 
@@ -243,7 +226,7 @@ namespace JunkOut.Controllers
                     throw;
                 }
             }
-                return View(model);
+            return RedirectToAction("Index");
         }
 
 

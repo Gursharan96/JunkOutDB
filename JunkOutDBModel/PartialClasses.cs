@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace JunkOutDBModel
 {
@@ -56,10 +57,10 @@ namespace JunkOutDBModel
 
         [Display(Name = "Postal Code")]
         [Required(ErrorMessage = " {0} required")]
-       // [RegularExpression("(^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$)", ErrorMessage = "Please Insert Valid Postal Code")]
+        [RegularExpression("([ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9])", ErrorMessage = "Please Insert Valid Postal Code")]
         public string PostalCode { get; set; }
 
-       [Required(ErrorMessage = " {0} required")]
+        [Required(ErrorMessage = " {0} required")]
         public string Country { get; set; }
 
         [Required(ErrorMessage = " {0} required")]
@@ -67,7 +68,7 @@ namespace JunkOutDBModel
 
         [Display(Name = "Phone Number")]
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Can contain Numbers Only")]
+        [RegularExpression("(\\(?\\d{3}\\)?-? *\\d{3}-? *-?\\d{4})", ErrorMessage = "Please Enter valid format")]
         public string Phone { get; set; }
 
         [Display(Name = "Hours Of Operations")]
@@ -111,7 +112,6 @@ namespace JunkOutDBModel
 
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = " {0} required")]
-       // [RegularExpression("/^[a-z ,.'-]+$/i", ErrorMessage = "Last Name cannot contain numbers")]
         public string LastName { get; set; }
 
         [Display(Name = "Company Name")]
@@ -123,7 +123,7 @@ namespace JunkOutDBModel
 
         [Display(Name = "Phone Number")]
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Can contain Numbers Only")]
+        [RegularExpression("(\\(?\\d{3}\\)?-? *\\d{3}-? *-?\\d{4})", ErrorMessage = "Please Enter valid format")]
         public string PhoneNumber { get; set; }
 
 
@@ -223,7 +223,6 @@ namespace JunkOutDBModel
 
 
     }
-
 
 
 

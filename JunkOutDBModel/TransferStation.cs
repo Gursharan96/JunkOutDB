@@ -31,9 +31,10 @@ namespace JunkOutDBModel
         public string Notes { get; set; }
         public string Rate { get; set; }
         public string Term { get; set; }
+        public Nullable<int> Expen_ID { get; set; }
     
+        public virtual Expens Expens { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
-        public virtual Expens Expen { get; set; }
     }
 }

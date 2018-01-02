@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using JunkOutDBModel;
+//using JunkoutModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 
