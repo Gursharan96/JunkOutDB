@@ -185,7 +185,7 @@ namespace JunkOut.Controllers
                     throw;
                 }
             }
-                return View(model);
+            return RedirectToAction("Index");
         }
 
 
