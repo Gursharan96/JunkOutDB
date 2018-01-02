@@ -55,7 +55,7 @@ namespace CustomerForms.Controllers
 
             db.SaveChanges();
                
-            return RedirectToAction("About");
+            return RedirectToAction("Confirmation");
 
             //return Content($"Hello {fname} {jobtype} {bintwo} {binone}");
             //return View();
@@ -70,6 +70,12 @@ namespace CustomerForms.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        public ActionResult Confirmation()
+        {
+            ViewBag.Message = "Confirmation Page";
 
             return View();
         }
