@@ -9,12 +9,11 @@ namespace CustomerForms.Models
     public class CustomerFormModel
     {
         public Address address { get; set; }
-        public Order order { get; set; }
+        public Order orders { get; set; }
         public Customer customer { get; set; }
 
 
     }
-
     public enum Prov
     {
         ON,
@@ -28,12 +27,18 @@ namespace CustomerForms.Models
         AB,
         NL
     }
-
     public enum Site
     {
         Residence,
         Household,
         Office,
         Apartment
+    }
+    public enum SourceOfHearing
+    {
+        Referral,
+        Advertisement,
+        Online_Surfing,
+        Other
     }
 }
