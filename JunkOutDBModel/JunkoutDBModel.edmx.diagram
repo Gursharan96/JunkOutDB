@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="72f39d5c55654f2c853210a64344cfec" Name="Diagram1" ZoomLevel="64" >
-        <EntityTypeShape EntityType="JunkoutDBModel.Address" Width="1.5" PointX="0.5" PointY="4.75" />
-        <EntityTypeShape EntityType="JunkoutDBModel.Bin" Width="1.5" PointX="3.375" PointY="7.125" />
-        <EntityTypeShape EntityType="JunkoutDBModel.Customer" Width="1.5" PointX="0.75" PointY="1.125" />
-        <EntityTypeShape EntityType="JunkoutDBModel.Expens" Width="1.5" PointX="8.875" PointY="7.875" />
-        <EntityTypeShape EntityType="JunkoutDBModel.Invoice" Width="1.5" PointX="7.25" PointY="1.125" />
-        <EntityTypeShape EntityType="JunkoutDBModel.Order" Width="1.5" PointX="3.75" PointY="1.5" />
-        <EntityTypeShape EntityType="JunkoutDBModel.TransferStation" Width="1.5" PointX="6.625" PointY="6" />
-        <AssociationConnector Association="JunkoutDBModel.CustomerAddress" />
-        <AssociationConnector Association="JunkoutDBModel.CustomerOrder" />
-        <AssociationConnector Association="JunkoutDBModel.OrderBin" />
-        <AssociationConnector Association="JunkoutDBModel.InvoiceOrder" />
-        <AssociationConnector Association="JunkoutDBModel.OrderTransferStation" />
-        <AssociationConnector Association="JunkoutDBModel.TransferStationExpens" />
+      <Diagram DiagramId="ffc6086522e747e4956823b2f6b387fc" Name="Diagram1">
+        <EntityTypeShape EntityType="JunkoutDBModel.Address" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JunkoutDBModel.Bin" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JunkoutDBModel.Customer" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JunkoutDBModel.Expens" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="JunkoutDBModel.Invoice" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JunkoutDBModel.Order" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="JunkoutDBModel.TransferStation" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <AssociationConnector Association="JunkoutDBModel.FK_OrderBin" ManuallyRouted="false" />
+        <AssociationConnector Association="JunkoutDBModel.FK_TransferStationExpens" ManuallyRouted="false" />
+        <AssociationConnector Association="JunkoutDBModel.FK_InvoiceOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="JunkoutDBModel.FK_OrderTransferStation" ManuallyRouted="false" />
+        <AssociationConnector Association="JunkoutDBModel.CustomerAddress" ManuallyRouted="false" />
+        <AssociationConnector Association="JunkoutDBModel.CustomerOrder" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

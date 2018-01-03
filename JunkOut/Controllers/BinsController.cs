@@ -6,7 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+//using JunkoutDBModel;
 using JunkOutDBModel;
+
+using Microsoft.Reporting.WebForms;
+
+using System.IO;
+
 
 namespace JunkOut.Controllers
 {
@@ -25,7 +31,8 @@ namespace JunkOut.Controllers
                 binList = db.Bins.ToList();
             }
 
-            return View(binList);
+            // return View(binList);
+              return View("Index",binList);
         }
 
         // GET: Bins/Details/5
@@ -171,5 +178,7 @@ namespace JunkOut.Controllers
             }
             base.Dispose(disposing);
         }
+
+       
     }
 }

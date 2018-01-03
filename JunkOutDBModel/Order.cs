@@ -28,11 +28,14 @@ namespace JunkOutDBModel
         public string Status { get; set; }
         public System.DateTime DeliveryDateTime { get; set; }
         public Nullable<System.DateTime> PickupDateTime { get; set; }
+        public int Bin_ID { get; set; }
+        public Nullable<int> Invoice_ID { get; set; }
+        public Nullable<int> TransferStation_ID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customers { get; set; }
         public virtual Bin Bin { get; set; }
         public virtual Invoice Invoice { get; set; }
         public virtual TransferStation TransferStation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Customer> Customers { get; set; }
     }
 }

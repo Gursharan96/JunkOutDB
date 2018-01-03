@@ -19,6 +19,7 @@ namespace JunkOut.Controllers
         // GET: Orders
         public ActionResult Index()
         {
+
             IEnumerable<Order> orderList = (IEnumerable<Order>)TempData["sortedList"];
 
             if (orderList == null)
@@ -26,6 +27,7 @@ namespace JunkOut.Controllers
                 orderList = db.Orders.ToList();
             }
             return View(orderList);
+
         }
 
         public ActionResult Details(int? id)
@@ -108,26 +110,10 @@ namespace JunkOut.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(OrdersViewModel model)
+        public ActionResult Create(OrdersViewModel model, FormCollection frm)
         {
-            /*
-            var order = model.order;
-
-
-            db.Orders.Add(order);
-
-            /*
-            var customer = new Customer() {
-
-                FirstName = model.customer.FirstName,
-                LastName = model.customer.LastName,
-                CompanyName = model.customer.CompanyName,
-                Email = model.customer.Email,
-                PhoneNumber = model.customer.PhoneNumber
-
-                };
-
-             */
+            String del = frm["delivery"].ToString();
+            String pickup = frm["pickup"].ToString();
 
             Customer customer = model.customer;
 
@@ -149,7 +135,9 @@ namespace JunkOut.Controllers
             Bin bin = queryBin.First();
 
 
-          //  Bin bin = db.Bins.First();
+            //  Bin bin = db.Bins.First();
+            order.DeliveryDateTime = DateTime.Parse(del);
+            order.PickupDateTime = DateTime.Parse(pickup);
             order.Bin = bin;
             order.Status = "Confirmed";
             order.SourceOfOrdering = "Call In";
@@ -243,7 +231,7 @@ namespace JunkOut.Controllers
                     throw;
                 }
             }
-                return View(model);
+            return RedirectToAction("Index");
         }
 
 

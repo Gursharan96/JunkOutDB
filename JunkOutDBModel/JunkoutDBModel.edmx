@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="JunkoutDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="JunkoutDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Addresses">
           <Key>
             <PropertyRef Name="ID" />
@@ -81,12 +81,12 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="JobType" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="DeliveryDateTime" Type="datetime" Nullable="false" />
-          <Property Name="PickupDateTime" Type="datetime" />
           <Property Name="SourceOfOrdering" Type="nvarchar(max)" Nullable="false" />
           <Property Name="HearingSource" Type="nvarchar(max)" Nullable="false" />
           <Property Name="OrderNotes" Type="nvarchar(max)" />
           <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DeliveryDateTime" Type="datetime" Nullable="false" />
+          <Property Name="PickupDateTime" Type="datetime" />
           <Property Name="Bin_ID" Type="int" Nullable="false" />
           <Property Name="Invoice_ID" Type="int" />
           <Property Name="TransferStation_ID" Type="int" />
@@ -247,91 +247,59 @@
             <End Role="TransferStations" EntitySet="TransferStations" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="JunkoutDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
-        <EntityContainer Name="JunkoutDBModelContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Addresses" EntityType="JunkoutDBModel.Address" />
-          <EntitySet Name="Bins" EntityType="JunkoutDBModel.Bin" />
-          <EntitySet Name="Customers" EntityType="JunkoutDBModel.Customer" />
-          <EntitySet Name="Expenses" EntityType="JunkoutDBModel.Expens" />
-          <EntitySet Name="Invoices" EntityType="JunkoutDBModel.Invoice" />
-          <EntitySet Name="Orders" EntityType="JunkoutDBModel.Order" />
-          <EntitySet Name="TransferStations" EntityType="JunkoutDBModel.TransferStation" />
-          <AssociationSet Name="CustomerAddress" Association="JunkoutDBModel.CustomerAddress">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="CustomerOrder" Association="JunkoutDBModel.CustomerOrder">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="OrderBin" Association="JunkoutDBModel.OrderBin">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="Bin" EntitySet="Bins" />
-          </AssociationSet>
-          <AssociationSet Name="InvoiceOrder" Association="JunkoutDBModel.InvoiceOrder">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="Invoice" EntitySet="Invoices" />
-          </AssociationSet>
-          <AssociationSet Name="OrderTransferStation" Association="JunkoutDBModel.OrderTransferStation">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="TransferStation" EntitySet="TransferStations" />
-          </AssociationSet>
-          <AssociationSet Name="TransferStationExpens" Association="JunkoutDBModel.TransferStationExpens">
-            <End Role="TransferStation" EntitySet="TransferStations" />
-            <End Role="Expens" EntitySet="Expenses" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="JunkoutDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StreetAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StreetAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AptNum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Province" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddressType" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Customers" Relationship="JunkoutDBModel.CustomerAddress" FromRole="Address" ToRole="Customer" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Province" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddressType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.CustomerAddress" FromRole="Addresses" ToRole="Customers" />
         </EntityType>
         <EntityType Name="Bin">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BinSize" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BinSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FlatRate" Type="Double" Nullable="false" />
           <Property Name="MinTonnageAwarded" Type="Double" Nullable="false" />
           <Property Name="MaxRentalDuration" Type="Double" Nullable="false" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="JunkoutDBModel.OrderBin" FromRole="Bin" ToRole="Order" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_OrderBin" FromRole="Bins" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Addresses" Relationship="JunkoutDBModel.CustomerAddress" FromRole="Customer" ToRole="Address" />
-          <NavigationProperty Name="Orders" Relationship="JunkoutDBModel.CustomerOrder" FromRole="Customer" ToRole="Order" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="Self.CustomerAddress" FromRole="Customers" ToRole="Addresses" />
+          <NavigationProperty Name="Orders" Relationship="Self.CustomerOrder" FromRole="Customers" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Expens">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisposalCost" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Distance" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Time" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TransferStations" Relationship="JunkoutDBModel.TransferStationExpens" FromRole="Expens" ToRole="TransferStation" />
+          <Property Name="DisposalCost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Distance" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Time" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TransferStations" Relationship="Self.FK_TransferStationExpens" FromRole="Expenses" ToRole="TransferStations" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -342,235 +310,273 @@
           <Property Name="FuelSurcharge" Type="Double" />
           <Property Name="SubTotal" Type="Double" Nullable="false" />
           <Property Name="OverWeight" Type="Double" />
-          <NavigationProperty Name="Orders" Relationship="JunkoutDBModel.InvoiceOrder" FromRole="Invoice" ToRole="Order" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_InvoiceOrder" FromRole="Invoices" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="JobType" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SourceOfOrdering" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="HearingSource" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JobType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SourceOfOrdering" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HearingSource" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="OrderNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Customers" Relationship="JunkoutDBModel.CustomerOrder" FromRole="Order" ToRole="Customer" />
-          <NavigationProperty Name="Bin" Relationship="JunkoutDBModel.OrderBin" FromRole="Order" ToRole="Bin" />
-          <NavigationProperty Name="Invoice" Relationship="JunkoutDBModel.InvoiceOrder" FromRole="Order" ToRole="Invoice" />
-          <NavigationProperty Name="TransferStation" Relationship="JunkoutDBModel.OrderTransferStation" FromRole="Order" ToRole="TransferStation" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DeliveryDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PickupDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Bin_ID" Type="Int32" Nullable="false" />
+          <Property Name="Invoice_ID" Type="Int32" />
+          <Property Name="TransferStation_ID" Type="Int32" />
+          <NavigationProperty Name="Bin" Relationship="Self.FK_OrderBin" FromRole="Orders" ToRole="Bins" />
+          <NavigationProperty Name="Invoice" Relationship="Self.FK_InvoiceOrder" FromRole="Orders" ToRole="Invoices" />
+          <NavigationProperty Name="TransferStation" Relationship="Self.FK_OrderTransferStation" FromRole="Orders" ToRole="TransferStations" />
+          <NavigationProperty Name="Customers" Relationship="Self.CustomerOrder" FromRole="Orders" ToRole="Customers" />
         </EntityType>
         <EntityType Name="TransferStation">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StreetAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Country" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Company" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="HoursOfOperation" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Notes" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Rate" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Term" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="JunkoutDBModel.OrderTransferStation" FromRole="TransferStation" ToRole="Order" />
-          <NavigationProperty Name="Expen" Relationship="JunkoutDBModel.TransferStationExpens" FromRole="TransferStation" ToRole="Expens" />
+          <Property Name="StreetAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HoursOfOperation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Rate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Term" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Expen_ID" Type="Int32" />
+          <NavigationProperty Name="Expens" Relationship="Self.FK_TransferStationExpens" FromRole="TransferStations" ToRole="Expenses" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_OrderTransferStation" FromRole="TransferStations" ToRole="Orders" />
         </EntityType>
+        <Association Name="FK_OrderBin">
+          <End Role="Bins" Type="Self.Bin" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bins">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Bin_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferStationExpens">
+          <End Role="Expenses" Type="Self.Expens" Multiplicity="0..1" />
+          <End Role="TransferStations" Type="Self.TransferStation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expenses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransferStations">
+              <PropertyRef Name="Expen_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoiceOrder">
+          <End Role="Invoices" Type="Self.Invoice" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Invoice_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderTransferStation">
+          <End Role="TransferStations" Type="Self.TransferStation" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransferStations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="TransferStation_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="CustomerAddress">
-          <End Type="JunkoutDBModel.Address" Role="Address" Multiplicity="*" />
-          <End Type="JunkoutDBModel.Customer" Role="Customer" Multiplicity="*" />
+          <End Role="Addresses" Type="Self.Address" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
         </Association>
         <Association Name="CustomerOrder">
-          <End Type="JunkoutDBModel.Customer" Role="Customer" Multiplicity="*" />
-          <End Type="JunkoutDBModel.Order" Role="Order" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
         </Association>
-        <Association Name="OrderBin">
-          <End Type="JunkoutDBModel.Order" Role="Order" Multiplicity="*" />
-          <End Type="JunkoutDBModel.Bin" Role="Bin" Multiplicity="1" />
-        </Association>
-        <Association Name="InvoiceOrder">
-          <End Type="JunkoutDBModel.Order" Role="Order" Multiplicity="*" />
-          <End Type="JunkoutDBModel.Invoice" Role="Invoice" Multiplicity="0..1" />
-        </Association>
-        <Association Name="OrderTransferStation">
-          <End Type="JunkoutDBModel.Order" Role="Order" Multiplicity="*" />
-          <End Type="JunkoutDBModel.TransferStation" Role="TransferStation" Multiplicity="0..1" />
-        </Association>
-        <Association Name="TransferStationExpens">
-          <End Type="JunkoutDBModel.TransferStation" Role="TransferStation" Multiplicity="*" />
-          <End Type="JunkoutDBModel.Expens" Role="Expens" Multiplicity="0..1" />
-        </Association>
-        </Schema>
+        <EntityContainer Name="JunkoutDBModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Bins" EntityType="Self.Bin" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Expenses" EntityType="Self.Expens" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="TransferStations" EntityType="Self.TransferStation" />
+          <AssociationSet Name="FK_OrderBin" Association="Self.FK_OrderBin">
+            <End Role="Bins" EntitySet="Bins" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferStationExpens" Association="Self.FK_TransferStationExpens">
+            <End Role="Expenses" EntitySet="Expenses" />
+            <End Role="TransferStations" EntitySet="TransferStations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoiceOrder" Association="Self.FK_InvoiceOrder">
+            <End Role="Invoices" EntitySet="Invoices" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTransferStation" Association="Self.FK_OrderTransferStation">
+            <End Role="TransferStations" EntitySet="TransferStations" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerAddress" Association="Self.CustomerAddress">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerOrder" Association="Self.CustomerOrder">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="JunkoutDBModelStoreContainer" CdmEntityContainer="JunkoutDBModelContainer">
-    <EntitySetMapping Name="Addresses">
-      <EntityTypeMapping TypeName="IsTypeOf(JunkoutDBModel.Address)">
-        <MappingFragment StoreEntitySet="Addresses">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
-          <ScalarProperty Name="AptNum" ColumnName="AptNum" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Province" ColumnName="Province" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-          <ScalarProperty Name="AddressType" ColumnName="AddressType" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Bins">
-      <EntityTypeMapping TypeName="IsTypeOf(JunkoutDBModel.Bin)">
-        <MappingFragment StoreEntitySet="Bins">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="BinSize" ColumnName="BinSize" />
-          <ScalarProperty Name="FlatRate" ColumnName="FlatRate" />
-          <ScalarProperty Name="MinTonnageAwarded" ColumnName="MinTonnageAwarded" />
-          <ScalarProperty Name="MaxRentalDuration" ColumnName="MaxRentalDuration" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="IsTypeOf(JunkoutDBModel.Customer)">
-        <MappingFragment StoreEntitySet="Customers">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Expenses">
-      <EntityTypeMapping TypeName="IsTypeOf(JunkoutDBModel.Expens)">
-        <MappingFragment StoreEntitySet="Expenses">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="DisposalCost" ColumnName="DisposalCost" />
-          <ScalarProperty Name="Distance" ColumnName="Distance" />
-          <ScalarProperty Name="Time" ColumnName="Time" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Invoices">
-      <EntityTypeMapping TypeName="IsTypeOf(JunkoutDBModel.Invoice)">
-        <MappingFragment StoreEntitySet="Invoices">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="HST" ColumnName="HST" />
-          <ScalarProperty Name="FuelSurcharge" ColumnName="FuelSurcharge" />
-          <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
-          <ScalarProperty Name="OverWeight" ColumnName="OverWeight" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Orders">
-      <EntityTypeMapping TypeName="IsTypeOf(JunkoutDBModel.Order)">
-        <MappingFragment StoreEntitySet="Orders">
-          <ScalarProperty Name="PickupDateTime" ColumnName="PickupDateTime" />
-                <ScalarProperty Name="DeliveryDateTime" ColumnName="DeliveryDateTime" />
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JunkoutDBModelStoreContainer" CdmEntityContainer="JunkoutDBModelContainer">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="JunkoutDBModel.Address">
+              <MappingFragment StoreEntitySet="Addresses">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="JobType" ColumnName="JobType" />
-          <ScalarProperty Name="SourceOfOrdering" ColumnName="SourceOfOrdering" />
-          <ScalarProperty Name="HearingSource" ColumnName="HearingSource" />
-          <ScalarProperty Name="OrderNotes" ColumnName="OrderNotes" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TransferStations">
-      <EntityTypeMapping TypeName="IsTypeOf(JunkoutDBModel.TransferStation)">
-        <MappingFragment StoreEntitySet="TransferStations">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="Company" ColumnName="Company" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="HoursOfOperation" ColumnName="HoursOfOperation" />
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-          <ScalarProperty Name="Term" ColumnName="Term" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="CustomerAddress" TypeName="JunkoutDBModel.CustomerAddress" StoreEntitySet="CustomerAddress">
-      <EndProperty Name="Address">
-        <ScalarProperty Name="ID" ColumnName="Addresses_ID" />
-      </EndProperty>
-      <EndProperty Name="Customer">
-        <ScalarProperty Name="ID" ColumnName="Customers_ID" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="CustomerOrder" TypeName="JunkoutDBModel.CustomerOrder" StoreEntitySet="CustomerOrder">
-      <EndProperty Name="Customer">
-        <ScalarProperty Name="ID" ColumnName="Customers_ID" />
-      </EndProperty>
-      <EndProperty Name="Order">
-        <ScalarProperty Name="ID" ColumnName="Orders_ID" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="OrderBin" TypeName="JunkoutDBModel.OrderBin" StoreEntitySet="Orders">
-      <EndProperty Name="Bin">
-        <ScalarProperty Name="ID" ColumnName="Bin_ID" />
-      </EndProperty>
-      <EndProperty Name="Order">
-        <ScalarProperty Name="ID" ColumnName="ID" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="InvoiceOrder" TypeName="JunkoutDBModel.InvoiceOrder" StoreEntitySet="Orders">
-      <EndProperty Name="Invoice">
-        <ScalarProperty Name="ID" ColumnName="Invoice_ID" />
-      </EndProperty>
-      <EndProperty Name="Order">
-        <ScalarProperty Name="ID" ColumnName="ID" />
-      </EndProperty>
-      <Condition ColumnName="Invoice_ID" IsNull="false" />
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="OrderTransferStation" TypeName="JunkoutDBModel.OrderTransferStation" StoreEntitySet="Orders">
-      <EndProperty Name="TransferStation">
-        <ScalarProperty Name="ID" ColumnName="TransferStation_ID" />
-      </EndProperty>
-      <EndProperty Name="Order">
-        <ScalarProperty Name="ID" ColumnName="ID" />
-      </EndProperty>
-      <Condition ColumnName="TransferStation_ID" IsNull="false" />
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="TransferStationExpens" TypeName="JunkoutDBModel.TransferStationExpens" StoreEntitySet="TransferStations">
-      <EndProperty Name="Expens">
-        <ScalarProperty Name="ID" ColumnName="Expen_ID" />
-      </EndProperty>
-      <EndProperty Name="TransferStation">
-        <ScalarProperty Name="ID" ColumnName="ID" />
-      </EndProperty>
-      <Condition ColumnName="Expen_ID" IsNull="false" />
-    </AssociationSetMapping>
-  </EntityContainerMapping>
-</Mapping></edmx:Mappings>
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="AptNum" ColumnName="AptNum" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="AddressType" ColumnName="AddressType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bins">
+            <EntityTypeMapping TypeName="JunkoutDBModel.Bin">
+              <MappingFragment StoreEntitySet="Bins">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BinSize" ColumnName="BinSize" />
+                <ScalarProperty Name="FlatRate" ColumnName="FlatRate" />
+                <ScalarProperty Name="MinTonnageAwarded" ColumnName="MinTonnageAwarded" />
+                <ScalarProperty Name="MaxRentalDuration" ColumnName="MaxRentalDuration" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="JunkoutDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expenses">
+            <EntityTypeMapping TypeName="JunkoutDBModel.Expens">
+              <MappingFragment StoreEntitySet="Expenses">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DisposalCost" ColumnName="DisposalCost" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="JunkoutDBModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoices">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HST" ColumnName="HST" />
+                <ScalarProperty Name="FuelSurcharge" ColumnName="FuelSurcharge" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="OverWeight" ColumnName="OverWeight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="JunkoutDBModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="SourceOfOrdering" ColumnName="SourceOfOrdering" />
+                <ScalarProperty Name="HearingSource" ColumnName="HearingSource" />
+                <ScalarProperty Name="OrderNotes" ColumnName="OrderNotes" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DeliveryDateTime" ColumnName="DeliveryDateTime" />
+                <ScalarProperty Name="PickupDateTime" ColumnName="PickupDateTime" />
+                <ScalarProperty Name="Bin_ID" ColumnName="Bin_ID" />
+                <ScalarProperty Name="Invoice_ID" ColumnName="Invoice_ID" />
+                <ScalarProperty Name="TransferStation_ID" ColumnName="TransferStation_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferStations">
+            <EntityTypeMapping TypeName="JunkoutDBModel.TransferStation">
+              <MappingFragment StoreEntitySet="TransferStations">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="HoursOfOperation" ColumnName="HoursOfOperation" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Term" ColumnName="Term" />
+                <ScalarProperty Name="Expen_ID" ColumnName="Expen_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CustomerAddress" TypeName="JunkoutDBModel.CustomerAddress" StoreEntitySet="CustomerAddress">
+            <EndProperty Name="Addresses">
+              <ScalarProperty Name="ID" ColumnName="Addresses_ID" />
+            </EndProperty>
+            <EndProperty Name="Customers">
+              <ScalarProperty Name="ID" ColumnName="Customers_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="CustomerOrder" TypeName="JunkoutDBModel.CustomerOrder" StoreEntitySet="CustomerOrder">
+            <EndProperty Name="Customers">
+              <ScalarProperty Name="ID" ColumnName="Customers_ID" />
+            </EndProperty>
+            <EndProperty Name="Orders">
+              <ScalarProperty Name="ID" ColumnName="Orders_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
-    <edmx:Connection>
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
       </DesignerInfoPropertySet>
-    </edmx:Connection>
-    <edmx:Options>
+    </Connection>
+    <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
-        <DesignerProperty Name="UseLegacyProvider" Value="False" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
-    </edmx:Options>
+    </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <edmx:Diagrams>
-    </edmx:Diagrams>
-  </edmx:Designer>
+    <Diagrams></Diagrams>
+  </Designer>
 </edmx:Edmx>
