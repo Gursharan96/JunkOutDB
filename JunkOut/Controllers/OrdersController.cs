@@ -19,7 +19,8 @@ namespace JunkOut.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            return View(db.Orders.ToList());
+           // return View(db.Orders.ToList());
+              return View("Index",db.Orders.ToList());
         }
 
         public ActionResult Details(int? id)

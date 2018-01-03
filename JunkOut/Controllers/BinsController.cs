@@ -31,7 +31,8 @@ namespace JunkOut.Controllers
                 binList = db.Bins.ToList();
             }
 
-            return View(binList);
+            // return View(binList);
+              return View("Index",binList);
         }
 
         // GET: Bins/Details/5
