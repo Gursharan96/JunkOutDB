@@ -12,10 +12,37 @@
     <!-- Include the jQuery library -->
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv-x3Oo0fLyDiLzOtZ9D47_oQUq02TNrY&libraries=places"></script>
+
     <link rel="stylesheet" type="text/css" href="~/Content/customerForm.css">
 
     <script>
         $(document).ready(function () {
+
+            google.maps.event.addDomListener(window, 'load', function () {
+                var input = document.getElementById('streetaddress');
+                var options = {
+                    componentRestrictions: { country: 'CA' }
+                };
+                var places = new google.maps.places.Autocomplete(input, options);
+
+                google.maps.event.addListener(places, 'place_changed', function () {
+                    console.log(place);
+                    var place = places.getPlace();
+                    var address = place.formatted_address;
+                    var value = address.split(",");
+                    count = value.length;
+                    streetAddress = value[0]
+                    prov = value[count - 2];
+                    city = value[count - 3];
+                    var z = prov.split(" "); 
+                    document.getElementById("province").value = z[1];
+                    document.getElementById("city").value = city;
+                    document.getElementById("streetaddress").value = streetAddress;
+                    
+                });
+            });
+
             $("#go").click(function () {
                 var reg1 = /^([A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9])$/;
                 var reg2 = /^([A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9])$/;
@@ -39,8 +66,8 @@
                     else {
                         $("#slide-1").hide();
                         $("#slide-2").show('slow');
+                        $(".progressbar li:nth-child(2)").addClass("active");
                     }
-                    
                 }
                 else{
                     alert("Please enter into the formal of A9A 9A9");
@@ -60,6 +87,7 @@
                 else {
                     $("#slide-2").hide();
                     $("#slide-3").show('slow');
+                    $(".progressbar li:nth-child(3)").addClass("active");
                     if ($("input[name='jobtype']:checked").val() == "Bin Rental") {
                         $("#binsdiv").show();
                     }
@@ -71,6 +99,7 @@
             $("#prev_1").click(function () {
                 $("#slide-2").hide();
                 $("#slide-1").show('slow');
+                $(".progressbar li:nth-child(2)").removeClass("active");
             });
             $("#next_2").click(function () {
                 if ((!$("#del").val())) {
@@ -83,11 +112,13 @@
                     $("#slide-3").hide();
                     $("#slide-4").show('slow');
                     $('#poscode').val($('#pcode').val().toUpperCase());
+                    $(".progressbar li:nth-child(4)").addClass("active");
                 } 
             });
             $("#prev_2").click(function () {
                 $("#slide-3").hide();
                 $("#slide-2").show('slow');
+                $(".progressbar li:nth-child(3)").removeClass("active");
             });
             $("#next_3").click(function () {
                 $("#slide-4").hide();
@@ -111,10 +142,12 @@
 
                 $("#deldateandtimetxt").html($("#del").val());
                 $("#pickupdateandtimetxt").html($("#pickup").val());
+                $(".progressbar li:nth-child(5)").addClass("active");
             });
             $("#prev_3").click(function () {
                 $("#slide-4").hide();
                 $("#slide-3").show('slow');
+                $(".progressbar li:nth-child(4)").removeClass("active");
             });
             $("#submit").click(function () {
                 $("#slide-5").hide();
@@ -122,12 +155,21 @@
             $("#prev_4").click(function () {
                 $("#slide-5").hide();
                 $("#slide-4").show('slow');
+                $(".progressbar li:nth-child(5)").removeClass("active");
             });
-
         });
     </script>
 </head>
 <body>
+        <div class="container1">
+            <ul class="progressbar">
+                <li class="active">Postal Code Verification</li>
+                <li>Job Type Service</li>
+                <li>Schedule Appointment</li>
+                <li>Contact Information</li>
+                <li>Confirmation</li>
+            </ul>
+        </div>
     <form id="form1" runat="server" method="post">
         <div class="container" style="font-size: 16px">
             <div class="col-xs-12" style="margin: auto">
@@ -229,13 +271,20 @@
                             <label for="comment" style="color: #468847;">
                                 Please describe a little about the job (if you need extra bin, mention here):
                             </label>
-                            <textarea class="form-control" rows="3" id="comment"></textarea>
+                            @*<textarea class="form-control" rows="3" id="comment"></textarea>*@
+                            @Html.TextAreaFor(model => model.orders.OrderNotes, new { rows = "3", @class = "form-control", @id ="comment" })
                         </div>
                         <fieldset class="dimensions">
                             <legend class="f-border">Schedule Appointment</legend>
                             <div id="appointment">
-                                <p class="col-md-6">Delivery Date and Time: <input type="datetime-local" id="del" style="color: black"></p>
-                                <p class="col-md-6">Pick-Up Date and Time:<input type="datetime-local" id="pickup" name="date" style="color: black"></p>
+                                <p class="col-md-6">Delivery Date and Time: 
+                                <input type="datetime-local" id="del" name="delivery" style="color: black">
+                                @*@Html.EditorFor(model => Model.orders.DeliveryDateTime, new { htmlAttributes = new { @class = "form-control", id = "del" }})*@
+                                </p>
+                                <p class="col-md-6">Pick-Up Date and Time:
+                                <input type="datetime-local" id="pickup" name="pickup" style="color: black">
+                                    @*@Html.EditorFor(model => Model.orders.PickupDateTime, new { htmlAttributes = new { @class = "form-control", id = "pickup" } })*@
+                                </p>
                             </div>
                         </fieldset>
                         <div class="space">
@@ -494,7 +543,8 @@
                         </fieldset>
                         <label for="resource">How did you hear about us?</label>
                         <div>
-                            <input type="text" class="form-control" id="resource" name="resource">
+                            @*<input type="text" class="form-control" id="resource" name="resource">*@
+                            @Html.DropDownListFor(model => model.orders.HearingSource, new SelectList(Enum.GetValues(typeof(SourceOfHearing))), new { @class = "form-control", @id = "sitetype" })
                         </div>
                         <div class="space"></div> 
 

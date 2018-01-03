@@ -149,7 +149,7 @@ namespace JunkOutDBModel
         [Required(ErrorMessage = " {0} required")]
         public string StreetAddress { get; set; }
 
-        [Display(Name = "Apartment Number")]
+        [Display(Name = "Apt Num#")]
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Can contain Numbers Only")]
         public string AptNum { get; set; }
 
