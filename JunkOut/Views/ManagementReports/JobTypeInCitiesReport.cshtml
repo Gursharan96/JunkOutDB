@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "JobTypeInCitiesReport";
+}
+
+<h2>JobTypeInCitiesReport</h2>
+
+<p>
+   Take a look at what Job type is popular in your nearby cities
+</p>
+
+<div style="padding:10px; border:1px solid black">
+    <div><a href="@Url.Action("CustomerReport",new {id= "PDF"})"> Get Report PDF</a></div>
+    <div><a href="@Url.Action("CustomerReport",new {id= "Excel"})"> Get Report Excel</a></div>
+    <div><a href="@Url.Action("CustomerReport",new {id= "Word"})"> Get Report Word</a></div>
+    <div><a href="@Url.Action("CustomerReport",new {id= "Image"})"> Get Report Image</a></div>
+</div>
+
