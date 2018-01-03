@@ -47,7 +47,7 @@ namespace JunkOut.Controllers
         public ActionResult SortBins(FormCollection form)
         {
             IEnumerable<Bin> binList = db.Bins.ToList();
-            string[] statuses = { "New", "Available", "pending", "Booked", "delivered"};
+            string[] statuses = { "New", "Available", "Booked", "delivered"};
             string[] sizes = { "5", "10", "14" };
             string[] checkedStatuses = new string[5];
             string[] checkedSizes= new string[3];
