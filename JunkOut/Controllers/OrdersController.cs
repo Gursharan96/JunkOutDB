@@ -50,30 +50,25 @@ namespace JunkOut.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(OrdersViewModel model)
+        public ActionResult Create(OrdersViewModel model, FormCollection frm)
         {
+            String del = frm["delivery"].ToString();
+            String pickup = frm["pickup"].ToString();
             /*
             var order = model.order;
-
-
             db.Orders.Add(order);
 
             /*
             var customer = new Customer() {
-
                 FirstName = model.customer.FirstName,
                 LastName = model.customer.LastName,
                 CompanyName = model.customer.CompanyName,
                 Email = model.customer.Email,
                 PhoneNumber = model.customer.PhoneNumber
-
                 };
-
              */
 
             Customer customer = model.customer;
-
-
             Address address = model.address;
             Order order = model.order;
 
@@ -89,9 +84,9 @@ namespace JunkOut.Controllers
                           select b;
 
             Bin bin = queryBin.First();
-
-
-          //  Bin bin = db.Bins.First();
+            //  Bin bin = db.Bins.First();
+            order.DeliveryDateTime = DateTime.Parse(del);
+            order.PickupDateTime = DateTime.Parse(pickup);
             order.Bin = bin;
             order.Status = "Confirmed";
             order.SourceOfOrdering = "Call In";
@@ -101,11 +96,6 @@ namespace JunkOut.Controllers
             order.Customers.Add(customer);
 
             bin.Status = "Booked";
-
-           
-
-
-
 
             db.SaveChanges();
 
