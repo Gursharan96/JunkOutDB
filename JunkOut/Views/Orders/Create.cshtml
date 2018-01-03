@@ -217,10 +217,9 @@
         <div class="col-md-10">
 
             <div class="input-group" id="datetimepicker">
-                @Html.EditorFor(model => model.order.DeliveryDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.order.DeliveryDateTime, "", new { @class = "text-danger" })
-
-
+                @*@Html.EditorFor(model => model.order.DeliveryDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.order.DeliveryDateTime, "", new { @class = "text-danger" })*@
+                    <input type="datetime-local" id="del" name="delivery" style="color: black">
             </div>
 
 
@@ -232,8 +231,9 @@
     <div class="form-group">
         @Html.LabelFor(model => model.order.PickupDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.order.PickupDateTime, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.order.PickupDateTime, "", new { @class = "text-danger" })
+            @*@Html.EditorFor(model => model.order.PickupDateTime, new { htmlAttributes = new { @class = "form-control" } })*@
+            @*@Html.ValidationMessageFor(model => model.order.PickupDateTime, "", new { @class = "text-danger" })*@
+            <input type="datetime-local" id="pickup" name="pickup" style="color: black">
 
 
         </div>
