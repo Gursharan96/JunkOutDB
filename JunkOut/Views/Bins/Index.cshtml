@@ -10,55 +10,29 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-<!--
- Status: 
-    <form method="get">
-        <select id="status" name="status">
-            <option value="available" selected="selected" >available</option>
-            <option value="new">new</option>
-            <option value="pending">Pending</option>
-            <option value="confirmed">confirmed</option>
-            <option value="delivered">delivered</option>
-            <option value="completed">completed</option>
-        </select>
-    </form>
      
- --> 
+  @using (Html.BeginForm("SortBins", "Bins"))
+  {
+    <div style="display:inline;float:left;width:200px;">
+        <p>Status:</p>
+        @Html.CheckBox("New", true) <span>New</span> <br />
+        @Html.CheckBox("Available", true) <span>Available</span><br />
+        @Html.CheckBox("pending", true) <span>pending</span><br />
+        @Html.CheckBox("Booked", true) <span>Booked</span><br />
+        @Html.CheckBox("delivered", true) <span>delivered</span><br />
+    </div>
+    <div style="display:inline;float:left;width:200px;">
+        <p>Bin Size:</p>
+        @Html.CheckBox("5", true)  <span>5</span><br />
+        @Html.CheckBox("10", true) <span>10</span><br />
+        @Html.CheckBox("14", true) <span>14</span><br />
 
-    @using (Html.BeginForm("SortStatus", "Bins"))
-    {
+    </div>
 
-        @Html.DropDownList("status",
-             new List<SelectListItem>
-             {
-                 new SelectListItem {Text = "all"},
-                 new SelectListItem {Text = "new"},
-                 new SelectListItem {Text = "pending"},
-                 new SelectListItem {Text = "confirmed"},
-                 new SelectListItem {Text = "delivered"},
-                 new SelectListItem {Text = "completed"},
-             },
-             "Choose Status..."
-             );
+    <input type="submit" value="Search" />
+  }
 
-        @Html.DropDownList("binSize",
-             new List<SelectListItem>
-             {
-                 new SelectListItem {Text = "all"},
-                 new SelectListItem {Text = "10"},
-                 new SelectListItem {Text = "14"},
-                 new SelectListItem {Text = "20"},
-             },
-             "Choose Size..."
-             );
-        
-
-        <input type="submit" value="Submit" />
-
-
-    }
-
-</div>
+    </div>
 
 
 
@@ -108,3 +82,11 @@
 }
 
 </table>
+
+
+<div style="padding:10px; border:1px solid black">
+    <div><a href="@Url.Action("Report",new {id= "PDF"})"> Get Report PDF</a></div>
+    <div><a href="@Url.Action("Report",new {id= "Excel"})"> Get Report Excel</a></div>
+    <div><a href="@Url.Action("Report",new {id= "Word"})"> Get Report Word</a></div>
+    <div><a href="@Url.Action("Report",new {id= "Image"})"> Get Report Image</a></div>
+</div>

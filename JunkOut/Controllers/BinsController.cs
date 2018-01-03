@@ -6,7 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+//using JunkoutDBModel;
 using JunkOutDBModel;
+
+using Microsoft.Reporting.WebForms;
+
+using System.IO;
+
 
 namespace JunkOut.Controllers
 {
@@ -25,7 +31,8 @@ namespace JunkOut.Controllers
                 binList = db.Bins.ToList();
             }
 
-            return View(binList);
+            // return View(binList);
+              return View("Index",binList);
         }
 
         // GET: Bins/Details/5
@@ -42,23 +49,41 @@ namespace JunkOut.Controllers
             }
             return View(bin);
         }
-        
 
-        public ActionResult SortStatus(string status, string binSize)
+
+        public ActionResult SortBins(FormCollection form)
         {
             IEnumerable<Bin> binList = db.Bins.ToList();
-            if(!status.Equals("all") && !status.Equals(""))
+            string[] statuses = { "New", "Available", "pending", "Booked", "delivered"};
+            string[] sizes = { "5", "10", "14" };
+            string[] checkedStatuses = new string[5];
+            string[] checkedSizes= new string[3];
+            int countStatus = 0;
+            int countSizes = 0;
+            foreach (string item in form)
             {
-                binList = binList.Where(Bins => Bins.Status == status);
-            }
+                if (statuses.Contains(item) && form[item].Substring(0, 1).Equals("t"))
+                {
+                    checkedStatuses[countStatus++] = item;
+                }
 
-            if(!binSize.Equals("all") && !binSize.Equals(""))
-            {
-                binList = binList.Where(Bins => Bins.BinSize == binSize);
+                if (sizes.Contains(item) && form[item].Substring(0, 1).Equals("t"))
+                {
+                    checkedSizes[countSizes++] = item;
+                }
+
             }
+            binList = binList.Where(Bins => Bins.Status == checkedStatuses[0] ||
+                                                Bins.Status == checkedStatuses[1] ||
+                                                Bins.Status == checkedStatuses[2] ||
+                                                Bins.Status == checkedStatuses[3] ||
+                                                Bins.Status == checkedStatuses[4]);
+
+            binList = binList.Where(Bins => Bins.BinSize == checkedSizes[0] ||
+                                                Bins.BinSize == checkedSizes[1] ||
+                                                Bins.BinSize == checkedSizes[2]);
 
             TempData["sortedList"] = binList;
-
             return RedirectToAction("Index");
         }
 
@@ -78,7 +103,7 @@ namespace JunkOut.Controllers
             if (ModelState.IsValid)
             {
 
-                bin.Status = "New";
+                bin.Status = "Available";
 
                 db.Bins.Add(bin);
                 db.SaveChanges();
@@ -152,6 +177,69 @@ namespace JunkOut.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Report(string id)
+        {
+            LocalReport lr = new LocalReport();
+            string path = Path.Combine(Server.MapPath("~/Reports"), "JobType.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                lr.ReportPath = path;
+            }
+            else
+            {
+                return View("Index");
+            }
+            List<Address> ad = new List<Address>();
+            List<Customer> cust = new List<Customer>();
+            List<Order> ord = new List<Order>();
+
+
+
+            using (JunkoutDBModelContainer jo = new JunkoutDBModelContainer())
+            {
+                ad = jo.Addresses.ToList();
+                cust = jo.Customers.ToList();
+                ord = jo.Orders.ToList();
+            }
+
+
+            ReportDataSource rd = new ReportDataSource("JobType", ord);
+            lr.DataSources.Add(rd);
+            string reportType = id;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+
+
+
+            string deviceInfo =
+
+            "<DeviceInfo>" +
+            "  <OutputFormat>" + id + "</OutputFormat>" +
+            "  <PageWidth>8.5in</PageWidth>" +
+            "  <PageHeight>11in</PageHeight>" +
+            "  <MarginTop>0.5in</MarginTop>" +
+            "  <MarginLeft>1in</MarginLeft>" +
+            "  <MarginRight>1in</MarginRight>" +
+            "  <MarginBottom>0.5in</MarginBottom>" +
+            "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = lr.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings
+                );
+            return File(renderedBytes, mimeType);
         }
     }
 }
