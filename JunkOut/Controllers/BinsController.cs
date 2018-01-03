@@ -9,6 +9,11 @@ using System.Web.Mvc;
 //using JunkoutDBModel;
 using JunkOutDBModel;
 
+using Microsoft.Reporting.WebForms;
+
+using System.IO;
+
+
 namespace JunkOut.Controllers
 {
     public class BinsController : Controller
@@ -26,7 +31,8 @@ namespace JunkOut.Controllers
                 binList = db.Bins.ToList();
             }
 
-            return View(binList);
+            // return View(binList);
+              return View("Index",binList);
         }
 
         // GET: Bins/Details/5
@@ -171,6 +177,69 @@ namespace JunkOut.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Report(string id)
+        {
+            LocalReport lr = new LocalReport();
+            string path = Path.Combine(Server.MapPath("~/Reports"), "JobType.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                lr.ReportPath = path;
+            }
+            else
+            {
+                return View("Index");
+            }
+            List<Address> ad = new List<Address>();
+            List<Customer> cust = new List<Customer>();
+            List<Order> ord = new List<Order>();
+
+
+
+            using (JunkoutDBModelContainer jo = new JunkoutDBModelContainer())
+            {
+                ad = jo.Addresses.ToList();
+                cust = jo.Customers.ToList();
+                ord = jo.Orders.ToList();
+            }
+
+
+            ReportDataSource rd = new ReportDataSource("JobType", ord);
+            lr.DataSources.Add(rd);
+            string reportType = id;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+
+
+
+            string deviceInfo =
+
+            "<DeviceInfo>" +
+            "  <OutputFormat>" + id + "</OutputFormat>" +
+            "  <PageWidth>8.5in</PageWidth>" +
+            "  <PageHeight>11in</PageHeight>" +
+            "  <MarginTop>0.5in</MarginTop>" +
+            "  <MarginLeft>1in</MarginLeft>" +
+            "  <MarginRight>1in</MarginRight>" +
+            "  <MarginBottom>0.5in</MarginBottom>" +
+            "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = lr.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings
+                );
+            return File(renderedBytes, mimeType);
         }
     }
 }

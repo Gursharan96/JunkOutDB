@@ -19,6 +19,7 @@ namespace JunkOut.Controllers
         // GET: Orders
         public ActionResult Index()
         {
+
             IEnumerable<Order> orderList = (IEnumerable<Order>)TempData["sortedList"];
 
             if (orderList == null)
@@ -26,6 +27,7 @@ namespace JunkOut.Controllers
                 orderList = db.Orders.ToList();
             }
             return View(orderList);
+
         }
 
         public ActionResult Details(int? id)
