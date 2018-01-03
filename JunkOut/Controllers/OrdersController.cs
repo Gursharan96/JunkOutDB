@@ -110,9 +110,10 @@ namespace JunkOut.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(OrdersViewModel model)
+        public ActionResult Create(OrdersViewModel model, FormCollection frm)
         {
-           
+            String del = frm["delivery"].ToString();
+            String pickup = frm["pickup"].ToString();
 
             Customer customer = model.customer;
 
@@ -134,7 +135,9 @@ namespace JunkOut.Controllers
             Bin bin = queryBin.First();
 
 
-          //  Bin bin = db.Bins.First();
+            //  Bin bin = db.Bins.First();
+            order.DeliveryDateTime = DateTime.Parse(del);
+            order.PickupDateTime = DateTime.Parse(pickup);
             order.Bin = bin;
             order.Status = "Confirmed";
             order.SourceOfOrdering = "Call In";
