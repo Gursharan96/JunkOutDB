@@ -178,7 +178,5 @@ namespace JunkOut.Controllers
             }
             base.Dispose(disposing);
         }
-
-       
     }
 }
