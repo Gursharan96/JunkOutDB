@@ -7,18 +7,41 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Bin</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.BinSize, htmlAttributes: new { @class = "control-label col-md-2" })
+
+
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BinSize, new { htmlAttributes = new { @class = "form-control" } })
+                @{
+                    List<SelectListItem> listBinSize = new List<SelectListItem>();
+                    listBinSize.Add(new SelectListItem
+                    {
+                        Text = "5",
+                        Value = "5",
+                        Selected = true
+                    });
+                    listBinSize.Add(new SelectListItem
+                    {
+                        Text = "10",
+                        Value = "10"
+                    });
+                    listBinSize.Add(new SelectListItem
+                    {
+                        Text = "14",
+                        Value = "14"
+                    });
+
+                }
+
+                @Html.DropDownListFor(model => model.BinSize, listBinSize, "-- Bin Size --", new { @id = "MyId", onchange = "MyFunction()" })
                 @Html.ValidationMessageFor(model => model.BinSize, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -26,7 +49,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FlatRate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FlatRate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FlatRate, new { htmlAttributes = new { @class = "form-control" , id = "flatRate" } })
                 @Html.ValidationMessageFor(model => model.FlatRate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,7 +57,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MinTonnageAwarded, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MinTonnageAwarded, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.MinTonnageAwarded, new { htmlAttributes = new { @class = "form-control", id = "minTonn" } })
                 @Html.ValidationMessageFor(model => model.MinTonnageAwarded, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +65,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MaxRentalDuration, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MaxRentalDuration, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.MaxRentalDuration, new { htmlAttributes = new { @class = "form-control", id = "maxRent" } })
                 @Html.ValidationMessageFor(model => model.MaxRentalDuration, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,7 +81,7 @@
             </div>
         </div>
     </div>
-}
+                    }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -66,4 +89,29 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+<script type="text/javascript">
+    $('#MyId').change(function () {
+        var slectedSize = $("#MyId").val();
+        if (slectedSize == 5) {
+            $("#flatRate").val("325");
+            $("#minTonn").val("2");
+            $("#maxRent").val("21");
+        }
+        else if (slectedSize == 10)
+        {
+            $("#flatRate").val("250");
+            $("#minTonn").val("1");
+            $("#maxRent").val("21");           
+        }
+        else if (slectedSize == 14)
+        {
+            $("#flatRate").val("375");
+            $("#minTonn").val("2.5");
+            $("#maxRent").val("21");  
+        }           
+    });
+</script>
+
+
 }

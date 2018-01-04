@@ -26,7 +26,7 @@ namespace JunkOut.Controllers
             {
                 orderList = db.Orders.ToList();
             }
-            return View(orderList);
+            return View("Index",orderList);
 
         }
 
