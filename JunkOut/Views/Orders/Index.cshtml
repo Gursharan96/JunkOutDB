@@ -9,8 +9,11 @@
 
 <h2>Index</h2>
 
+
+
+
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Place a new order", "Create")
 </p>
 
 @using (Html.BeginForm("SortOrders", "Orders"))
@@ -88,3 +91,12 @@
     }
 
 </table>
+
+@section Scripts {
+<script>
+    $(document).ready(function () {
+        $("td:contains(New)").css("color", "red");
+    });
+</script>
+@Scripts.Render("~/bundles/jqueryval")
+}

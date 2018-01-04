@@ -87,3 +87,13 @@
         </table>
 
 
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("td:contains(Available)").css("color", "Green");
+        $("td:contains(Booked)").css("color", "red");
+       
+    });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
