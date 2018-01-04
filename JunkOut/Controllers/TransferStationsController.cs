@@ -17,7 +17,15 @@ namespace JunkOut.Controllers
         // GET: TransferStations
         public ActionResult Index()
         {
-            return View(db.TransferStations.ToList());
+            IEnumerable<TransferStation> transferStationList = 
+                (IEnumerable<TransferStation>)TempData["sortedList"];
+
+            if (transferStationList == null)
+            {
+                transferStationList = db.TransferStations.ToList();
+            }
+           
+            return View(transferStationList);
         }
 
         // GET: TransferStations/Details/5
@@ -34,6 +42,46 @@ namespace JunkOut.Controllers
             }
             return View(transferStation);
         }
+
+        public ActionResult SortStations(FormCollection form)
+        {
+           IEnumerable<TransferStation> transferStationList = db.TransferStations.ToList();
+            string[] cities = { "Brampton", "Mississauga", "Booked", "delivered" };
+            string[] checkedStatuses = new string[5];
+            int countStatus = 0;
+            int selectedRate = 0;//default value
+            //System.Diagnostics.Debug.WriteLine(transferStationList);
+
+            string selectedCity = form[0]; //get city value from form dropdown
+            
+            //check for input in rate field
+            if(form[1] != "")
+            {
+                int.TryParse(form[1], out var num);//try to parse the rate filter. output to num variable.
+                selectedRate = num; // set the rate to the num variable.
+            }
+            
+            
+
+
+            //If value has changed, filter list
+            if (selectedRate != 0)
+            {
+                transferStationList = transferStationList.Where
+                    (TransferStation => int.Parse(TransferStation.Rate) < selectedRate);
+            }
+
+            //if city has been selected
+            if(selectedCity != "")
+            {
+                transferStationList = transferStationList.Where
+                    (TransferStation => TransferStation.City == selectedCity);
+            }
+            
+            TempData["sortedList"] = transferStationList; 
+            return RedirectToAction("Index");
+        }
+
 
         // GET: TransferStations/Create
         public ActionResult Create()
