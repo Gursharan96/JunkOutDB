@@ -169,6 +169,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AddressesController.cs" />
+    <Compile Include="Controllers\ManagementReportsController.cs" />
     <Compile Include="Controllers\TrackBinsController.cs" />
     <Compile Include="Controllers\BinsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -274,6 +275,8 @@
     <Content Include="Views\TrackBins\Index.cshtml" />
     <Content Include="Views\Orders\Create.cshtml" />
     <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\ManagementReports\Index.cshtml" />
+    <Content Include="Views\ManagementReports\JobTypeInCitiesReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

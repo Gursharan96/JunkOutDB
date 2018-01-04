@@ -15,6 +15,7 @@
 
 @using (Html.BeginForm("SortOrders", "Orders"))
 {
+
     <div class="container"  style="background-color:lightcyan; padding:0.75em ; margin: 0.5em" >
         <div style="display:inline;float:left ; width:200px;">
             <p>JobType: </p>
@@ -35,6 +36,9 @@
             @Html.RadioButton("orderByDelivery", "deliveryAsc", true) <span>Ascending</span>
             @Html.RadioButton("orderByDelivery", "deliveryDesc", true) <span>Descending</span>
         </div>
+
+   
+
 
         <input type="submit" value="Search" />
     </div>
