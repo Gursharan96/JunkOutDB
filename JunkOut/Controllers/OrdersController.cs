@@ -128,35 +128,38 @@ namespace JunkOut.Controllers
 
             customer.Addresses.Add(address);
 
-            var queryBin= from b in db.Bins
+            var queryBin= (from b in db.Bins
                           where b.Status == "Available"
-                          select b;
+                          select b).ToList();
 
-            Bin bin = queryBin.First();
+            if (queryBin.Count > 0)
+            {
 
-
-            //  Bin bin = db.Bins.First();
-            order.DeliveryDateTime = DateTime.Parse(del);
-            order.PickupDateTime = DateTime.Parse(pickup);
-            order.Bin = bin;
-            order.Status = "Confirmed";
-            order.SourceOfOrdering = "Call In";
-
-            db.Orders.Add(order);
-
-            order.Customers.Add(customer);
-
-            bin.Status = "Booked";
-
-           
+                Bin bin = queryBin.First();
 
 
+                //  Bin bin = db.Bins.First();
 
 
-            db.SaveChanges();
+                order.DeliveryDateTime = DateTime.Parse(del);
+                order.PickupDateTime = DateTime.Parse(pickup);
+                order.Bin = bin;
+                order.Status = "Confirmed";
+                order.SourceOfOrdering = "Call In";
+
+                db.Orders.Add(order);
+
+                order.Customers.Add(customer);
+
+                bin.Status = "Booked";
+                db.SaveChanges();
 
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+               
+            }
+            ViewBag.Message = "Out of Bins";
+            return View("Create");
         }
 
         public ActionResult Edit(int? id)
