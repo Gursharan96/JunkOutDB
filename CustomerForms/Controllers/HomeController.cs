@@ -55,7 +55,8 @@ namespace CustomerForms.Controllers
 
             db.SaveChanges();
                
-            return RedirectToAction("Confirmation");
+           // return RedirectToAction("Confirmation");
+            return View("Confirmation");
 
             //return Content($"Hello {fname} {jobtype} {bintwo} {binone}");
             //return View();
