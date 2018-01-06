@@ -11,22 +11,23 @@ namespace JunkOutDBModel
 
     public class BinMeta
     {
+        [Display(Name = "Bin Id")]
+        public int ID { get; set; }
+
         [Display(Name = "Bin Size")]
         [Required(ErrorMessage = " {0} required")]
         [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Can contain Numbers Only")]
         public string BinSize { get; set; }
 
-
-
         [Display(Name = "Flat Rate")]
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Can contain Numbers Only")]
+        [RegularExpression("([0-9]+(,[0-9]{1,3})?([.,][0-9]{1,3})?$)", ErrorMessage = "Can contain Numbers Only")]
         public double FlatRate { get; set; }
 
 
         [Display(Name = "Minimum Tonnage Awarded")]
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Can contain Numbers Only")]
+        [RegularExpression("(^[0-9]([.,][0-9]{1,3})?$)", ErrorMessage = "Can contain Numbers Only")]
         public double MinTonnageAwarded { get; set; }
 
 
@@ -48,6 +49,9 @@ namespace JunkOutDBModel
 
     public class TransferStationMeta
     {
+        [Display(Name = "Transfer Station Id")]
+        public int ID { get; set; }
+
         [Display(Name = "Street Address")]
         [Required(ErrorMessage = " {0} required")]
         public string StreetAddress { get; set; }
@@ -79,7 +83,7 @@ namespace JunkOutDBModel
         public string Notes { get; set; }
 
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Can contain Numbers Only")]
+        [RegularExpression("(^[0-9]([.,][0-9]{1,3})?$)", ErrorMessage = "Can contain Numbers Only")]
         public string Rate { get; set; }
 
 
@@ -98,13 +102,11 @@ namespace JunkOutDBModel
 
     }
 
-
-
-
-
-
     public class CustomerMeta
     {
+        [Display(Name = "Customer Id")]
+        public int ID { get; set; }
+
         [Display(Name = "First Name")]
         [Required(ErrorMessage = " {0} required")]
 
@@ -126,10 +128,6 @@ namespace JunkOutDBModel
         [RegularExpression("(\\(?\\d{3}\\)?-? *\\d{3}-? *-?\\d{4})", ErrorMessage = "Please Enter valid format")]
         public string PhoneNumber { get; set; }
 
-
-
-
-
     }
 
     [MetadataType(typeof(CustomerMeta))]
@@ -139,12 +137,10 @@ namespace JunkOutDBModel
 
     }
 
-
-
-
     public class AddressMeta
     {
-
+        [Display(Name = "Address Id")]
+        public int ID { get; set; }
         [Display(Name = "Street Address")]
         [Required(ErrorMessage = " {0} required")]
         public string StreetAddress { get; set; }
@@ -188,6 +184,9 @@ namespace JunkOutDBModel
 
     public class OrderMeta
     {
+        [Display(Name = "Order Id")]
+        public int ID { get; set; }
+
         [Display(Name = "Job Type")]
         [Required(ErrorMessage = " {0} required")]
         public string JobType { get; set; }

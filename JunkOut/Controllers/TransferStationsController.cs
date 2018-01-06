@@ -17,7 +17,7 @@ namespace JunkOut.Controllers
         // GET: TransferStations
         public ActionResult Index()
         {
-            return View(db.TransferStations.ToList());
+            return View("Index", db.TransferStations.ToList());
         }
 
         // GET: TransferStations/Details/5
