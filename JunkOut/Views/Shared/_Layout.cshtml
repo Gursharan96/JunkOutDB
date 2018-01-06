@@ -27,8 +27,9 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reports <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Expenses</a></li>
-                            <li><a href="#">Orders</a></li>
+                            <li>@Html.ActionLink("Inventory", "Inventory", "ManagementReports")</li>
+                            <li>@Html.ActionLink("Customer Details", "Customer", "ManagementReports")</li>
+                            <li>@Html.ActionLink("Sales Trends", "Sale", "ManagementReports")</li>
                         </ul>
                     </li>
                     <li>@Html.ActionLink("Track Bins", "Index", "TrackBins")</li>   

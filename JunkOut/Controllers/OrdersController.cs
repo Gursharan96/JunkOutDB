@@ -137,10 +137,6 @@ namespace JunkOut.Controllers
 
                 Bin bin = queryBin.First();
 
-
-                //  Bin bin = db.Bins.First();
-
-
                 order.DeliveryDateTime = DateTime.Parse(del);
                 order.PickupDateTime = DateTime.Parse(pickup);
                 order.Bin = bin;
