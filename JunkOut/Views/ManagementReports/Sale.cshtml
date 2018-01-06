@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Sale";
+}
+
+<h2>Sale Trends</h2>
+
+<h3>Job Type</h3>
+<p> Find out which job is popular among our customers</p>
+
+<div style="padding:10px; border:1px solid black">
+    <div><a href="@Url.Action("JobTypes",new {id= "PDF"})"> Get Report PDF</a></div>
+    <div><a href="@Url.Action("JobTypes",new {id= "Excel"})"> Get Report Excel</a></div>
+    <div><a href="@Url.Action("JobTypes",new {id= "Word"})"> Get Report Word</a></div>
+    <div><a href="@Url.Action("JobTypes",new {id= "Image"})"> Get Report Image</a></div>
+</div>
+
+<h3>Job Type Vs Hearing Source</h3>
+<p> Check Out Hearing source for various Job Types </p>
+
+<div style="padding:10px; border:1px solid black">
+    <div><a href="@Url.Action("JobTypeVsSource",new {id= "PDF"})"> Get Report PDF</a></div>
+    <div><a href="@Url.Action("JobTypeVsSource",new {id= "Excel"})"> Get Report Excel</a></div>
+    <div><a href="@Url.Action("JobTypeVsSource",new {id= "Word"})"> Get Report Word</a></div>
+    <div><a href="@Url.Action("JobTypeVsSource",new {id= "Image"})"> Get Report Image</a></div>
+</div>
+
+<h3>Sales Distribution</h3>
+<p> Check Out Sale trends in Various Cities</p>
+
+<div style="padding:10px; border:1px solid black">
+    <div><a href="@Url.Action("OrdersInCities",new {id= "PDF"})"> Get Report PDF</a></div>
+    <div><a href="@Url.Action("OrdersInCities",new {id= "Excel"})"> Get Report Excel</a></div>
+    <div><a href="@Url.Action("OrdersInCities",new {id= "Word"})"> Get Report Word</a></div>
+    <div><a href="@Url.Action("OrdersInCities",new {id= "Image"})"> Get Report Image</a></div>
+</div>
+
