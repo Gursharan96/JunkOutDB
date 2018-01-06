@@ -32,31 +32,37 @@ namespace CustomerForms.Controllers
             Address a = db.Addresses.Find(cfm.address.ID);
             c.Addresses.Add(a);
 
-            var queryBin = from b in db.Bins
+            var queryBin = (from b in db.Bins
                            where b.Status == "Available"
-                           select b;
+                           select b).ToList();
+            if (queryBin.Count > 0)
+            {
+                Bin bin = queryBin.First();
 
-            Bin bin = queryBin.First();
+                cfm.orders.Bin = bin;
 
-            cfm.orders.Bin = bin;
+                cfm.orders.SourceOfOrdering = "Online";
+                cfm.orders.JobType = jt;
+                cfm.orders.DeliveryDateTime = DateTime.Parse(del);
+                cfm.orders.PickupDateTime = DateTime.Parse(pickup);
+                db.Orders.Add(cfm.orders);
 
-            cfm.orders.SourceOfOrdering = "Online";
-            cfm.orders.JobType = jt;
-            cfm.orders.DeliveryDateTime = DateTime.Parse(del);
-            cfm.orders.PickupDateTime = DateTime.Parse(pickup);
-            db.Orders.Add(cfm.orders);
+                Order o = db.Orders.Find(cfm.orders.ID);
+                c.Orders.Add(o);
 
-            Order o = db.Orders.Find(cfm.orders.ID);
-            c.Orders.Add(o);
+                cfm.orders.Status = "New";
 
-            cfm.orders.Status = "New";
+                bin.Status = "Booked";
 
-            bin.Status = "Booked";
+                db.SaveChanges();
+                return RedirectToAction("Confirm");
+            }
 
-            db.SaveChanges();
-               
-           // return RedirectToAction("Confirmation");
-            return View("Confirmation");
+            ViewBag.Message = "Sorry, We are out of Bins at moment";
+            return View("Index");
+
+
+            // return RedirectToAction("Confirmation");
 
             //return Content($"Hello {fname} {jobtype} {bintwo} {binone}");
             //return View();
@@ -77,6 +83,12 @@ namespace CustomerForms.Controllers
         public ActionResult Confirmation()
         {
             ViewBag.Message = "Confirmation Page";
+
+            return View();
+        }
+
+        public ActionResult Confirm()
+        {
 
             return View();
         }
