@@ -83,7 +83,7 @@ namespace JunkOutDBModel
         public string Notes { get; set; }
 
         [Required(ErrorMessage = " {0} required")]
-        [RegularExpression("(^[0-9]([.,][0-9]{1,3})?$)", ErrorMessage = "Can contain Numbers Only")]
+        [RegularExpression("([0-9]+(,[0-9]{1,3})?([.,][0-9]{1,3})?$)", ErrorMessage = "Can contain Numbers Only")]
         public string Rate { get; set; }
 
 
