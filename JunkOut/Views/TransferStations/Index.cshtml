@@ -9,6 +9,35 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("SortStations", "TransferStations"))
+{
+    <div style="display:inline;float:left;width:200px;">
+        <p>City:</p>
+        @Html.DropDownList("City", new List<SelectListItem>
+   {
+       new SelectListItem{Text = "All", Value = "", Selected=true },
+       new SelectListItem{Text = "Brampton", Value = " Brampton" },
+       new SelectListItem{Text = "Etobicoke", Value = " Etobicoke" },
+       new SelectListItem{Text = "Mississauga", Value = " Mississauga" },
+       new SelectListItem{Text = "North York", Value = " North York" },
+       new SelectListItem{Text = "OakVille", Value = " OakVille" },
+       new SelectListItem{Text = "Scarborough", Value = " Scarborough" },
+       new SelectListItem{Text = "Toronto", Value = " Toronto" },
+       new SelectListItem{Text = "Vaughn", Value = " Vaughn" },
+   })
+        
+    </div>
+    <div style="display:inline;float:left;width:200px;">
+        <p>Rate less than :</p>
+        <span>$</span>@Html.TextBox("rate")<br />
+
+    </div>
+
+    <input type="submit" value="Search" />
+}
+
+
 <table class="table">
     <tr>
         <th>
