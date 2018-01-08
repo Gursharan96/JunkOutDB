@@ -12,9 +12,10 @@
 
 @using (Html.BeginForm("SortStations", "TransferStations"))
 {
-    <div style="display:inline;float:left;width:200px;">
-        <p>City:</p>
-        @Html.DropDownList("City", new List<SelectListItem>
+    <div class="container" style="background-color:lightcyan; padding:0.75em ; margin: 0.5em">
+        <div style="display:inline;float:left;width:200px;">
+            <p>City:</p>
+            @Html.DropDownList("City", new List<SelectListItem>
    {
        new SelectListItem{Text = "All", Value = "", Selected=true },
        new SelectListItem{Text = "Brampton", Value = " Brampton" },
@@ -26,91 +27,93 @@
        new SelectListItem{Text = "Toronto", Value = " Toronto" },
        new SelectListItem{Text = "Vaughn", Value = " Vaughn" },
    })
-        
-    </div>
-    <div style="display:inline;float:left;width:200px;">
-        <p>Rate less than :</p>
-        <span>$</span>@Html.TextBox("rate")<br />
 
-    </div>
+        </div>
+        <div style="display:inline;float:left;width:200px;">
+            <p>Rate less than :</p>
+            <span>$</span>@Html.TextBox("rate")<br />
 
-    <input type="submit" value="Search" />
+        </div>
+
+        <input type="submit" value="Search" />
+    </div>
 }
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.StreetAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PostalCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Company)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HoursOfOperation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Notes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Term)
-        </th>
-        <th></th>
-    </tr>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StreetAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostalCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Company)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HoursOfOperation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Notes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Term)
+                </th>
+                <th></th>
+            </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StreetAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostalCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Company)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoursOfOperation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Notes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Term)
-        </td>
-        <td>
-            @Html.ActionLink(" ", "Edit", new { id=item.ID }, new { @class = "glyphicon glyphicon-edit", title = "Edit" }) |
-            @Html.ActionLink(" ", "Details", new { id=item.ID },new { @class = "glyphicon glyphicon-info-sign", title = "Details" }) |
-            @Html.ActionLink(" ", "Delete", new { id=item.ID }, new { @class = "glyphicon glyphicon-remove", title = "Delete" })
-        </td>
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StreetAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PostalCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Company)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoursOfOperation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Notes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Term)
+                    </td>
+                    <td>
+                        @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-edit", title = "Edit" }) |
+                        @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", title = "Details" }) |
+                        @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-remove", title = "Delete" })
+                    </td>
+                </tr>
+            }
 
-</table>
+        </table>

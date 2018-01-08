@@ -18,7 +18,9 @@ namespace JunkOut.Controllers
         // GET: Addresses
         public ActionResult Index()
         {
-            return View(db.Addresses.ToList());
+            AddressesController a = new AddressesController();
+
+            return View(a.GetAddresses());
         }
         
     }
