@@ -10,28 +10,18 @@ using JunkOutDBModel;
 
 namespace JunkOut.Controllers
 {
-    public class TransferStationsController : Controller
+    public class BestRouteController : Controller
     {
         private JunkoutDBModelContainer db = new JunkoutDBModelContainer();
 
-        // GET: TransferStations
+        // GET: BestRoute
         public ActionResult Index()
         {
-
-            IEnumerable<TransferStation> transferStationList = 
-                (IEnumerable<TransferStation>)TempData["sortedList"];
-
-            if (transferStationList == null)
-            {
-                transferStationList = db.TransferStations.ToList();
-            }
-           
-            return View("Index",transferStationList);
-
-
+            var transferStations = db.TransferStations.Include(t => t.Expens);
+            return View(transferStations.ToList());
         }
 
-        // GET: TransferStations/Details/5
+        // GET: BestRoute/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -46,58 +36,19 @@ namespace JunkOut.Controllers
             return View(transferStation);
         }
 
-        public ActionResult SortStations(FormCollection form)
-        {
-           IEnumerable<TransferStation> transferStationList = db.TransferStations.ToList();
-            string[] cities = { "Brampton", "Mississauga", "Booked", "delivered" };
-            string[] checkedStatuses = new string[5];
-            int countStatus = 0;
-            int selectedRate = 0;//default value
-            //System.Diagnostics.Debug.WriteLine(transferStationList);
-
-            string selectedCity = form[0]; //get city value from form dropdown
-            
-            //check for input in rate field
-            if(form[1] != "")
-            {
-                int.TryParse(form[1], out var num);//try to parse the rate filter. output to num variable.
-                selectedRate = num; // set the rate to the num variable.
-            }
-            
-            
-
-
-            //If value has changed, filter list
-            if (selectedRate != 0)
-            {
-                transferStationList = transferStationList.Where
-                    (TransferStation => int.Parse(TransferStation.Rate) < selectedRate);
-            }
-
-            //if city has been selected
-            if(selectedCity != "")
-            {
-                transferStationList = transferStationList.Where
-                    (TransferStation => TransferStation.City == selectedCity);
-            }
-            
-            TempData["sortedList"] = transferStationList; 
-            return RedirectToAction("Index");
-        }
-
-
-        // GET: TransferStations/Create
+        // GET: BestRoute/Create
         public ActionResult Create()
         {
+            ViewBag.Expen_ID = new SelectList(db.Expenses, "ID", "DisposalCost");
             return View();
         }
 
-        // POST: TransferStations/Create
+        // POST: BestRoute/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,StreetAddress,City,PostalCode,Country,Company,Phone,HoursOfOperation,Notes,Rate,Term")] TransferStation transferStation)
+        public ActionResult Create([Bind(Include = "ID,StreetAddress,City,PostalCode,Country,Company,Phone,HoursOfOperation,Notes,Rate,Term,Expen_ID")] TransferStation transferStation)
         {
             if (ModelState.IsValid)
             {
@@ -106,10 +57,11 @@ namespace JunkOut.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Expen_ID = new SelectList(db.Expenses, "ID", "DisposalCost", transferStation.Expen_ID);
             return View(transferStation);
         }
 
-        // GET: TransferStations/Edit/5
+        // GET: BestRoute/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -121,15 +73,16 @@ namespace JunkOut.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Expen_ID = new SelectList(db.Expenses, "ID", "DisposalCost", transferStation.Expen_ID);
             return View(transferStation);
         }
 
-        // POST: TransferStations/Edit/5
+        // POST: BestRoute/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,StreetAddress,City,PostalCode,Country,Company,Phone,HoursOfOperation,Notes,Rate,Term")] TransferStation transferStation)
+        public ActionResult Edit([Bind(Include = "ID,StreetAddress,City,PostalCode,Country,Company,Phone,HoursOfOperation,Notes,Rate,Term,Expen_ID")] TransferStation transferStation)
         {
             if (ModelState.IsValid)
             {
@@ -137,10 +90,11 @@ namespace JunkOut.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Expen_ID = new SelectList(db.Expenses, "ID", "DisposalCost", transferStation.Expen_ID);
             return View(transferStation);
         }
 
-        // GET: TransferStations/Delete/5
+        // GET: BestRoute/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -155,7 +109,7 @@ namespace JunkOut.Controllers
             return View(transferStation);
         }
 
-        // POST: TransferStations/Delete/5
+        // POST: BestRoute/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
