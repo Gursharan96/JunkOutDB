@@ -19,8 +19,28 @@ namespace JunkOut.Controllers
         // GET: api/Addresses
         public IQueryable<Address> GetAddresses()
         {
-            return db.Addresses;
+            /*
+            List<Address> add = new List<Address>();
+            var queryOrder = (from o in db.Orders
+                             where o.Status == "Delivered"
+                             select o).ToList();
+
+            if((queryOrder.Count > 0) || (queryOrder != null) )
+            {
+                foreach (Order ord in queryOrder)
+                {
+                    Customer cust = ord.Customers.First();
+                    Address a = cust.Addresses.First();
+                    add.Add(a);
+                }
+                // return db.Addresses;
+                return add.AsQueryable();
+            }
+            */
+             return db.Addresses;
         }
+
+
 
         // GET: api/Addresses/5
         [ResponseType(typeof(Address))]
