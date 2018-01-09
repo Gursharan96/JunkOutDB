@@ -27,18 +27,18 @@ namespace CustomerForms.Models
         AB,
         NL
     }
-    public enum Site
-    {
-        Residence,
-        Household,
-        Office,
-        Apartment
-    }
-    public enum SourceOfHearing
-    {
-        Referral,
-        Advertisement,
-        Online_Surfing,
-        Other
-    }
+    //public enum Site
+    //{
+    //    Residential,
+    //    Retail,
+    //    Commercial,
+    //    Apartment
+    //}
+    //public enum SourceOfHearing
+    //{
+    //    Referral,
+    //    Advertisement,
+    //    Online Surfing,
+    //    Other
+    //}
 }
