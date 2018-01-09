@@ -43,7 +43,7 @@
                 var geoOptions = {
                     address: myLoc.StreetAddress + "," + myLoc.City + "," + myLoc.Province + "," + myLoc.PostalCode
                 }
-        /*
+        
                 if (myLoc.AddressType == "Transfer Station") {
                     icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
                 } else if (myLoc.AddressType == "Lot") {
@@ -51,12 +51,12 @@
                 }else{
                     icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
                 }
-                */
-
-                icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                
+                /*
+                icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'*/
                 var markerContentString = myLoc.AddressType + ", \n" + myLoc.StreetAddress + "\n" +
                     myLoc.City + ", " + myLoc.Province + "\n" + myLoc.PostalCode;
-
+                
                 geocoder.geocode(geoOptions, addMarkers(markerContentString, icon));
             }
 
