@@ -433,7 +433,42 @@
                                         <option>Office Building</option>
                                         <option>Apartment</option>
                                     </select> -->
-                                    @Html.DropDownListFor(model => model.address.AddressType, new SelectList(Enum.GetValues(typeof(Site))), new { @class = "form-control", @id = "sitetype" })
+                                    @*@Html.DropDownListFor(model => model.address.AddressType, new SelectList(Enum.GetValues(typeof(Site))), new { @class = "form-control", @id = "sitetype" })*@
+                                    @{
+                                        List<SelectListItem> listAddressType = new List<SelectListItem>();
+                                        listAddressType.Add(new SelectListItem
+                                        {
+                                            Text = "Residential",
+                                            Value = "Residential"
+                                        });
+                                        listAddressType.Add(new SelectListItem
+                                        {
+                                            Text = "Construction Site",
+                                            Value = "Construction Site",
+                                            Selected = true
+                                        });
+                                        listAddressType.Add(new SelectListItem
+                                        {
+                                            Text = "Commercial",
+                                            Value = "Commercial"
+                                        });
+                                        listAddressType.Add(new SelectListItem
+                                        {
+                                            Text = "Retail",
+                                            Value = "Retail"
+                                        });
+                                        listAddressType.Add(new SelectListItem
+                                        {
+                                            Text = "Others",
+                                            Value = "Others"
+                                        });
+
+                                    }
+
+                                    @Html.DropDownListFor(model => model.address.AddressType, listAddressType, "-- Address Type --", new { @class = "form-control", @id = "sitetype" })
+                                
+                                
+                                
                                 </div>
                                 <div class="col-md-8 streetaddress">
                                    <!-- <label class="control-label" for="streetaddress">Street Address:</label>
@@ -606,8 +641,50 @@
                         </fieldset>
                         <label for="resource">How did you hear about us?</label>
                         <div>
+                            @{
+                                List<SelectListItem> listItems = new List<SelectListItem>();
+                                listItems.Add(new SelectListItem
+                                {
+                                    Text = "Referral",
+                                    Value = "Referral"
+                                });
+                                listItems.Add(new SelectListItem
+                                {
+                                    Text = "Website",
+                                    Value = "Website",
+                                    Selected = true
+                                });
+                                listItems.Add(new SelectListItem
+                                {
+                                    Text = "Bins",
+                                    Value = "Bins"
+                                });
+                                listItems.Add(new SelectListItem
+                                {
+                                    Text = "Saw truck",
+                                    Value = "Saw truck"
+                                });
+                                listItems.Add(new SelectListItem
+                                {
+                                    Text = "Lawn Sign",
+                                    Value = "Lawn Sign",
+                                });
+                                listItems.Add(new SelectListItem
+                                {
+                                    Text = "Referral / Friend",
+                                    Value = "Referral / Friend"
+                                });
+                                listItems.Add(new SelectListItem
+                                {
+                                    Text = "Others",
+                                    Value = "Others"
+                                });
+                            }
+
+                            @Html.DropDownListFor(model => model.orders.HearingSource, listItems, "-- Select Source --", new { @class = "form-control", @id = "sitetype" })
+
                             @*<input type="text" class="form-control" id="resource" name="resource">*@
-                            @Html.DropDownListFor(model => model.orders.HearingSource, new SelectList(Enum.GetValues(typeof(SourceOfHearing))), new { @class = "form-control", @id = "sitetype" })
+                            @*@Html.DropDownListFor(model => model.orders.HearingSource, new SelectList(Enum.GetValues(typeof(SourceOfHearing))), new { @class = "form-control", @id = "sitetype" })*@
                         </div>
                         <div class="space"></div> 
 
