@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Author: Gursharan Deol
+ * Partial Classes for validating Classes
+ *  
+ */
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace JunkOutDBModel
 {
-
+    //Validation for Bins properties
     public class BinMeta
     {
         [Display(Name = "Bin Id")]
@@ -24,12 +29,10 @@ namespace JunkOutDBModel
         [RegularExpression("([0-9]+(,[0-9]{1,3})?([.,][0-9]{1,3})?$)", ErrorMessage = "Can contain Numbers Only")]
         public double FlatRate { get; set; }
 
-
         [Display(Name = "Minimum Tonnage Awarded")]
         [Required(ErrorMessage = " {0} required")]
         [RegularExpression("(^[0-9]([.,][0-9]{1,3})?$)", ErrorMessage = "Can contain Numbers Only")]
         public double MinTonnageAwarded { get; set; }
-
 
         [Display(Name = "Maximum Rental Duration")]
         [Required(ErrorMessage = " {0} required")]
@@ -39,14 +42,13 @@ namespace JunkOutDBModel
 
     }
 
+    //Validation for Bins 
     [MetadataType(typeof(BinMeta))]
     public partial class Bin
     {
-
-
     }
 
-
+    //Validation for Transfer Stations properties
     public class TransferStationMeta
     {
         [Display(Name = "Transfer Station Id")]
@@ -79,29 +81,22 @@ namespace JunkOutDBModel
         [Required(ErrorMessage = " {0} required")]
         public string HoursOfOperation { get; set; }
 
-
         public string Notes { get; set; }
 
         [Required(ErrorMessage = " {0} required")]
         [RegularExpression("(^[0-9]([.,][0-9]{1,3})?$)", ErrorMessage = "Can contain Numbers Only")]
         public string Rate { get; set; }
 
-
         [Required(ErrorMessage = " {0} required")]
         public string Term { get; set; }
-
-
-
     }
 
     [MetadataType(typeof(TransferStationMeta))]
     public partial class TransferStation
-
     {
-
-
     }
 
+    //Validation for Customer properties
     public class CustomerMeta
     {
         [Display(Name = "Customer Id")]
@@ -109,7 +104,6 @@ namespace JunkOutDBModel
 
         [Display(Name = "First Name")]
         [Required(ErrorMessage = " {0} required")]
-
         public string FirstName { get; set; }
 
         [Display(Name = "Last Name")]
@@ -133,8 +127,6 @@ namespace JunkOutDBModel
     [MetadataType(typeof(CustomerMeta))]
     public partial class Customer
     {
-
-
     }
 
     public class AddressMeta
@@ -180,8 +172,7 @@ namespace JunkOutDBModel
 
     }
 
-
-
+    //Validation for Orders properties
     public class OrderMeta
     {
         [Display(Name = "Order Id")]

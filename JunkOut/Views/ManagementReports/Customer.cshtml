@@ -1,4 +1,9 @@
-﻿
+﻿@*
+    *
+     Author: Gursharan Deol
+     View for Reports - Customer Deatils
+    *
+*@
 @{
     ViewBag.Title = "Customer";
 }
@@ -6,7 +11,7 @@
 <h2>Customer Details</h2>
 
 <p> Find the Customer Information </p>
-
+@*List to choose Report Type*@
 <div style="padding:10px; border:1px solid black">
     <div><a href="@Url.Action("CustomerReport",new {id= "PDF"})"> Get Report PDF</a></div>
     <div><a href="@Url.Action("CustomerReport",new {id= "Excel"})"> Get Report Excel</a></div>

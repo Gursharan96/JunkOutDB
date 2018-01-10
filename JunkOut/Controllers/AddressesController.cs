@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Author: Gursharan Deol
+ * APIs for Address
+ *  
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -120,7 +126,7 @@ namespace JunkOut.Controllers
 
             return Ok(address);
         }
-
+        // DISPOSE: to close DB connection
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -129,12 +135,13 @@ namespace JunkOut.Controllers
             }
             base.Dispose(disposing);
         }
-
+        // Find: To find some address
         private bool AddressExists(int id)
         {
             return db.Addresses.Count(e => e.ID == id) > 0;
         }
 
+        //To stop Lazy loading
         public AddressesController() : base()
         {
             db.Configuration.LazyLoadingEnabled = false;

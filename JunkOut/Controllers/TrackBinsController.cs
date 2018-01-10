@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Author: Jeffery Mclean
+ * Controller for Tracking Bins
+ *  
+ */
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;

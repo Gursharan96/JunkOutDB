@@ -1,4 +1,9 @@
-﻿using JunkOutDBModel;
+﻿/*
+ * Author: Gursharan Deol
+ * Controller for Management reports
+ *  
+ */
+using JunkOutDBModel;
 using Microsoft.Reporting.WebForms;
 using System;
 using System.Collections.Generic;
@@ -17,23 +22,28 @@ namespace JunkOut.Controllers
             return View();
         }
 
+        //Redirecting to Inventory View
         public ActionResult Inventory()
         {
             return View();
         }
 
+        //Redirecting to Customer View
         public ActionResult Customer()
         {
             return View();
         }
 
+        //Redirecting to Sales View
         public ActionResult Sale()
         {
             return View();
         }
 
+        //Method for Rendering Customer Report
         public ActionResult CustomerReport(string id)
         {
+            //Specify Path/ Report Name
             LocalReport lr = new LocalReport();
             string path = Path.Combine(Server.MapPath("~/Reports"), "CustomerInfo.rdlc");
             if (System.IO.File.Exists(path))
@@ -44,12 +54,12 @@ namespace JunkOut.Controllers
             {
                 return View("Index");
             }
+            //Make object
             List<Address> ad = new List<Address>();
             List<Customer> cust = new List<Customer>();
             List<Order> ord = new List<Order>();
 
-
-
+            //Get data from DB
             using (JunkoutDBModelContainer jo = new JunkoutDBModelContainer())
             {
                 ad = jo.Addresses.ToList();
@@ -57,7 +67,7 @@ namespace JunkOut.Controllers
                 ord = jo.Orders.ToList();
             }
 
-
+            //Data source from Report
             ReportDataSource rd = new ReportDataSource("CustomerInfo", cust);
             lr.DataSources.Add(rd);
             string reportType = id;
@@ -65,8 +75,7 @@ namespace JunkOut.Controllers
             string encoding;
             string fileNameExtension;
 
-
-
+            //Set Report
             string deviceInfo =
 
             "<DeviceInfo>" +
@@ -79,6 +88,7 @@ namespace JunkOut.Controllers
             "  <MarginBottom>0.5in</MarginBottom>" +
             "</DeviceInfo>";
 
+            //Rendering Report
             Warning[] warnings;
             string[] streams;
             byte[] renderedBytes;
@@ -95,9 +105,10 @@ namespace JunkOut.Controllers
             return File(renderedBytes, mimeType);
         }
 
-
+        //Method for Rendering Job Type Vs Sorce Report
         public ActionResult JobTypeVsSource(string id)
         {
+            //Setting Path
             LocalReport lr = new LocalReport();
             string path = Path.Combine(Server.MapPath("~/Reports"), "JobTypeVsSource.rdlc");
             if (System.IO.File.Exists(path))
@@ -108,12 +119,12 @@ namespace JunkOut.Controllers
             {
                 return View("Index");
             }
+            //Setting objects
             List<Address> ad = new List<Address>();
             List<Customer> cust = new List<Customer>();
             List<Order> ord = new List<Order>();
 
-
-
+            //getting data from db
             using (JunkoutDBModelContainer jo = new JunkoutDBModelContainer())
             {
                 ad = jo.Addresses.ToList();
@@ -121,7 +132,7 @@ namespace JunkOut.Controllers
                 ord = jo.Orders.ToList();
             }
 
-
+            //using datasource from db
             ReportDataSource rd = new ReportDataSource("JobTypeVsSource", ord);
             lr.DataSources.Add(rd);
             string reportType = id;
@@ -129,8 +140,7 @@ namespace JunkOut.Controllers
             string encoding;
             string fileNameExtension;
 
-
-
+            //Setting up the Report
             string deviceInfo =
 
             "<DeviceInfo>" +
@@ -143,6 +153,7 @@ namespace JunkOut.Controllers
             "  <MarginBottom>0.5in</MarginBottom>" +
             "</DeviceInfo>";
 
+            //Render Report
             Warning[] warnings;
             string[] streams;
             byte[] renderedBytes;
@@ -159,8 +170,10 @@ namespace JunkOut.Controllers
             return File(renderedBytes, mimeType);
         }
 
+        //Method for Rendering Job Type Report
         public ActionResult JobTypes(string id)
         {
+            //Set Path
             LocalReport lr = new LocalReport();
             string path = Path.Combine(Server.MapPath("~/Reports"), "JobTypes.rdlc");
             if (System.IO.File.Exists(path))
@@ -171,12 +184,12 @@ namespace JunkOut.Controllers
             {
                 return View("Index");
             }
+            //Create objects
             List<Address> ad = new List<Address>();
             List<Customer> cust = new List<Customer>();
             List<Order> ord = new List<Order>();
 
-
-
+            //Getting data from db
             using (JunkoutDBModelContainer jo = new JunkoutDBModelContainer())
             {
                 ad = jo.Addresses.ToList();
@@ -184,7 +197,7 @@ namespace JunkOut.Controllers
                 ord = jo.Orders.ToList();
             }
 
-
+            //Setting data source
             ReportDataSource rd = new ReportDataSource("JobTypes", ord);
             lr.DataSources.Add(rd);
             string reportType = id;
@@ -192,8 +205,7 @@ namespace JunkOut.Controllers
             string encoding;
             string fileNameExtension;
 
-
-
+            //Preparing report
             string deviceInfo =
 
             "<DeviceInfo>" +
@@ -206,6 +218,7 @@ namespace JunkOut.Controllers
             "  <MarginBottom>0.5in</MarginBottom>" +
             "</DeviceInfo>";
 
+            //Rendering Report
             Warning[] warnings;
             string[] streams;
             byte[] renderedBytes;
@@ -222,8 +235,10 @@ namespace JunkOut.Controllers
             return File(renderedBytes, mimeType);
         }
 
+        //Method for Rendering Bin availability Report
         public ActionResult BinAvailability(string id)
         {
+            //Setting path
             LocalReport lr = new LocalReport();
             string path = Path.Combine(Server.MapPath("~/Reports"), "BinAvailability.rdlc");
             if (System.IO.File.Exists(path))
@@ -234,13 +249,14 @@ namespace JunkOut.Controllers
             {
                 return View("Index");
             }
+
+            //Creating object
             List<Address> ad = new List<Address>();
             List<Customer> cust = new List<Customer>();
             List<Order> ord = new List<Order>();
             List<Bin> bins = new List<Bin>();
 
-
-
+            //Using db
             using (JunkoutDBModelContainer jo = new JunkoutDBModelContainer())
             {
                 ad = jo.Addresses.ToList();
@@ -249,7 +265,7 @@ namespace JunkOut.Controllers
                 bins = jo.Bins.ToList();
             }
 
-
+            //Specifying Datasource
             ReportDataSource rd = new ReportDataSource("BinAvailability", bins);
             lr.DataSources.Add(rd);
             string reportType = id;
@@ -257,8 +273,7 @@ namespace JunkOut.Controllers
             string encoding;
             string fileNameExtension;
 
-
-
+            //Setting report parameter
             string deviceInfo =
 
             "<DeviceInfo>" +
@@ -275,6 +290,7 @@ namespace JunkOut.Controllers
             string[] streams;
             byte[] renderedBytes;
 
+            //Render the Report
             renderedBytes = lr.Render(
                 reportType,
                 deviceInfo,
@@ -287,8 +303,10 @@ namespace JunkOut.Controllers
             return File(renderedBytes, mimeType);
         }
 
+        //Method for Rendering Customer Report
         public ActionResult OrdersInCities(string id)
         {
+            //set path
             LocalReport lr = new LocalReport();
             string path = Path.Combine(Server.MapPath("~/Reports"), "OrdersInCities.rdlc");
             if (System.IO.File.Exists(path))
@@ -299,14 +317,14 @@ namespace JunkOut.Controllers
             {
                 return View("Index");
             }
+            //create object
             List<Address> ad = new List<Address>();
             List<Customer> cust = new List<Customer>();
             List<Order> ord = new List<Order>();
             List<Bin> bins = new List<Bin>();
             List<TransferStation> tf = new List<TransferStation>();
 
-
-
+            //Use db
             using (JunkoutDBModelContainer jo = new JunkoutDBModelContainer())
             {
                 ad = jo.Addresses.ToList();
@@ -316,7 +334,7 @@ namespace JunkOut.Controllers
                 tf = jo.TransferStations.ToList();
             }
 
-
+            // data sourec
             ReportDataSource rd = new ReportDataSource("OrdersInCities", ad);
             lr.DataSources.Add(rd);
             string reportType = id;
@@ -324,8 +342,7 @@ namespace JunkOut.Controllers
             string encoding;
             string fileNameExtension;
 
-
-
+            //Report Specifications
             string deviceInfo =
 
             "<DeviceInfo>" +
@@ -342,6 +359,7 @@ namespace JunkOut.Controllers
             string[] streams;
             byte[] renderedBytes;
 
+            //Render Report
             renderedBytes = lr.Render(
                 reportType,
                 deviceInfo,

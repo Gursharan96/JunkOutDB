@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Author: Gursharan Deol
+ * Controller for Bins
+ *  
+ */
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -50,7 +55,7 @@ namespace JunkOut.Controllers
             return View(bin);
         }
 
-
+        //Dorting Bins
         public ActionResult SortBins(FormCollection form)
         {
             IEnumerable<Bin> binList = db.Bins.ToList();
@@ -170,6 +175,7 @@ namespace JunkOut.Controllers
             return RedirectToAction("Index");
         }
 
+        //Closing db connections
         protected override void Dispose(bool disposing)
         {
             if (disposing)

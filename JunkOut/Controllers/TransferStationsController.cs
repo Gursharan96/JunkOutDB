@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Author: Gursharan Deol/Jeffery Mclean
+ * Controller for Transfer Stations
+ *  
+ */
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -24,11 +29,8 @@ namespace JunkOut.Controllers
             if (transferStationList == null)
             {
                 transferStationList = db.TransferStations.ToList();
-            }
-           
+            }          
             return View("Index",transferStationList);
-
-
         }
 
         // GET: TransferStations/Details/5
@@ -46,6 +48,7 @@ namespace JunkOut.Controllers
             return View(transferStation);
         }
 
+        //Filtering data
         public ActionResult SortStations(FormCollection form)
         {
            IEnumerable<TransferStation> transferStationList = db.TransferStations.ToList();
@@ -63,10 +66,7 @@ namespace JunkOut.Controllers
                 int.TryParse(form[1], out var num);//try to parse the rate filter. output to num variable.
                 selectedRate = num; // set the rate to the num variable.
             }
-            
-            
-
-
+                      
             //If value has changed, filter list
             if (selectedRate != 0)
             {
@@ -166,6 +166,7 @@ namespace JunkOut.Controllers
             return RedirectToAction("Index");
         }
 
+        //Closing DB Connections
         protected override void Dispose(bool disposing)
         {
             if (disposing)

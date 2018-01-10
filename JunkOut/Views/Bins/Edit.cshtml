@@ -1,4 +1,10 @@
-﻿@model JunkOutDBModel.Bin
+﻿@*
+    *
+     Author: Gursharan Deol
+     View for Bins - Edit
+    *
+*@
+@model JunkOutDBModel.Bin
 
 @{
     ViewBag.Title = "Edit";
@@ -20,6 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.BinSize, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                @*List for sizes*@
                 @{
                     List<SelectListItem> listBinSize = new List<SelectListItem>();
                     listBinSize.Add(new SelectListItem
@@ -92,6 +99,7 @@
 @section Scripts {
 
 <script type="text/javascript">
+    //Populate Textboxs based on size selection
     $('#MyId').change(function () {
         var slectedSize = $("#MyId").val();
         if (slectedSize == 5) {

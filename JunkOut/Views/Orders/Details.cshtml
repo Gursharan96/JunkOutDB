@@ -1,4 +1,10 @@
-﻿@model JunkOutDBModel.Order
+﻿@*
+    *
+     Author: Gursharan Deol
+     View for Order - Details
+    *
+*@
+@model JunkOutDBModel.Order
 @{
     ViewBag.Title = "Details";
 }
@@ -8,213 +14,216 @@
 <div class="container">
     <h4>Order Details</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeliveryDateTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeliveryDateTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PickupDateTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PickupDateTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.JobType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.JobType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.OrderNotes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OrderNotes)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SourceOfOrdering)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SourceOfOrdering)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HearingSource)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HearingSource)
-        </dd>
-
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Bin.ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Bin.ID)
-        </dd>
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Bin.BinSize)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Bin.BinSize)
-        </dd>
-
-        
-        @*<dt>
-            Transfer Station
-            @Html.DisplayNameFor(model => model.TransferStation.StreetAddress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TransferStation.StreetAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TransferStation.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TransferStation.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TransferStation.PostalCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TransferStation.PostalCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TransferStation.Company)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TransferStation.Company)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Invoice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Invoice)
-        </dd>*@
-
-    </dl>
-
-    <dl class="dl-horizontal">
-        @foreach (var item in Model.Customers)
-        {
+    <div class="container" style="background-color:lightcyan; padding:0.75em ; margin: 0.5em">
+        <dl class="dl-horizontal">
             <dt>
-                <b>  @Html.DisplayNameFor(model => item.ID) </b>
+                @Html.DisplayNameFor(model => model.ID)
             </dt>
+
             <dd>
-                @Html.DisplayFor(model => item.ID)
+                @Html.DisplayFor(model => model.ID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DeliveryDateTime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DeliveryDateTime)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PickupDateTime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PickupDateTime)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.JobType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.JobType)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.OrderNotes)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OrderNotes)
             </dd>
             <dt>
-                <b>   @Html.DisplayNameFor(model => item.FirstName) </b> :
+                @Html.DisplayNameFor(model => model.SourceOfOrdering)
             </dt>
+
             <dd>
-                @Html.DisplayFor(model => item.FirstName)
+                @Html.DisplayFor(model => model.SourceOfOrdering)
             </dd>
             <dt>
-                <b> @Html.DisplayNameFor(model => item.LastName) </b> :
+                @Html.DisplayNameFor(model => model.HearingSource)
             </dt>
+
             <dd>
-                @Html.DisplayFor(model => item.LastName)
-            </dd>
-            <dt>
-                <b> @Html.DisplayNameFor(model => item.CompanyName) </b> :
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => item.CompanyName)
-            </dd>
-            <dt>
-                <b> @Html.DisplayNameFor(model => item.Email) </b> :
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => item.Email)
-            </dd>
-            <dt>
-                <b> @Html.DisplayNameFor(model => item.PhoneNumber) </b> :
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => item.PhoneNumber)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => item.Addresses.First().AddressType)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => item.Addresses.First().AddressType)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => item.Addresses.First().StreetAddress  )
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => item.Addresses.First().StreetAddress)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => item.Addresses.First().AptNum)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => item.Addresses.First().AptNum)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => item.Addresses.First().City)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => item.Addresses.First().City)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => item.Addresses.First().Province)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => item.Addresses.First().Province)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => item.Addresses.First().PostalCode)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => item.Addresses.First().PostalCode)
+                @Html.DisplayFor(model => model.HearingSource)
             </dd>
 
 
 
+            <dt>
+                @Html.DisplayNameFor(model => model.Bin.ID)
+            </dt>
 
-        }
-</div>
+            <dd>
+                @Html.DisplayFor(model => model.Bin.ID)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Bin.BinSize)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Bin.BinSize)
+            </dd>
+
+
+            @*<dt>
+                    Transfer Station
+                    @Html.DisplayNameFor(model => model.TransferStation.StreetAddress)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TransferStation.StreetAddress)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TransferStation.City)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TransferStation.City)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TransferStation.PostalCode)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TransferStation.PostalCode)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TransferStation.Company)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TransferStation.Company)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Invoice)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Invoice)
+                </dd>*@
+
+        </dl>
+    </div>
+    @*Customer Details*@
+        <div class="container" style="background-color:lightgoldenrodyellow; padding:0.75em ; margin: 0.5em">
+            <dl class="dl-horizontal">
+                @foreach (var item in Model.Customers)
+            {
+                    <dt>
+                        <b>  @Html.DisplayNameFor(model => item.ID) </b>
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => item.ID)
+                    </dd>
+                    <dt>
+                        <b>   @Html.DisplayNameFor(model => item.FirstName) </b> :
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => item.FirstName)
+                    </dd>
+                    <dt>
+                        <b> @Html.DisplayNameFor(model => item.LastName) </b> :
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => item.LastName)
+                    </dd>
+                    <dt>
+                        <b> @Html.DisplayNameFor(model => item.CompanyName) </b> :
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => item.CompanyName)
+                    </dd>
+                    <dt>
+                        <b> @Html.DisplayNameFor(model => item.Email) </b> :
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => item.Email)
+                    </dd>
+                    <dt>
+                        <b> @Html.DisplayNameFor(model => item.PhoneNumber) </b> :
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => item.PhoneNumber)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => item.Addresses.First().AddressType)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => item.Addresses.First().AddressType)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => item.Addresses.First().StreetAddress)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => item.Addresses.First().StreetAddress)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => item.Addresses.First().AptNum)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => item.Addresses.First().AptNum)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => item.Addresses.First().City)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => item.Addresses.First().City)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => item.Addresses.First().Province)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => item.Addresses.First().Province)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => item.Addresses.First().PostalCode)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => item.Addresses.First().PostalCode)
+                    </dd>
+
+                }
+            </dl>
+
+        </div>
+    </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")

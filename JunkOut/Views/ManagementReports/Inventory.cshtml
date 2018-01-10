@@ -1,4 +1,9 @@
-﻿
+﻿@*
+    *
+     Author: Gursharan Deol
+     View for Reports - Inventory-Bins
+    *
+*@
 @{
     ViewBag.Title = "Inventory";
 }
@@ -7,7 +12,7 @@
 
 <h3>Bins Availability</h3>
 <p> Check out the bins availability</p>
-
+@*Select Report Format from List*@
 <div style="padding:10px; border:1px solid black">
     <div><a href="@Url.Action("BinAvailability",new {id= "PDF"})"> Get Report PDF</a></div>
     <div><a href="@Url.Action("BinAvailability",new {id= "Excel"})"> Get Report Excel</a></div>

@@ -1,4 +1,11 @@
-﻿@model JunkOutDBModel.Bin
+﻿@*
+*
+ Author: Gursharan Deol
+ View for Bins - Create
+*    
+*@
+
+@model JunkOutDBModel.Bin
 
 @{
     ViewBag.Title = "Create";
@@ -17,8 +24,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.BinSize, htmlAttributes: new { @class = "control-label col-md-2" })
-
-
+            @*List for Bins*@
             <div class="col-md-10">
                 @{
                     List<SelectListItem> listBinSize = new List<SelectListItem>();
@@ -72,9 +78,6 @@
 
         @Html.HiddenFor(model => model.Status)
 
-
-
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -91,6 +94,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 
 <script type="text/javascript">
+    //Method to set textbox values based on the selection
     $('#MyId').change(function () {
         var slectedSize = $("#MyId").val();
         if (slectedSize == 5) {
