@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Author: Gursharan Deol/Jeffery Mclean
+ * Controller for Orders
+ * ADD/EDIT/DELETE/GET
+ *  
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -26,10 +32,11 @@ namespace JunkOut.Controllers
             {
                 orderList = db.Orders.ToList();
             }
-            return View("Index",orderList);
+            return View("Index", orderList);
 
         }
 
+        //Deatils
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -46,6 +53,7 @@ namespace JunkOut.Controllers
             return View(orderList);
         }
 
+        //Sorting data for filters
         public ActionResult SortOrders(FormCollection form)
         {
             IEnumerable<Order> orderList = db.Orders.ToList();
@@ -63,15 +71,15 @@ namespace JunkOut.Controllers
                 {
                     checkedStatuses[countStatus++] = item;
                 }
-                else if(jobTypes.Contains(item) && form[item].Substring(0, 1).Equals("t"))
+                else if (jobTypes.Contains(item) && form[item].Substring(0, 1).Equals("t"))
                 {
                     checkedJobTypes[countJobTypes++] = item;
                 }
-                else if(form[item] == "deliveryAsc")
+                else if (form[item] == "deliveryAsc")
                 {
                     orderByDeliveryDesc = false;
                 }
-                        
+
 
             }
             orderList = orderList.Where(Orders => Orders.Status == checkedStatuses[0] ||
@@ -84,7 +92,7 @@ namespace JunkOut.Controllers
                                                 Orders.JobType == checkedJobTypes[1] ||
                                                 Orders.JobType == checkedJobTypes[2]);
 
-            if(orderByDeliveryDesc)
+            if (orderByDeliveryDesc)
             {
                 orderList = orderList.OrderByDescending(Orders => Orders.DeliveryDateTime);
             }
@@ -92,14 +100,13 @@ namespace JunkOut.Controllers
             {
                 orderList = orderList.OrderBy(Orders => Orders.DeliveryDateTime);
             }
-            
+
 
             TempData["sortedList"] = orderList;
             return RedirectToAction("Index");
         }
 
-
-
+        //Create new Order
         public ActionResult Create()
         {
             return View();
@@ -112,101 +119,94 @@ namespace JunkOut.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(OrdersViewModel model, FormCollection frm)
         {
+            //Getting delivery and pickup date from form 
             String del = frm["delivery"].ToString();
             String pickup = frm["pickup"].ToString();
 
+            //Creating new objects from model
             Customer customer = model.customer;
-
-
             Address address = model.address;
             Order order = model.order;
 
-
-
+            //Add customer
             db.Customers.Add(customer);
+            //Add Address
             db.Addresses.Add(address);
-
+            //Add relation for Customer-Address
             customer.Addresses.Add(address);
 
-            var queryBin= (from b in db.Bins
-                          where b.Status == "Available"
-                          select b).ToList();
-
+            //Find available bin
+            var queryBin = (from b in db.Bins
+                            where b.Status == "Available"
+                            select b).ToList();
+            //Check is bin is avialable
             if (queryBin.Count > 0)
             {
 
                 Bin bin = queryBin.First();
-
                 order.DeliveryDateTime = DateTime.Parse(del);
                 order.PickupDateTime = DateTime.Parse(pickup);
                 order.Bin = bin;
                 order.Status = "Confirmed";
                 order.SourceOfOrdering = "Call In";
 
+                //Adding Orders
                 db.Orders.Add(order);
-
+                //Adding order-Customer relation
                 order.Customers.Add(customer);
 
                 bin.Status = "Booked";
                 db.SaveChanges();
 
-
+                //If successful redirect to index
                 return RedirectToAction("Index");
-               
+
             }
+            //If no bin is Avaialable
             ViewBag.Message = "Out of Bins";
             return View("Create");
         }
 
+        //Edit Method
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
-
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             var ordervm = new OrdersViewModel();
-
             {
-
                 Order order = db.Orders.SingleOrDefault(o => o.ID == id);
-
                 Customer customer = order.Customers.First();
-
                 Address address = customer.Addresses.First();
-
 
                 if (order == null)
                 {
                     return HttpNotFound();
                 }
 
-
                 ordervm.order = order;
                 ordervm.customer = customer;
                 ordervm.address = address;
-
-               
-
-                // Retrieve list of States
-                
             }
+            //Return a model from DB
             return View(ordervm);
         }
 
-
+        //Edit Action
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( OrdersViewModel model)
+        public ActionResult Edit(OrdersViewModel model)
         {
             if (ModelState.IsValid)
             {
+                //Model
                 Order order = model.order;
                 Customer customer = model.customer;
                 Address address = model.address;
 
-
+                //if state is modeified - data is changed
                 db.Entry(order).State = EntityState.Modified;
                 db.Entry(customer).State = EntityState.Modified;
                 db.Entry(address).State = EntityState.Modified;
@@ -215,6 +215,7 @@ namespace JunkOut.Controllers
                 {
                     db.SaveChanges();
                 }
+                //Catching Errors
                 catch (DbEntityValidationException e)
                 {
                     foreach (var eve in e.EntityValidationErrors)
@@ -230,13 +231,11 @@ namespace JunkOut.Controllers
                     throw;
                 }
             }
+            //If Successful Redirect to Index
             return RedirectToAction("Index");
         }
 
-
-      
-
-
+        //Delete Method 
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -256,33 +255,32 @@ namespace JunkOut.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Order order = db.Orders.Find(id);
-
-
             Customer customer = order.Customers.FirstOrDefault<Customer>();
 
             Bin bin = order.Bin;
 
-          
-
+            //Remove Relationship od order Customer
             order.Customers.Remove(customer);
+            //Delete order
             db.Orders.Remove(order);
-
+            //Set Bin status to Avaialable
             bin.Status = "Available";
 
             Address address = customer.Addresses.FirstOrDefault<Address>();
 
+            //Remove customer-Address realtion
             customer.Addresses.Remove(address);
-
+            //Delete Customer
             db.Customers.Remove(customer);
+            //Delete Address
             db.Addresses.Remove(address);
-
-
-
-
+            //save chnages
             db.SaveChanges();
+            //Redirect to Index if successful
             return RedirectToAction("Index");
         }
 
+        //Close Db connections
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -292,8 +290,4 @@ namespace JunkOut.Controllers
             base.Dispose(disposing);
         }
     }
-
 }
-
-
-

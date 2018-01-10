@@ -1,4 +1,10 @@
-﻿@using JunkOut.Models
+﻿@*
+    *
+     Author: Gursharan Deol/Jeffery Mclean
+     View for Order - Index
+    *
+*@
+@using JunkOut.Models
 
 @model IEnumerable<JunkOutDBModel.Order>
 
@@ -9,9 +15,6 @@
 
 <h2>Index</h2>
 
-
-
-
 <p>
     @Html.ActionLink("Place a new order", "Create")
 </p>
@@ -19,7 +22,7 @@
 @using (Html.BeginForm("SortOrders", "Orders"))
 {
 
-    <div class="container"  style="background-color:lightcyan; padding:0.75em ; margin: 0.5em" >
+    <div class="container" style="background-color:lightcyan; padding:0.75em ; margin: 0.5em">
         <div style="display:inline;float:left ; width:200px;">
             <p>JobType: </p>
             @Html.CheckBox("Bin Rental", true)  <span>Bin Rental</span><br />
@@ -39,10 +42,6 @@
             @Html.RadioButton("orderByDelivery", "deliveryAsc", true) <span>Ascending</span>
             @Html.RadioButton("orderByDelivery", "deliveryDesc", true) <span>Descending</span>
         </div>
-
-   
-
-
         <input type="submit" value="Search" />
     </div>
 }
@@ -97,10 +96,10 @@
 </table>
 
 @section Scripts {
-<script>
-    $(document).ready(function () {
-        $("td:contains(New)").css("color", "red");
-    });
-</script>
-@Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("td:contains(New)").css("color", "red");
+        });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
 }

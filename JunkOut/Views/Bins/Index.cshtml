@@ -1,4 +1,10 @@
-﻿@model IEnumerable<JunkOutDBModel.Bin>
+﻿@*
+    *
+     Author: Gursharan Deol/Jeffery Mclean
+     View for Bins - Index
+    *
+*@
+@model IEnumerable<JunkOutDBModel.Bin>
 
 @{
     ViewBag.Title = "Index";
@@ -13,6 +19,7 @@
      
 @using (Html.BeginForm("SortBins", "Bins"))
 {
+    //Filters
     <div class="container" style="background-color:lightcyan; padding:0.75em ; margin: 0.5em">
         <div style="display:inline;float:left;width:200px;">
             <p>Status:</p>
@@ -34,10 +41,7 @@
 </div>
         }
 
-
-
-
-
+@*Displaying data in Table*@
         <table class="table">
             <tr>
                 <th>
@@ -89,6 +93,7 @@
 
 @section Scripts {
     <script>
+        //Method to color code the Status
         $(document).ready(function () {
             $("td:contains(Available)").css("color", "Green");
         $("td:contains(Booked)").css("color", "red");

@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Author: Gursharan Deol
+ * Tests for Bins
+ *  
+ */
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JunkOutDBModel;
 using JunkOut.Controllers;

@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Author: Gursharan Deol
+ * Tests for Orders
+ *  
+ */
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JunkOut.Controllers;
 using System.Web.Mvc;
@@ -67,12 +72,8 @@ namespace JunkOut.Tests.Controllers
             string actualOrderJobType = actualOrder.JobType;
 
             //Assert
-
             string ExpectedJobType = "Bin Rental";
             Assert.AreEqual(ExpectedJobType, actualOrderJobType);
-
         }
-
-
     }
 }

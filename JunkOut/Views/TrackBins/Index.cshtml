@@ -1,4 +1,10 @@
-﻿@model IEnumerable<JunkOutDBModel.Address>
+﻿@*
+    *
+     Author: Jeffery Mclean
+     View for Track Bins
+    *
+*@
+@model IEnumerable<JunkOutDBModel.Address>
 
 @{
     ViewBag.Title = "Index";
@@ -12,16 +18,15 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeVLMqIbVxzRyPnv4szmwLjzFsJ4G8xQ4"></script>
     <script type="text/javascript">
 
-
-
         function initialize() {
             var geocoder;
             var map;
             var addresses = @Html.Raw(Json.Encode(Model));
 
+            //Geeting Icon
             var icon = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
-            
 
+            //Seeting up Map
             geocoder = new google.maps.Geocoder();
             var latlng = new google.maps.LatLng(43.6532, -79.3832);
             var myOptions = {
@@ -40,10 +45,12 @@
 
                 var myLoc = addresses[i];
 
+                //GeTting Values from API
                 var geoOptions = {
                     address: myLoc.StreetAddress + "," + myLoc.City + "," + myLoc.Province + "," + myLoc.PostalCode
                 }
-        
+
+                //Displaying Markers
                 if (myLoc.AddressType == "Transfer Station") {
                     icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
                 } else if (myLoc.AddressType == "Lot") {
