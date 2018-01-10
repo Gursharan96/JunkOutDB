@@ -1,4 +1,10 @@
-﻿@using CustomerForms.Models
+﻿<!--
+    Author: Ramsha Tariq
+    Main customer form page
+-->
+
+
+@using CustomerForms.Models
 @model CustomerFormModel
 
 @{
@@ -19,6 +25,7 @@
     <script>
         $(document).ready(function () {
 
+            //Google api method for auto prediction
             google.maps.event.addDomListener(window, 'load', function () {
                 var input = document.getElementById('streetaddress');
                 var options = {
@@ -26,6 +33,7 @@
                 };
                 var places = new google.maps.places.Autocomplete(input, options);
 
+                //Populating the fields for the Address section
                 google.maps.event.addListener(places, 'place_changed', function () {
                     console.log(place);
                     var place = places.getPlace();
@@ -44,6 +52,8 @@
             });
 
             $("#go").click(function () {
+
+                //Verifying the postal code based on green, gray and out of service area
                 var reg1 = /^([A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9])$/;
                 var reg2 = /^([A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9])$/;
                 if (reg1.test($('#pcode').val()) || reg2.test($('#pcode').val())) {
@@ -80,6 +90,7 @@
                 }
             });*/
             $("#next_1").click(function () {
+                //Dispalying the bins section if Bin Rental is selected
                 // if (!$("input[name='order.JobType']:checked").val()) {
                 if (!$("input[name='jobtype']:checked").val()){
                     alert('Please select a job type');
@@ -96,12 +107,15 @@
                     }
                 }
             });
+
+            //Changing the progress bar status according to the slide panel
             $("#prev_1").click(function () {
                 $("#slide-2").hide();
                 $("#slide-1").show('slow');
                 $(".progressbar li:nth-child(2)").removeClass("active");
             });
             $("#next_2").click(function () {
+                //Validation for Dlivery and PickUp Date/ime
                 if ((!$("#del").val())) {
                     alert("Please enter BOTH date and time for Delivery!");
                 }
@@ -115,12 +129,14 @@
                     $(".progressbar li:nth-child(4)").addClass("active");
                 } 
             });
+            //Changing the progress bar status according to the slide panel
             $("#prev_2").click(function () {
                 $("#slide-3").hide();
                 $("#slide-2").show('slow');
                 $(".progressbar li:nth-child(3)").removeClass("active");
             });
 
+            //Validation for all the fields in the Contact Information panel
             $("#fname").blur(function () {
                 if ($(this).val() !== '') {
                     $(".firstname").addClass("has-success has-feedback").removeClass("has-error has-feedback");
@@ -176,9 +192,12 @@
             });
             $("#next_3").click(function () {
 
+                //Validation for empty fields
                 if ($("#fname").val() == "" || $("#lname").val() == "" || $("#email").val() == "" || $("#phone").val() == "" || $("#streetaddress").val() == "" || $("#city").val() == "") {
                     alert("Please complete all the required fields!");
                 }
+
+                //Populate all the fields from the previous panel
                 else {
                     $("#slide-4").hide();
                     $("#slide-5").show('slow');
@@ -204,14 +223,17 @@
                     $(".progressbar li:nth-child(5)").addClass("active");
                 }
             });
+            //Changing the progress bar status according to the slide panel
             $("#prev_3").click(function () {
                 $("#slide-4").hide();
                 $("#slide-3").show('slow');
                 $(".progressbar li:nth-child(4)").removeClass("active");
             });
+            //Submitting the information to database
             $("#submit").click(function () {
                 $("#slide-5").hide();
             });
+            //Changing the progress bar status according to the slide panel
             $("#prev_4").click(function () {
                 $("#slide-5").hide();
                 $("#slide-4").show('slow');
@@ -233,7 +255,8 @@
     <form id="form1" runat="server" method="post">
         <div class="container" style="font-size: 16px">
             <div class="col-xs-12" style="margin: auto">
-                <!--First Panel-->
+                <!--First Panel--> 
+                <!--Postal Code Verification-->
                 <div style="padding: 25px;" id="slide-1">
                     <h1 class="heading">Please enter your postal code:</h1>
                     <div class="divbg">
@@ -250,6 +273,7 @@
                     </div>
                 </div>
                 <!--Second Panel-->
+                <!--Job Type Services-->
                 <div style="padding: 25px;" id="slide-2">
                     <h1 class="heading">Choose one Job Service!</h1>
                     <div class="divbg">
@@ -280,6 +304,7 @@
                     </div>
                 </div>
                 <!--Third Panel-->
+                <!--Scedule Appointment Panel-->
                 <div style="padding: 25px;" id="slide-3">
                     <h1 class="heading">Schedule Appointment</h1>
                     <div class="divbg">
@@ -354,6 +379,7 @@
                     </div>
                 </div>
                 <!--Fourth Panel-->
+                <!--Contact Information Panel-->
                 <div style="padding: 25px;" id="slide-4">
                     <h1 class="heading">Contact Information</h1>
                     <div class="divbg" style="font-size: 15px">
@@ -530,6 +556,7 @@
                     </div>
                 </div>
                 <!--Fifth Panel-->
+                <!--Confirmation Panel-->
                 <div style="padding: 25px;" id="slide-5">
                     <h1 class="heading">Confirmation</h1>
                     <div class="divbg" style="font-size: 15px">
