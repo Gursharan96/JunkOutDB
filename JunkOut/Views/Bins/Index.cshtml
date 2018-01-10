@@ -6,87 +6,94 @@
 
 <h2>Index</h2>
 
-<div style="display:inline;">
+
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
      
-  @using (Html.BeginForm("SortBins", "Bins"))
-  {
-    <div style="display:inline;float:left;width:200px;">
-        <p>Status:</p>
-        @Html.CheckBox("New", true) <span>New</span> <br />
-        @Html.CheckBox("Available", true) <span>Available</span><br />
-        @Html.CheckBox("pending", true) <span>pending</span><br />
-        @Html.CheckBox("Booked", true) <span>Booked</span><br />
-        @Html.CheckBox("delivered", true) <span>delivered</span><br />
-    </div>
-    <div style="display:inline;float:left;width:200px;">
-        <p>Bin Size:</p>
-        @Html.CheckBox("5", true)  <span>5</span><br />
-        @Html.CheckBox("10", true) <span>10</span><br />
-        @Html.CheckBox("14", true) <span>14</span><br />
+@using (Html.BeginForm("SortBins", "Bins"))
+{
+    <div class="container" style="background-color:lightcyan; padding:0.75em ; margin: 0.5em">
+        <div style="display:inline;float:left;width:200px;">
+            <p>Status:</p>
+            @Html.CheckBox("New", true) <span>New</span> <br />
+            @Html.CheckBox("Available", true) <span>Available</span><br />
+            @Html.CheckBox("pending", true) <span>pending</span><br />
+            @Html.CheckBox("Booked", true) <span>Booked</span><br />
+            @Html.CheckBox("delivered", true) <span>delivered</span><br />
+        </div>
+        <div style="display:inline;float:left;width:200px;">
+            <p>Bin Size:</p>
+            @Html.CheckBox("5", true)  <span>5</span><br />
+            @Html.CheckBox("10", true) <span>10</span><br />
+            @Html.CheckBox("14", true) <span>14</span><br />
 
-    </div>
+        </div>
 
-    <input type="submit" value="Search" />
-  }
-
-    </div>
-
-
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BinSize)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FlatRate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MinTonnageAwarded)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaxRentalDuration)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BinSize)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FlatRate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MinTonnageAwarded)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaxRentalDuration)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.ActionLink(" ", "Edit", new { id=item.ID }, new { @class = "glyphicon glyphicon-edit", title = "Edit" }) |
-            @Html.ActionLink(" ", "Details", new { id=item.ID }, new { @class = "glyphicon glyphicon-info-sign", title = "Details" }) |
-            @Html.ActionLink(" ", "Delete", new { id=item.ID }, new { @class = "glyphicon glyphicon-remove", title = "Delete" })
-        </td>
-    </tr>
-}
-
-</table>
-
-
-<div style="padding:10px; border:1px solid black">
-    <div><a href="@Url.Action("Report",new {id= "PDF"})"> Get Report PDF</a></div>
-    <div><a href="@Url.Action("Report",new {id= "Excel"})"> Get Report Excel</a></div>
-    <div><a href="@Url.Action("Report",new {id= "Word"})"> Get Report Word</a></div>
-    <div><a href="@Url.Action("Report",new {id= "Image"})"> Get Report Image</a></div>
+        <input type="submit" value="Search" />
 </div>
+        }
+
+
+
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BinSize)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FlatRate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MinTonnageAwarded)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaxRentalDuration)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BinSize)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FlatRate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MinTonnageAwarded)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaxRentalDuration)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-edit", title = "Edit" }) |
+                        @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", title = "Details" }) |
+                        @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-remove", title = "Delete" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("td:contains(Available)").css("color", "Green");
+        $("td:contains(Booked)").css("color", "red");
+       
+    });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

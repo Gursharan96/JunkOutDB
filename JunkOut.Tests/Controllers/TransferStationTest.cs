@@ -2,23 +2,22 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JunkOut.Controllers;
 using System.Web.Mvc;
-using JunkOutDBModel;
 using System.Net;
-using System.Collections.Generic;
+using JunkOutDBModel;
 
 namespace JunkOut.Tests.Controllers
 {
     [TestClass]
-    public class OrderControllerTest
+    public class TransferStationTest
     {
         [TestMethod]
         public void IndexAction_Returns_IndexView()
         {
             //Arrange
-            OrdersController oc = new OrdersController();
+            TransferStationsController tc = new TransferStationsController();
 
             //Act
-            ViewResult actualResult = oc.Index() as ViewResult;
+            ViewResult actualResult = tc.Index() as ViewResult;
             string actualViewName = actualResult.ViewName;
 
             //Assert
@@ -30,9 +29,9 @@ namespace JunkOut.Tests.Controllers
         public void DetailsAction_NullID_BADHTTP()
         {
             //Arrange
-            OrdersController oc = new OrdersController();
+            TransferStationsController tc = new TransferStationsController();
             //Act
-            HttpStatusCodeResult actualResult = oc.Details(null) as HttpStatusCodeResult;
+            HttpStatusCodeResult actualResult = tc.Details(null) as HttpStatusCodeResult;
             int actualStatusCode = actualResult.StatusCode;
 
             //Assert
@@ -44,10 +43,10 @@ namespace JunkOut.Tests.Controllers
         public void DetailsAction_InvalidID_NotFoundHTTP()
         {
             //Arrange
-            OrdersController oc = new OrdersController();
+            TransferStationsController tc = new TransferStationsController();
 
             //Act
-            HttpStatusCodeResult actualResult = oc.Details(-1) as HttpStatusCodeResult;
+            HttpStatusCodeResult actualResult = tc.Details(-1) as HttpStatusCodeResult;
             int actualStatusCode = actualResult.StatusCode;
 
             //Assert
@@ -59,20 +58,18 @@ namespace JunkOut.Tests.Controllers
         public void DetailsAction_DB_ValidOrder()
         {
             //Arrange
-            OrdersController oc = new OrdersController();
+            TransferStationsController tc = new TransferStationsController();
 
             //Act
-            ViewResult actualResult = oc.Details(1) as ViewResult;
-            Order actualOrder = actualResult.Model as Order;
-            string actualOrderJobType = actualOrder.JobType;
+            ViewResult actualResult = tc.Details(1) as ViewResult;
+            TransferStation actualTf = actualResult.Model as TransferStation;
+            string actualCompany = actualTf.Company;
 
             //Assert
 
-            string ExpectedJobType = "Bin Rental";
-            Assert.AreEqual(ExpectedJobType, actualOrderJobType);
+            string ExpectedCompany = "Progressive Waste";
+            Assert.AreEqual(ExpectedCompany, actualCompany);
 
         }
-
-
     }
 }

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="OrderedTest1" storage="c:\users\deol\source\repos\junkoutdb\junkout.tests\controllers\orderedtest1.orderedtest" id="361be35e-38d6-42a5-b258-c06f1c600c0e" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="e23d6316-7afe-99e6-7eda-35535f64c286" name="Add_Test" storage="..\bin\debug\junkout.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="a5c92c84-1e6c-7ac1-d5bb-f540a0a45be4" name="Get_Test" storage="..\bin\debug\junkout.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="e23d6316-7afe-99e6-7eda-35535f64c286" name="Add_Test" storage="..\bin\debug\junkout.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel,   PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>

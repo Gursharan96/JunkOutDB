@@ -26,7 +26,7 @@ namespace JunkOut.Controllers
             {
                 orderList = db.Orders.ToList();
             }
-            return View(orderList);
+            return View("Index",orderList);
 
         }
 
@@ -110,9 +110,10 @@ namespace JunkOut.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(OrdersViewModel model)
+        public ActionResult Create(OrdersViewModel model, FormCollection frm)
         {
-           
+            String del = frm["delivery"].ToString();
+            String pickup = frm["pickup"].ToString();
 
             Customer customer = model.customer;
 
@@ -127,33 +128,34 @@ namespace JunkOut.Controllers
 
             customer.Addresses.Add(address);
 
-            var queryBin= from b in db.Bins
+            var queryBin= (from b in db.Bins
                           where b.Status == "Available"
-                          select b;
+                          select b).ToList();
 
-            Bin bin = queryBin.First();
+            if (queryBin.Count > 0)
+            {
 
+                Bin bin = queryBin.First();
 
-          //  Bin bin = db.Bins.First();
-            order.Bin = bin;
-            order.Status = "Confirmed";
-            order.SourceOfOrdering = "Call In";
+                order.DeliveryDateTime = DateTime.Parse(del);
+                order.PickupDateTime = DateTime.Parse(pickup);
+                order.Bin = bin;
+                order.Status = "Confirmed";
+                order.SourceOfOrdering = "Call In";
 
-            db.Orders.Add(order);
+                db.Orders.Add(order);
 
-            order.Customers.Add(customer);
+                order.Customers.Add(customer);
 
-            bin.Status = "Booked";
-
-           
-
-
-
-
-            db.SaveChanges();
+                bin.Status = "Booked";
+                db.SaveChanges();
 
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+               
+            }
+            ViewBag.Message = "Out of Bins";
+            return View("Create");
         }
 
         public ActionResult Edit(int? id)
