@@ -1,5 +1,5 @@
 ﻿/*
- * Author: Gursharan Deol
+ * Author: Gursharan Deol, shazeen farooqi
  * Controller for Management reports
  *  
  */

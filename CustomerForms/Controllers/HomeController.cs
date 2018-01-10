@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * Author: Ramsha Tariq, Shazeen Farooqi
+ * 
+ * customer form 
+ *
+ */
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
